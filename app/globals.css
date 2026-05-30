@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --muted: #f5f5f5;
+  --muted-foreground: #6b6b6b;
+  --border: #e7e7e7;
+  --accent: #e0142c;
+  --accent-foreground: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.45);
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --sec-a-bg: rgba(255, 255, 255, 0.72);
+  --sec-a-fg: #0a0a0a;
+  --sec-a-muted: rgba(0, 0, 0, 0.60);
+  --sec-a-border: rgba(0, 0, 0, 0.12);
+  --sec-a-surface: rgba(0, 0, 0, 0.04);
+  --sec-b-bg: rgba(10, 10, 10, 0.92);
+  --sec-b-fg: #fafafa;
+  --sec-b-muted: rgba(255, 255, 255, 0.75);
+  --sec-b-border: rgba(255, 255, 255, 0.18);
+  --sec-b-surface: rgba(255, 255, 255, 0.07);
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --muted: #171717;
+  --muted-foreground: #a3a3a3;
+  --border: #262626;
+  --accent: #e0142c;
+  --accent-foreground: #ffffff;
+  --nav-bg: rgba(10, 10, 10, 0.45);
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --sec-a-bg: rgba(10, 10, 10, 0.58);
+  --sec-a-fg: #fafafa;
+  --sec-a-muted: rgba(255, 255, 255, 0.65);
+  --sec-a-border: rgba(255, 255, 255, 0.14);
+  --sec-a-surface: rgba(255, 255, 255, 0.05);
+  --sec-b-bg: rgba(255, 255, 255, 0.58);
+  --sec-b-fg: #0a0a0a;
+  --sec-b-muted: rgba(0, 0, 0, 0.65);
+  --sec-b-border: rgba(0, 0, 0, 0.14);
+  --sec-b-surface: rgba(0, 0, 0, 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--background);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: transparent;
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* native form controls inherit theme colour scheme so the select dropdown
+   matches dark/light mode chrome instead of always defaulting to white */
+:root { color-scheme: light; }
+.dark { color-scheme: dark; }
+select, input, textarea { color-scheme: inherit; }
+
+/* explicit option styling so the dropdown is readable on both themes —
+   browsers don't always honour color-scheme alone for <option> rendering */
+select option {
+  background-color: #ffffff;
+  color: #0a0a0a;
+}
+.dark select option {
+  background-color: #161616;
+  color: #fafafa;
+}
+select option:checked,
+select option:hover {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+/* ─── ARCADE SECTION — explicit theme-flipping classes so cards + chips
+   are guaranteed visible regardless of section inversion. */
+
+/* light theme: section-b renders as DARK panel → cards stay LIGHT */
+.arc-card {
+  background: #fafafa;
+  color: #0a0a0a;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
+}
+.dark .arc-card {
+  background: #0f0f0f;
+  color: #fafafa;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+}
+
+.arc-card-muted { color: rgba(10, 10, 10, 0.62); }
+.dark .arc-card-muted { color: rgba(250, 250, 250, 0.62); }
+
+.arc-card-divider { background: rgba(0, 0, 0, 0.10); }
+.dark .arc-card-divider { background: rgba(255, 255, 255, 0.10); }
+
+/* chips */
+.arc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: #ffffff;
+  color: #0a0a0a;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.dark .arc-chip {
+  background: #1a1a1a;
+  color: #fafafa;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.arc-chip:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+.arc-chip:hover .arc-chip-dot { background: #ffffff; }
+.arc-chip-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--accent);
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), Arial, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.section-a {
+  background: var(--sec-a-bg);
+  color: var(--sec-a-fg);
+  --section-border: var(--sec-a-border);
+  --section-muted: var(--sec-a-muted);
+  --section-surface: var(--sec-a-surface);
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+.section-b {
+  background: var(--sec-b-bg);
+  color: var(--sec-b-fg);
+  --section-border: var(--sec-b-border);
+  --section-muted: var(--sec-b-muted);
+  --section-surface: var(--sec-b-surface);
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+.section-accent {
+  background: var(--accent);
+  color: #ffffff;
+  --section-border: rgba(255, 255, 255, 0.18);
+  --section-muted: rgba(255, 255, 255, 0.7);
+}
+
+/* Always-dark — used by footer. Fixed dark regardless of theme,
+   slightly more opaque so it reads clearly over the water in light mode. */
+.section-dark {
+  background: rgba(10, 10, 10, 0.88);
+  color: #fafafa;
+  --section-border: rgba(255, 255, 255, 0.12);
+  --section-muted: rgba(255, 255, 255, 0.60);
+  --section-surface: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.bg-section-border { background: var(--section-border); }
+.border-section { border-color: var(--section-border); }
+.text-section-muted { color: var(--section-muted); }
+.bg-section-surface { background: var(--section-surface); }
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1.1s ease-in-out infinite;
+}
+
+@keyframes seedFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(180deg); }
+}
+
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  background: var(--accent);
+  transform-origin: bottom;
+}
+
+.scribble {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: draw 1.8s ease forwards 0.2s;
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Word reveal mask — clips the slide-in animation but lets descenders
+   (g, y, j, p, q) extend below the box without affecting layout height,
+   so headline line-spacing stays tight while descenders render fully. */
+.reveal-mask {
+  display: inline-block;
+  overflow: clip;
+  overflow-clip-margin: 0.4em;
+  vertical-align: bottom;
+}
+
+.reveal-mask > span {
+  display: inline-block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
