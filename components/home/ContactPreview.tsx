@@ -1,22 +1,23 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
-import { MagneticButton } from "../ui/MagneticButton";
-import { ArrowUpRight, Mail, Phone, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Phone, MessageCircle } from "lucide-react";
 
 const PHONE_DISPLAY = "+91 95117 84952";
 const PHONE_TEL = "+919511784952";
-const WA_NUMBER = "919511784952"; // wa.me requires no '+' prefix
+const WA_NUMBER = "919511784952";
+const EMAIL = "hello@promogranade.com";
 
 export function ContactPreview() {
   return (
     <section
       id="contact"
-      className="section-a relative overflow-hidden py-32 lg:py-48"
+      className="section-a relative overflow-hidden py-28 lg:py-44"
     >
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+
+        {/* Eyebrow */}
         <FadeUp>
           <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-10">
             <span className="h-px w-12 bg-[color:var(--section-border)]" />
@@ -24,6 +25,7 @@ export function ContactPreview() {
           </div>
         </FadeUp>
 
+        {/* Heading */}
         <TextReveal
           as="h2"
           className="font-display text-[clamp(2.75rem,8vw,8rem)] font-black leading-[0.9] tracking-[-0.04em] max-w-5xl"
@@ -33,79 +35,123 @@ export function ContactPreview() {
         <TextReveal
           as="h2"
           delay={0.15}
-          className="font-display text-[clamp(2.75rem,8vw,8rem)] font-black leading-[0.9] tracking-[-0.04em] text-[var(--accent)] max-w-5xl"
+          className="font-display text-[clamp(2.75rem,8vw,8rem)] font-black leading-[0.9] tracking-[-0.04em] text-[var(--accent)] max-w-5xl mb-14"
         >
           Tell us everything.
         </TextReveal>
 
+        {/* Action area */}
         <FadeUp delay={0.25}>
-          <div className="mt-16 grid gap-10 lg:grid-cols-12 items-start">
-            <div className="lg:col-span-7 space-y-4">
-              <Link href="/contact" data-cursor="start">
-                <MagneticButton className="group inline-flex items-center gap-4 rounded-full bg-[var(--accent)] text-white px-8 py-5 text-base md:text-lg font-semibold hover:bg-[color:var(--sec-a-fg)] hover:text-[color:var(--sec-a-bg)] transition-colors">
-                  Start a project
-                  <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
-                </MagneticButton>
-              </Link>
-              <p className="text-sm text-[color:var(--section-muted)] max-w-md pl-2">
-                We reply within one business day. Expect questions before
-                quotes — we cost projects only when we&apos;ve understood them.
+          <div className="grid gap-5 lg:grid-cols-12">
+
+            {/* ── Primary CTA card ── */}
+            <div className="lg:col-span-7">
+              <motion.a
+                href={`mailto:${EMAIL}`}
+                data-cursor="start"
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative flex flex-col justify-between rounded-3xl bg-[var(--accent)] p-8 md:p-10 overflow-hidden min-h-[220px] cursor-pointer"
+              >
+                {/* Background glow on hover */}
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.06] transition-colors duration-500 pointer-events-none" />
+
+                {/* Decorative ring */}
+                <div className="absolute -right-12 -top-12 h-52 w-52 rounded-full border border-white/10 group-hover:border-white/20 transition-colors duration-500" />
+                <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full border border-white/10 group-hover:border-white/20 transition-colors duration-500" />
+
+                {/* Top row: label + arrow */}
+                <div className="relative flex items-start justify-between">
+                  <p className="text-white/60 text-[10px] uppercase tracking-[0.3em] font-medium">
+                    Send us a message
+                  </p>
+                  <div className="h-10 w-10 rounded-full border border-white/25 flex items-center justify-center group-hover:border-white/60 group-hover:bg-white/10 transition-all duration-300">
+                    <ArrowUpRight className="h-4 w-4 text-white group-hover:rotate-45 transition-transform duration-300" />
+                  </div>
+                </div>
+
+                {/* CTA headline */}
+                <div className="relative mt-8">
+                  <p className="font-display text-4xl md:text-5xl font-black text-white leading-[0.92] tracking-tight">
+                    Start a project
+                  </p>
+                  <p className="text-white/55 text-sm mt-3 max-w-xs leading-relaxed">
+                    We reply within one business day. Expect questions before
+                    quotes — we scope projects only when we understand them.
+                  </p>
+                </div>
+              </motion.a>
+            </div>
+
+            {/* ── Secondary contact options ── */}
+            <div className="lg:col-span-5 flex flex-col gap-4">
+
+              <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-1">
+                Or reach us directly
+              </p>
+
+              {/* WhatsApp */}
+              <motion.a
+                href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
+                  "Hi Promogranade, I'd like to talk about a project."
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="whatsapp"
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -2 }}
+                className="group relative flex items-center gap-4 rounded-2xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] px-6 py-5 hover:border-[var(--accent)] hover:bg-[color:var(--section-surface)] transition-all duration-300 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-[var(--accent)]/0 group-hover:bg-[var(--accent)]/[0.03] transition-colors duration-400 pointer-events-none" />
+                <div className="relative h-11 w-11 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center group-hover:bg-[var(--accent)] transition-colors duration-300 shrink-0">
+                  <MessageCircle className="h-5 w-5 text-[var(--accent)] group-hover:text-white transition-colors duration-300" />
+                </div>
+                <div className="relative min-w-0">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)] mb-0.5">
+                    WhatsApp
+                  </p>
+                  <p className="text-base font-semibold tracking-tight">
+                    {PHONE_DISPLAY}
+                  </p>
+                </div>
+                <ArrowUpRight className="relative ml-auto h-4 w-4 text-[color:var(--section-muted)] group-hover:text-[var(--accent)] group-hover:rotate-45 transition-all duration-300 shrink-0" />
+              </motion.a>
+
+              {/* Call */}
+              <motion.a
+                href={`tel:${PHONE_TEL}`}
+                data-cursor="call"
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -2 }}
+                className="group relative flex items-center gap-4 rounded-2xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] px-6 py-5 hover:border-[var(--accent)] hover:bg-[color:var(--section-surface)] transition-all duration-300 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-[var(--accent)]/0 group-hover:bg-[var(--accent)]/[0.03] transition-colors duration-400 pointer-events-none" />
+                <div className="relative h-11 w-11 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center group-hover:bg-[var(--accent)] transition-colors duration-300 shrink-0">
+                  <Phone className="h-5 w-5 text-[var(--accent)] group-hover:text-white transition-colors duration-300" />
+                </div>
+                <div className="relative min-w-0">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)] mb-0.5">
+                    Call us
+                  </p>
+                  <p className="text-base font-semibold tracking-tight">
+                    {PHONE_DISPLAY}
+                  </p>
+                </div>
+                <ArrowUpRight className="relative ml-auto h-4 w-4 text-[color:var(--section-muted)] group-hover:text-[var(--accent)] group-hover:rotate-45 transition-all duration-300 shrink-0" />
+              </motion.a>
+
+              {/* Bottom note */}
+              <p className="text-xs text-[color:var(--section-muted)] leading-relaxed pt-1">
+                Available Mon – Sat, 10 AM – 8 PM IST. We respond to every enquiry.
               </p>
             </div>
 
-            <div className="lg:col-span-5 space-y-4">
-              {[
-                {
-                  href: "mailto:hello@promogranade.com",
-                  cursor: "copy email",
-                  Icon: Mail,
-                  label: "Email",
-                  value: "hello@promogranade.com",
-                  target: undefined,
-                  rel: undefined,
-                },
-                {
-                  href: `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Promogranade, I'd like to talk about a project.")}`,
-                  cursor: "whatsapp",
-                  Icon: MessageCircle,
-                  label: "WhatsApp",
-                  value: PHONE_DISPLAY,
-                  target: "_blank",
-                  rel: "noreferrer",
-                },
-                {
-                  href: `tel:${PHONE_TEL}`,
-                  cursor: "call",
-                  Icon: Phone,
-                  label: "Call",
-                  value: PHONE_DISPLAY,
-                  target: undefined,
-                  rel: undefined,
-                },
-              ].map(({ href, cursor, Icon, label, value, target, rel }, i) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  data-cursor={cursor}
-                  target={target}
-                  rel={rel}
-                  initial={{ opacity: 0, x: 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  className="group flex items-center gap-4 rounded-2xl border border-[color:var(--section-border)] px-5 py-4 hover:border-[var(--accent)] hover:bg-[color:var(--section-surface)] transition-colors"
-                >
-                  <Icon className="h-5 w-5 text-[color:var(--section-muted)] group-hover:text-[var(--accent)] transition-colors" />
-                  <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-widest text-[color:var(--section-muted)]">
-                      {label}
-                    </p>
-                    <p className="text-base font-medium">{value}</p>
-                  </div>
-                  <ArrowUpRight className="ml-auto h-4 w-4 text-[color:var(--section-muted)] group-hover:text-[var(--accent)] transition-colors" />
-                </motion.a>
-              ))}
-            </div>
           </div>
         </FadeUp>
       </div>
