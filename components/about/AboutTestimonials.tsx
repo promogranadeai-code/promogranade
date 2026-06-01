@@ -76,7 +76,7 @@ export function AboutTestimonials() {
               Ready to add your name to this list?
             </p>
             <a
-              href="/contact"
+              href="mailto:hello@promogranade.com"
               className="inline-flex items-center gap-3 rounded-full bg-[var(--accent)] text-white px-6 py-3 text-sm font-semibold hover:bg-[color:var(--sec-b-fg)] hover:text-[color:var(--sec-b-bg)] transition-colors"
             >
               Start a project →

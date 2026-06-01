@@ -44,12 +44,12 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Link href="/contact">
+            <a href="mailto:hello@promogranade.com">
               <MagneticButton className="inline-flex items-center gap-3 rounded-full bg-foreground text-background px-7 py-4 text-sm font-semibold hover:bg-[var(--accent)] hover:text-white transition-colors">
                 Start a project
                 <span>→</span>
               </MagneticButton>
-            </Link>
+            </a>
             <Link href="/services">
               <MagneticButton className="inline-flex items-center gap-3 rounded-full border border-foreground/20 px-7 py-4 text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
                 Explore services

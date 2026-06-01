@@ -47,7 +47,7 @@ const linkGroups = [
   {
     title: "Contact",
     links: [
-      { href: "/contact", label: "Start a project" },
+      { href: "mailto:hello@promogranade.com", label: "Start a project" },
       { href: "mailto:hello@promogranade.com", label: "hello@promogranade.com" },
     ],
   },
@@ -76,12 +76,12 @@ export function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Link
-                href="/contact"
+              <a
+                href="mailto:hello@promogranade.com"
                 className="mt-8 inline-flex items-center gap-3 rounded-full bg-[var(--accent)] text-white px-6 py-3 text-sm font-semibold hover:bg-white hover:text-black transition-colors"
               >
                 Start a project →
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
 
