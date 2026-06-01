@@ -231,15 +231,15 @@ function ArtWebsite() {
       <rect x="54" y="104" width="95" height="5" rx="2" fill="currentColor" opacity="0.1" />
       <rect x="54" y="118" width="56" height="14" rx="7" fill="#e0142c" opacity="0.6" />
       {/* Right sidebar content */}
-      <rect x="234" y="66" width="84" height="72" rx="5" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" opacity2="0.12" />
+      <rect x="234" y="66" width="84" height="72" rx="5" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" />
       <rect x="242" y="76" width="50" height="5" rx="2" fill="currentColor" opacity="0.15" />
       <rect x="242" y="86" width="60" height="5" rx="2" fill="currentColor" opacity="0.1" />
       <rect x="242" y="96" width="44" height="5" rx="2" fill="currentColor" opacity="0.1" />
       <rect x="242" y="110" width="38" height="10" rx="5" fill="currentColor" opacity="0.1" />
       {/* Bottom cards */}
-      <rect x="40" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" opacity2="0.1" />
-      <rect x="130" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" opacity2="0.1" />
-      <rect x="220" y="154" width="92" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" opacity2="0.1" />
+      <rect x="40" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
+      <rect x="130" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
+      <rect x="220" y="154" width="92" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
       <rect x="50" y="162" width="40" height="4" rx="2" fill="currentColor" opacity="0.15" />
       <rect x="142" y="162" width="40" height="4" rx="2" fill="currentColor" opacity="0.15" />
       <rect x="232" y="162" width="40" height="4" rx="2" fill="currentColor" opacity="0.15" />
@@ -263,19 +263,19 @@ function ArtApps() {
       ))}
       {/* Main content area */}
       {/* Metric cards */}
-      <rect x="82" y="50" width="68" height="42" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" opacity2="0.12" />
-      <rect x="160" y="50" width="68" height="42" rx="5" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="0.8" opacity2="0.3" />
+      <rect x="82" y="50" width="68" height="42" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
+      <rect x="160" y="50" width="68" height="42" rx="5" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="0.8" />
       <rect x="90" y="58" width="30" height="5" rx="2" fill="currentColor" opacity="0.15" />
       <rect x="90" y="68" width="48" height="12" rx="2" fill="currentColor" opacity="0.2" />
       <rect x="168" y="58" width="30" height="5" rx="2" fill="#e0142c" opacity="0.3" />
       <rect x="168" y="68" width="48" height="12" rx="2" fill="#e0142c" opacity="0.5" />
       {/* Line chart */}
-      <rect x="82" y="102" width="146" height="72" rx="5" fill="currentColor" opacity="0.04" stroke="currentColor" strokeWidth="0.8" opacity2="0.12" />
+      <rect x="82" y="102" width="146" height="72" rx="5" fill="currentColor" opacity="0.04" stroke="currentColor" strokeWidth="0.8" />
       <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.2" strokeLinejoin="round" />
       <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118" fill="none" stroke="#e0142c" strokeWidth="2" opacity="0.7" strokeLinejoin="round" />
       <circle cx="216" cy="118" r="4" fill="#e0142c" opacity="0.9" />
       {/* Floating panel */}
-      <rect x="250" y="30" width="90" height="140" rx="8" fill="currentColor" opacity="0.06" stroke="currentColor" strokeWidth="1" opacity2="0.14" />
+      <rect x="250" y="30" width="90" height="140" rx="8" fill="currentColor" opacity="0.06" stroke="currentColor" strokeWidth="1" />
       <rect x="260" y="44" width="50" height="5" rx="2" fill="currentColor" opacity="0.15" />
       {[60, 74, 88, 102, 116].map((y, i) => (
         <rect key={i} x="260" y={y} width={[62, 48, 56, 44, 52][i]} height="8" rx="3" fill={i === 2 ? "#e0142c" : "currentColor"} opacity={i === 2 ? 0.25 : 0.09} />
@@ -438,20 +438,20 @@ function ArtAds() {
   return (
     <svg viewBox="0 0 360 200" className="absolute inset-0 w-full h-full" aria-hidden>
       {/* Funnel */}
-      <path d="M80 30 L280 30 L230 90 L130 90 Z" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="1" opacity2="0.25" />
-      <path d="M130 94 L230 94 L210 138 L150 138 Z" fill="#e0142c" opacity="0.14" stroke="#e0142c" strokeWidth="1" opacity2="0.3" />
-      <path d="M150 142 L210 142 L200 174 L160 174 Z" fill="#e0142c" opacity="0.55" stroke="#e0142c" strokeWidth="1" opacity2="0.7" />
+      <path d="M80 30 L280 30 L230 90 L130 90 Z" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="1" />
+      <path d="M130 94 L230 94 L210 138 L150 138 Z" fill="#e0142c" opacity="0.14" stroke="#e0142c" strokeWidth="1" />
+      <path d="M150 142 L210 142 L200 174 L160 174 Z" fill="#e0142c" opacity="0.55" stroke="#e0142c" strokeWidth="1" />
       {/* Funnel labels */}
       <text x="164" y="65" fontSize="9" fill="currentColor" opacity="0.4" fontFamily="monospace">IMPRESSIONS</text>
       <text x="158" y="120" fontSize="9" fill="currentColor" opacity="0.4" fontFamily="monospace">CLICKS</text>
       <text x="158" y="162" fontSize="9" fill="white" opacity="0.8" fontFamily="monospace">SALES</text>
       {/* Right side ROAS metric */}
-      <rect x="296" y="38" width="50" height="60" rx="6" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" opacity2="0.12" />
+      <rect x="296" y="38" width="50" height="60" rx="6" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" />
       <text x="303" y="56" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">ROAS</text>
       <text x="298" y="76" fontSize="16" fill="#e0142c" opacity="0.85" fontFamily="monospace" fontWeight="bold">4.8x</text>
       <text x="300" y="90" fontSize="7" fill="#e0142c" opacity="0.4" fontFamily="monospace">↑ 24%</text>
       {/* Left CTR */}
-      <rect x="14" y="38" width="50" height="60" rx="6" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" opacity2="0.12" />
+      <rect x="14" y="38" width="50" height="60" rx="6" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" />
       <text x="22" y="56" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">CTR</text>
       <text x="18" y="76" fontSize="16" fill="currentColor" opacity="0.45" fontFamily="monospace" fontWeight="bold">3.2%</text>
       <text x="20" y="90" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">↑ 0.8</text>
@@ -570,7 +570,7 @@ function ArtAI() {
         <text key={i} x="14" y={l.y + 4} fontSize="7.5" fill="currentColor" opacity="0.25" fontFamily="monospace">{l.label}</text>
       ))}
       {/* RAG badge */}
-      <rect x="270" y="78" width="72" height="44" rx="6" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="0.8" opacity2="0.25" />
+      <rect x="270" y="78" width="72" height="44" rx="6" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="0.8" />
       <text x="278" y="96" fontSize="7" fill="#e0142c" opacity="0.5" fontFamily="monospace">RAG Pipeline</text>
       <rect x="278" y="102" width="48" height="5" rx="2" fill="#e0142c" opacity="0.2" />
       <rect x="278" y="110" width="36" height="5" rx="2" fill="#e0142c" opacity="0.12" />
