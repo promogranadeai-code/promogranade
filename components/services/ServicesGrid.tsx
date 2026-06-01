@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
 
 import { services } from "@/components/home/ServicesPreview";
@@ -49,14 +47,7 @@ export function ServicesGrid() {
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.75, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
-                <Link
-                  href={s.slug}
-                  data-cursor="open"
-                  className="group relative flex flex-col h-full rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden hover:border-[var(--accent)]/50 transition-all duration-500"
-                >
-                  {/* Hover glow */}
-                  <div className="absolute inset-0 bg-[var(--accent)]/0 group-hover:bg-[var(--accent)]/[0.03] transition-colors duration-500 pointer-events-none" />
-
+                <div className="relative flex flex-col h-full rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden">
                   {/* Illustration */}
                   <div className="relative h-44 shrink-0 border-b border-[color:var(--section-border)] overflow-hidden bg-[color:var(--section-surface)]">
                     <Art />
@@ -64,16 +55,11 @@ export function ServicesGrid() {
 
                   {/* Content */}
                   <div className="flex flex-col flex-1 p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
-                        {s.n}
-                      </span>
-                      <div className="h-8 w-8 rounded-full border border-[color:var(--section-border)] flex items-center justify-center group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:text-white transition-colors duration-300 shrink-0">
-                        <ArrowUpRight className="h-3.5 w-3.5" />
-                      </div>
-                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)] mb-4">
+                      {s.n}
+                    </span>
 
-                    <h3 className="font-display text-xl md:text-2xl font-bold leading-tight tracking-tight mb-3 group-hover:translate-x-1 transition-transform duration-500">
+                    <h3 className="font-display text-xl md:text-2xl font-bold leading-tight tracking-tight mb-3">
                       {s.title}
                     </h3>
                     <p className="text-sm text-[color:var(--section-muted)] leading-relaxed mb-5 flex-1">
@@ -91,7 +77,7 @@ export function ServicesGrid() {
                       ))}
                     </div>
                   </div>
-                </Link>
+                </div>
               </motion.div>
             );
           })}

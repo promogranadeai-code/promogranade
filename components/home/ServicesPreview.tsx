@@ -2,8 +2,6 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
 
 export const services = [
@@ -158,14 +156,7 @@ export function ServicesPreview() {
 function ServiceCard({ service }: { service: (typeof services)[number] }) {
   const { Art } = service;
   return (
-    <Link
-      href={service.slug}
-      data-cursor="open"
-      className="group relative flex flex-col w-[280px] md:w-[340px] lg:w-[360px] h-full flex-shrink-0 rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden hover:border-[var(--accent)]/50 transition-all duration-500"
-    >
-      {/* Hover glow */}
-      <div className="absolute inset-0 bg-[var(--accent)]/0 group-hover:bg-[var(--accent)]/[0.03] transition-colors duration-500 pointer-events-none" />
-
+    <div className="relative flex flex-col w-[280px] md:w-[340px] lg:w-[360px] h-full flex-shrink-0 rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden">
       {/* Illustration */}
       <div className="relative shrink-0 h-[44%] bg-[color:var(--section-surface)] border-b border-[color:var(--section-border)] overflow-hidden">
         <Art />
@@ -173,35 +164,28 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-6 md:p-7">
-        <div className="flex items-start justify-between mb-auto">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
-            {service.n}
-          </span>
-          <div className="h-8 w-8 rounded-full border border-[color:var(--section-border)] flex items-center justify-center group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:text-white transition-colors duration-300">
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </div>
-        </div>
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)] mb-4">
+          {service.n}
+        </span>
 
-        <div className="mt-4">
-          <h3 className="font-display text-2xl md:text-[1.6rem] font-bold leading-tight tracking-tight mb-3 group-hover:translate-x-1 transition-transform duration-500">
-            {service.title}
-          </h3>
-          <p className="text-xs md:text-sm text-[color:var(--section-muted)] leading-relaxed mb-4">
-            {service.blurb}
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {service.tags.map((t) => (
-              <span
-                key={t}
-                className="text-[9px] uppercase tracking-widest px-2.5 py-1 rounded-full border border-[color:var(--section-border)] text-[color:var(--section-muted)]"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
+        <h3 className="font-display text-2xl md:text-[1.6rem] font-bold leading-tight tracking-tight mb-3">
+          {service.title}
+        </h3>
+        <p className="text-xs md:text-sm text-[color:var(--section-muted)] leading-relaxed mb-4">
+          {service.blurb}
+        </p>
+        <div className="flex flex-wrap gap-1.5 mt-auto">
+          {service.tags.map((t) => (
+            <span
+              key={t}
+              className="text-[9px] uppercase tracking-widest px-2.5 py-1 rounded-full border border-[color:var(--section-border)] text-[color:var(--section-muted)]"
+            >
+              {t}
+            </span>
+          ))}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
