@@ -46,14 +46,6 @@ export function ContactPreview() {
     >
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
 
-        {/* Eyebrow */}
-        <FadeUp>
-          <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-10">
-            <span className="h-px w-12 bg-[color:var(--section-border)]" />
-            <span>06 — Let&apos;s talk</span>
-          </div>
-        </FadeUp>
-
         {/* Heading */}
         <TextReveal
           as="h2"

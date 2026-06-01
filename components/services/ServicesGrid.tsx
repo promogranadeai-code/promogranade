@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
+
 import { services } from "@/components/home/ServicesPreview";
 
 export function ServicesGrid() {
@@ -96,22 +97,6 @@ export function ServicesGrid() {
           })}
         </div>
 
-        {/* Bottom strip */}
-        <FadeUp delay={0.2}>
-          <div className="mt-16 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-[color:var(--section-border)] pt-8">
-            <p className="text-sm text-[color:var(--section-muted)] max-w-md">
-              Need a custom combination? Tell us the outcome — we&apos;ll scope the shortest path.
-            </p>
-            <Link
-              href="/contact"
-              data-cursor="start"
-              className="inline-flex items-center gap-3 rounded-full bg-[var(--accent)] text-white px-6 py-3 text-sm font-semibold hover:bg-foreground hover:text-background transition-colors"
-            >
-              Start a project
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </FadeUp>
       </div>
     </section>
   );
