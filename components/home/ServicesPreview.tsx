@@ -1,179 +1,189 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { Code2, Bot, Megaphone, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
-import { useRef } from "react";
 
 const services = [
   {
     n: "01",
-    icon: Code2,
-    title: "Web Development",
+    title: "Website Development",
     blurb:
-      "Custom websites and bespoke web applications. From WordPress and Shopify to fully custom-coded SaaS, agentic dashboards, and ERP systems.",
-    slug: "/services/web-development",
+      "Conversion-focused websites built on WordPress, Shopify, or fully custom Next.js — pixel-perfect, blazing fast, and built to grow.",
     tags: ["WordPress", "Shopify", "Next.js"],
-    art: <ArtCode />,
+    slug: "/services/web-development",
   },
   {
     n: "02",
-    icon: Bot,
-    title: "AI Automations",
+    title: "Custom Applications",
     blurb:
-      "Automate the manual. Make.com and n8n workflows, custom business automations, and full agentic systems that act, decide, and self-correct.",
-    slug: "/services/ai-automations",
-    tags: ["n8n", "LLM", "Agents"],
-    art: <ArtAI />,
+      "Bespoke web apps, SaaS platforms, ERP systems, and agentic dashboards engineered exactly to your specification.",
+    tags: ["SaaS", "ERP", "Dashboards"],
+    slug: "/services/web-development",
   },
   {
     n: "03",
-    icon: Megaphone,
-    title: "Marketing",
+    title: "AI Agentic Development",
     blurb:
-      "End-to-end growth — social, paid, creative, video, and the SEO/GEO/AEO playbook that gets you found by people and AI alike.",
+      "Intelligent agents that plan, act, and self-correct — from single-model tools to full multi-agent orchestration systems.",
+    tags: ["LangGraph", "Claude", "Multi-agent"],
+    slug: "/services/ai-automations",
+  },
+  {
+    n: "04",
+    title: "SEO / GEO / AEO",
+    blurb:
+      "Get found by people and AI alike. Search, generative engine, and answer engine optimisation that compounds every month.",
+    tags: ["SEO", "GEO", "AEO"],
     slug: "/services/marketing",
-    tags: ["Paid", "Creative", "SEO"],
-    art: <ArtMarketing />,
+  },
+  {
+    n: "05",
+    title: "Social Media Marketing",
+    blurb:
+      "Content strategy, creative production, and community management across every platform that matters to your audience.",
+    tags: ["Instagram", "LinkedIn", "YouTube"],
+    slug: "/services/marketing",
+  },
+  {
+    n: "06",
+    title: "Meta & Google Ads",
+    blurb:
+      "Performance campaigns with sharp targeting, rigorous A/B testing, and media spend that scales proportionally with results.",
+    tags: ["Meta Ads", "Google Ads", "Performance"],
+    slug: "/services/marketing",
+  },
+  {
+    n: "07",
+    title: "Workflow Automation",
+    blurb:
+      "Make.com, n8n, and custom integrations that eliminate manual work from your operations — running reliably, 24/7.",
+    tags: ["n8n", "Make.com", "Zapier"],
+    slug: "/services/ai-automations",
+  },
+  {
+    n: "08",
+    title: "Custom AI Systems",
+    blurb:
+      "Full-stack AI builds — RAG pipelines, fine-tuned models, vector databases, and production-grade inference infrastructure.",
+    tags: ["RAG", "Fine-tuning", "LLMs"],
+    slug: "/services/ai-automations",
   },
 ];
 
 export function ServicesPreview() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [dragRange, setDragRange] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      if (!trackRef.current) return;
+      setDragRange(Math.max(0, trackRef.current.scrollWidth - window.innerWidth));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], [0, -dragRange]);
+
   return (
     <section
       id="services"
-      className="section-a relative overflow-hidden py-32 lg:py-48"
+      ref={containerRef}
+      className="relative section-a"
+      style={{ height: `calc(100vh + ${dragRange}px)` }}
     >
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <FadeUp>
-          <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-10">
-            <span className="h-px w-12 bg-[color:var(--section-border)]" />
-            <span>02 — What we do</span>
-          </div>
-        </FadeUp>
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
 
-        <div className="grid gap-12 lg:grid-cols-12 items-end mb-20">
-          <div className="lg:col-span-8">
-            <TextReveal
-              as="h2"
-              className="font-display text-[clamp(2.5rem,7vw,6.5rem)] font-black leading-[0.92] tracking-[-0.03em]"
-            >
-              Three disciplines.
-            </TextReveal>
-            <TextReveal
-              as="h2"
-              delay={0.15}
-              className="font-display text-[clamp(2.5rem,7vw,6.5rem)] font-black leading-[0.92] tracking-[-0.03em] text-[var(--accent)]"
-            >
-              One outcome: growth.
-            </TextReveal>
-          </div>
-          <p className="lg:col-span-4 text-base md:text-lg leading-relaxed text-[color:var(--section-muted)]">
-            Pick a single service or hand us the whole funnel. Either way, you
-            get the same senior team start to finish.
-          </p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <ServiceCard key={s.n} {...s} index={i} />
-          ))}
-        </div>
-
-        <div className="mt-16 flex items-center justify-between gap-6 border-t border-[color:var(--section-border)] pt-8">
-          <p className="text-sm text-[color:var(--section-muted)] max-w-md">
-            Need something custom? Tell us the outcome — we&apos;ll scope the
-            shortest path.
-          </p>
-          <Link
-            href="/services"
-            data-cursor="all services"
-            className="inline-flex items-center gap-2 text-sm font-semibold hover:text-[var(--accent)] transition-colors"
+        {/* Header */}
+        <div className="px-6 lg:px-10 pt-20 pb-6 shrink-0">
+          <FadeUp>
+            <div className="flex items-center justify-between gap-6">
+              <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)]">
+                <span className="h-px w-12 bg-[color:var(--section-border)]" />
+                <span>02 — What we do</span>
+              </div>
+              <p className="hidden md:block text-xs uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
+                scroll to explore →
+              </p>
+            </div>
+          </FadeUp>
+          <TextReveal
+            as="h2"
+            className="font-display text-[clamp(2.25rem,5vw,4.5rem)] font-black leading-[0.9] tracking-[-0.03em] mt-4"
           >
-            All services <ArrowUpRight className="h-4 w-4" />
-          </Link>
+            What we do.
+          </TextReveal>
         </div>
+
+        {/* Horizontal cards track */}
+        <div className="flex-1 overflow-hidden min-h-0">
+          <motion.div
+            ref={trackRef}
+            style={{ x }}
+            className="flex h-full gap-4 pl-6 lg:pl-10 pr-24"
+          >
+            {services.map((s, i) => (
+              <ServiceCard key={s.n} service={s} index={i} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Scroll progress bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 h-[3px] bg-[var(--accent)] origin-left"
+          style={{ scaleX: scrollYProgress }}
+        />
       </div>
     </section>
   );
 }
 
 function ServiceCard({
-  n,
-  icon: Icon,
-  title,
-  blurb,
-  slug,
-  tags,
-  art,
+  service,
   index,
 }: {
-  n: string;
-  icon: typeof Code2;
-  title: string;
-  blurb: string;
-  slug: string;
-  tags: string[];
-  art: React.ReactNode;
+  service: (typeof services)[number];
   index: number;
 }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  const handleMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width) * 100;
-    const y = ((e.clientY - r.top) / r.height) * 100;
-    el.style.setProperty("--mx", `${x}%`);
-    el.style.setProperty("--my", `${y}%`);
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.1,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+    <Link
+      href={service.slug}
+      data-cursor="open"
+      className="group relative flex flex-col w-[280px] md:w-[360px] lg:w-[380px] h-full flex-shrink-0 rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] p-7 md:p-8 hover:border-[var(--accent)]/60 transition-all duration-500 overflow-hidden"
     >
-      <Link
-        ref={ref}
-        href={slug}
-        data-cursor="open"
-        onPointerMove={handleMove}
-        className="group relative block overflow-hidden rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] p-8 md:p-10 hover:border-[var(--accent)]/60 transition-all duration-500"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(224,20,44,0.16), transparent 50%)",
-        }}
-      >
-        <div className="absolute right-0 top-0 h-full w-2/5 opacity-25 pointer-events-none">
-          {art}
-        </div>
+      {/* Subtle hover glow */}
+      <div className="absolute inset-0 bg-[var(--accent)]/0 group-hover:bg-[var(--accent)]/[0.03] transition-colors duration-500 pointer-events-none rounded-3xl" />
 
-        <div className="relative flex items-start justify-between mb-12">
-          <span className="text-xs uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
-            {n}
-          </span>
-          <div className="h-12 w-12 rounded-full border border-[color:var(--section-border)] flex items-center justify-center group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:text-white transition-colors">
-            <Icon className="h-5 w-5" />
-          </div>
+      {/* Top row */}
+      <div className="flex items-start justify-between shrink-0">
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
+          {service.n}
+        </span>
+        <div className="h-10 w-10 rounded-full border border-[color:var(--section-border)] flex items-center justify-center group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:text-white transition-colors duration-300">
+          <ArrowUpRight className="h-4 w-4" />
         </div>
+      </div>
 
-        <h3 className="relative font-display text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-4 group-hover:translate-x-1 transition-transform duration-500">
-          {title}
+      {/* Title + content — pushed to bottom */}
+      <div className="mt-auto">
+        <h3 className="font-display text-3xl md:text-[2.25rem] font-bold leading-tight tracking-tight mb-4 group-hover:translate-x-1 transition-transform duration-500">
+          {service.title}
         </h3>
-        <p className="relative text-[color:var(--section-muted)] leading-relaxed mb-8 max-w-md">
-          {blurb}
+        <p className="text-sm text-[color:var(--section-muted)] leading-relaxed mb-6">
+          {service.blurb}
         </p>
-
-        <div className="relative flex flex-wrap gap-2">
-          {tags.map((t) => (
+        <div className="flex flex-wrap gap-2">
+          {service.tags.map((t) => (
             <span
               key={t}
               className="text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-full border border-[color:var(--section-border)] text-[color:var(--section-muted)]"
@@ -182,95 +192,7 @@ function ServiceCard({
             </span>
           ))}
         </div>
-
-        <ArrowUpRight className="absolute bottom-8 right-8 h-6 w-6 text-[color:var(--section-muted)] group-hover:text-[var(--accent)] group-hover:rotate-45 transition-all duration-500" />
-      </Link>
-    </motion.div>
-  );
-}
-
-function ArtCode() {
-  return (
-    <svg viewBox="0 0 200 240" className="h-full w-full" aria-hidden>
-      <g stroke="currentColor" strokeWidth="1" fill="none">
-        {Array.from({ length: 14 }).map((_, i) => (
-          <line key={i} x1="0" y1={i * 18} x2="200" y2={i * 18} opacity="0.3" />
-        ))}
-        {Array.from({ length: 8 }).map((_, i) => (
-          <rect
-            key={i}
-            x={20 + (i % 3) * 50}
-            y={20 + Math.floor(i / 3) * 60}
-            width={30 + (i * 7) % 25}
-            height="6"
-            fill="currentColor"
-            opacity={0.5 - (i % 4) * 0.1}
-          />
-        ))}
-      </g>
-    </svg>
-  );
-}
-
-function ArtAI() {
-  return (
-    <svg viewBox="0 0 200 240" className="h-full w-full" aria-hidden>
-      <g fill="none" stroke="currentColor" strokeWidth="1">
-        {[...Array(6)].map((_, i) => {
-          const cx = 40 + (i % 3) * 60;
-          const cy = 60 + Math.floor(i / 3) * 80;
-          return (
-            <g key={i}>
-              <circle cx={cx} cy={cy} r="6" fill="currentColor" opacity="0.7" />
-              {i < 5 && (
-                <line
-                  x1={cx}
-                  y1={cy}
-                  x2={40 + ((i + 1) % 3) * 60}
-                  y2={60 + Math.floor((i + 1) / 3) * 80}
-                  opacity="0.4"
-                />
-              )}
-            </g>
-          );
-        })}
-      </g>
-    </svg>
-  );
-}
-
-function ArtSEO() {
-  return (
-    <svg viewBox="0 0 200 240" className="h-full w-full" aria-hidden>
-      <g fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M20 200 Q60 160, 90 150 T170 60" />
-        <circle cx="170" cy="60" r="6" fill="currentColor" />
-        <circle cx="90" cy="150" r="4" fill="currentColor" opacity="0.7" />
-        <circle cx="50" cy="180" r="3" fill="currentColor" opacity="0.5" />
-      </g>
-      <g fontSize="9" fontFamily="monospace" fill="currentColor" opacity="0.5">
-        <text x="20" y="225">#1</text>
-        <text x="175" y="60">★</text>
-      </g>
-    </svg>
-  );
-}
-
-function ArtMarketing() {
-  return (
-    <svg viewBox="0 0 200 240" className="h-full w-full" aria-hidden>
-      <g fill="currentColor">
-        {[60, 90, 50, 110, 70, 130, 80, 150].map((h, i) => (
-          <rect
-            key={i}
-            x={20 + i * 22}
-            y={220 - h}
-            width="14"
-            height={h}
-            opacity={0.4 + (i % 4) * 0.15}
-          />
-        ))}
-      </g>
-    </svg>
+      </div>
+    </Link>
   );
 }
