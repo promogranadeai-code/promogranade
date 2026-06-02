@@ -511,13 +511,14 @@ function ArtAds() {
 }
 
 function ArtWorkflow() {
+  // Symmetric layout: edge-padding=28, node-width=52, gap=32 → right edge=332, gap=28 ✓
   const nodes = [
-    { x: 38,  y: 90,  w: 56, h: 28, accent: true,  label: "Trigger" },
-    { x: 134, y: 68,  w: 56, h: 28, accent: false, label: "Filter" },
-    { x: 134, y: 112, w: 56, h: 28, accent: false, label: "Enrich" },
-    { x: 232, y: 68,  w: 56, h: 28, accent: false, label: "Notify" },
-    { x: 232, y: 112, w: 56, h: 28, accent: false, label: "Log" },
-    { x: 300, y: 90,  w: 42, h: 28, accent: true,  label: "Done" },
+    { x: 28,  y: 90,  w: 52, h: 28, accent: true,  label: "Trigger" },
+    { x: 112, y: 68,  w: 52, h: 28, accent: false, label: "Filter"  },
+    { x: 112, y: 112, w: 52, h: 28, accent: false, label: "Enrich"  },
+    { x: 196, y: 68,  w: 52, h: 28, accent: false, label: "Notify"  },
+    { x: 196, y: 112, w: 52, h: 28, accent: false, label: "Log"     },
+    { x: 280, y: 90,  w: 52, h: 28, accent: true,  label: "Done"    },
   ];
   const edges: [number, number][] = [[0,1],[0,2],[1,3],[2,4],[3,5],[4,5]];
   return (
@@ -572,7 +573,7 @@ function ArtWorkflow() {
       {[0, 1.5].map((delay, i) => (
         <circle key={i} r="3.5" fill="#e0142c" opacity="0">
           <animateMotion dur="3s" begin={`${delay}s`} repeatCount="indefinite"
-            path="M94,104 C114,104 114,82 134,82 L190,82 C211,82 211,82 232,82 L288,82 C294,82 294,104 300,104" />
+            path="M80,104 C96,104 96,82 112,82 L164,82 C180,82 180,82 196,82 L248,82 C264,82 264,104 280,104" />
           <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.06;0.88;1" dur="3s" begin={`${delay}s`} repeatCount="indefinite" />
         </circle>
       ))}
