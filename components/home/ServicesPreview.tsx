@@ -197,33 +197,36 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
 function ArtWebsite() {
   return (
     <svg viewBox="0 0 360 200" className="absolute inset-0 w-full h-full" aria-hidden>
-      {/* Browser frame */}
       <rect x="28" y="20" width="304" height="168" rx="8" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.18" />
       <rect x="28" y="20" width="304" height="30" rx="8" fill="currentColor" opacity="0.06" />
       <line x1="28" y1="50" x2="332" y2="50" stroke="currentColor" strokeWidth="0.8" opacity="0.15" />
-      {/* Traffic lights */}
       <circle cx="45" cy="35" r="4.5" fill="#e0142c" opacity="0.85" />
       <circle cx="58" cy="35" r="4.5" fill="currentColor" opacity="0.18" />
       <circle cx="71" cy="35" r="4.5" fill="currentColor" opacity="0.18" />
-      {/* URL bar */}
       <rect x="95" y="27" width="150" height="16" rx="4" fill="currentColor" opacity="0.07" />
       <circle cx="105" cy="35" r="3" fill="currentColor" opacity="0.12" />
       <rect x="112" y="32" width="70" height="6" rx="2" fill="currentColor" opacity="0.12" />
-      {/* Hero image block */}
-      <rect x="40" y="62" width="180" height="80" rx="5" fill="#e0142c" opacity="0.08" />
-      <rect x="40" y="62" width="180" height="80" rx="5" stroke="#e0142c" strokeWidth="1" opacity="0.25" />
-      {/* Hero text lines inside */}
+      {/* Blinking cursor in URL bar */}
+      <rect x="185" y="30" width="1.5" height="10" rx="0.5" fill="currentColor" opacity="0.5">
+        <animate attributeName="opacity" values="0.5;0;0.5" dur="1.1s" repeatCount="indefinite" />
+      </rect>
+      {/* Hero block — shimmer */}
+      <rect x="40" y="62" width="180" height="80" rx="5" fill="#e0142c" opacity="0.08">
+        <animate attributeName="opacity" values="0.06;0.15;0.06" dur="3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="40" y="62" width="180" height="80" rx="5" stroke="#e0142c" strokeWidth="1" fill="none" opacity="0.25" />
       <rect x="54" y="80" width="90" height="8" rx="2" fill="#e0142c" opacity="0.3" />
       <rect x="54" y="94" width="110" height="5" rx="2" fill="currentColor" opacity="0.15" />
       <rect x="54" y="104" width="95" height="5" rx="2" fill="currentColor" opacity="0.1" />
-      <rect x="54" y="118" width="56" height="14" rx="7" fill="#e0142c" opacity="0.6" />
-      {/* Right sidebar content */}
+      {/* CTA button pulse */}
+      <rect x="54" y="118" width="56" height="14" rx="7" fill="#e0142c" opacity="0.6">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite" />
+      </rect>
       <rect x="234" y="66" width="84" height="72" rx="5" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" />
       <rect x="242" y="76" width="50" height="5" rx="2" fill="currentColor" opacity="0.15" />
       <rect x="242" y="86" width="60" height="5" rx="2" fill="currentColor" opacity="0.1" />
       <rect x="242" y="96" width="44" height="5" rx="2" fill="currentColor" opacity="0.1" />
       <rect x="242" y="110" width="38" height="10" rx="5" fill="currentColor" opacity="0.1" />
-      {/* Bottom cards */}
       <rect x="40" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
       <rect x="130" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
       <rect x="220" y="154" width="92" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
@@ -259,8 +262,15 @@ function ArtApps() {
       {/* Line chart */}
       <rect x="82" y="102" width="146" height="72" rx="5" fill="currentColor" opacity="0.04" stroke="currentColor" strokeWidth="0.8" />
       <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.2" strokeLinejoin="round" />
-      <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118" fill="none" stroke="#e0142c" strokeWidth="2" opacity="0.7" strokeLinejoin="round" />
-      <circle cx="216" cy="118" r="4" fill="#e0142c" opacity="0.9" />
+      {/* Chart line draws itself then resets */}
+      <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118" fill="none" stroke="#e0142c" strokeWidth="2" strokeLinejoin="round" strokeDasharray="140" opacity="0.7">
+        <animate attributeName="strokeDashoffset" values="140;0;0;140" keyTimes="0;0.45;0.85;1" dur="4s" repeatCount="indefinite" />
+      </polyline>
+      {/* Peak dot pulses */}
+      <circle cx="216" cy="118" r="4" fill="#e0142c" opacity="0.9">
+        <animate attributeName="r" values="4;8;4" dur="2s" begin="1.8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.9;0.2;0.9" dur="2s" begin="1.8s" repeatCount="indefinite" />
+      </circle>
       {/* Floating panel */}
       <rect x="250" y="30" width="90" height="140" rx="8" fill="currentColor" opacity="0.06" stroke="currentColor" strokeWidth="1" />
       <rect x="260" y="44" width="50" height="5" rx="2" fill="currentColor" opacity="0.15" />
@@ -300,9 +310,19 @@ function ArtAgents() {
           strokeDasharray="4 3"
         />
       ))}
-      {/* Accent orbit ring around central node */}
-      <circle cx="180" cy="100" r="30" fill="none" stroke="#e0142c" strokeWidth="1" opacity="0.15" strokeDasharray="3 4" />
-      <circle cx="180" cy="100" r="46" fill="none" stroke="#e0142c" strokeWidth="0.6" opacity="0.08" />
+      {/* Orbit ring — rotates */}
+      <circle cx="180" cy="100" r="30" fill="none" stroke="#e0142c" strokeWidth="1" opacity="0.15" strokeDasharray="3 4">
+        <animateTransform attributeName="transform" type="rotate" from="0 180 100" to="360 180 100" dur="8s" repeatCount="indefinite" />
+      </circle>
+      {/* Outer orbit — counter-rotates */}
+      <circle cx="180" cy="100" r="46" fill="none" stroke="#e0142c" strokeWidth="0.6" opacity="0.08">
+        <animateTransform attributeName="transform" type="rotate" from="0 180 100" to="-360 180 100" dur="14s" repeatCount="indefinite" />
+      </circle>
+      {/* Central node pulsing halo */}
+      <circle cx="180" cy="100" r="18" fill="#e0142c" opacity="0.06">
+        <animate attributeName="r" values="18;28;18" dur="2.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.08;0.02;0.08" dur="2.5s" repeatCount="indefinite" />
+      </circle>
       {/* Nodes */}
       {nodes.map((n, i) => (
         <g key={i}>
@@ -311,12 +331,20 @@ function ArtAgents() {
           {n.accent && <circle cx={n.cx} cy={n.cy} r={n.r - 4} fill="none" stroke="white" strokeWidth="1.5" opacity="0.6" />}
         </g>
       ))}
-      {/* Labels */}
       <text x="170" y="104" fontSize="8" fill="white" opacity="0.9" fontFamily="monospace" fontWeight="bold">AI</text>
-      {/* Data packets on edges (small circles) */}
-      <circle cx="128" cy="79" r="3" fill="#e0142c" opacity="0.7" />
-      <circle cx="232" cy="79" r="3" fill="#e0142c" opacity="0.5" />
-      <circle cx="116" cy="121" r="3" fill="#e0142c" opacity="0.4" />
+      {/* Animated data packets travelling outward from centre */}
+      <circle r="3" fill="#e0142c" opacity="0.85">
+        <animateMotion dur="2s" repeatCount="indefinite" path="M180,100 L76,58" />
+        <animate attributeName="opacity" values="0.85;0.2" dur="2s" repeatCount="indefinite" />
+      </circle>
+      <circle r="3" fill="#e0142c" opacity="0.85">
+        <animateMotion dur="2.4s" repeatCount="indefinite" begin="0.8s" path="M180,100 L284,58" />
+        <animate attributeName="opacity" values="0.85;0.2" dur="2.4s" begin="0.8s" repeatCount="indefinite" />
+      </circle>
+      <circle r="3" fill="#e0142c" opacity="0.85">
+        <animateMotion dur="1.9s" repeatCount="indefinite" begin="0.4s" path="M180,100 L52,142" />
+        <animate attributeName="opacity" values="0.85;0.2" dur="1.9s" begin="0.4s" repeatCount="indefinite" />
+      </circle>
     </svg>
   );
 }
@@ -329,17 +357,21 @@ function ArtSEO() {
       {[50, 80, 110, 140].map(y => (
         <line key={y} x1="40" y1={y} x2="280" y2={y} stroke="currentColor" strokeWidth="0.6" opacity="0.1" strokeDasharray="3 3" />
       ))}
-      {/* Bars */}
+      {/* Bars — grow from baseline then hold */}
       {bars.map((h, i) => {
         const x = 48 + i * 28;
         const isLast = i === bars.length - 1;
         const isTop3 = i >= bars.length - 3;
+        const delay = i * 0.1;
         return (
           <g key={i}>
-            <rect x={x} y={160 - h} width="18" height={h} rx="3"
+            <rect x={x} y="160" width="18" height="0" rx="3"
               fill={isLast ? "#e0142c" : "currentColor"}
               opacity={isLast ? 0.85 : isTop3 ? 0.2 : 0.1}
-            />
+            >
+              <animate attributeName="height" values={`0;${h};${h};0`} keyTimes="0;0.35;0.85;1" dur="4s" begin={`${delay}s`} repeatCount="indefinite" />
+              <animate attributeName="y" values={`160;${160-h};${160-h};160`} keyTimes="0;0.35;0.85;1" dur="4s" begin={`${delay}s`} repeatCount="indefinite" />
+            </rect>
             {isLast && <rect x={x} y={160 - h} width="18" height="4" rx="2" fill="#e0142c" opacity="0.4" />}
           </g>
         );
@@ -385,13 +417,20 @@ function ArtSocial() {
           stroke="currentColor" strokeWidth="1" opacity="0.12"
         />
       ))}
-      {/* Engagement rings */}
+      {/* Engagement rings — IG node ripples outward */}
       {platforms.map((p, i) => (
-        <circle key={`ring-${i}`} cx={p.cx} cy={p.cy} r="30" fill="none"
-          stroke={p.color === "#e0142c" ? "#e0142c" : "currentColor"}
-          strokeWidth="0.5" opacity={p.color === "#e0142c" ? 0.18 : 0.06}
-          strokeDasharray="2 4"
-        />
+        p.color === "#e0142c" ? (
+          [0,1,2].map(ri => (
+            <circle key={`ring-${i}-${ri}`} cx={p.cx} cy={p.cy} r="18" fill="none" stroke="#e0142c" strokeWidth="1" opacity="0">
+              <animate attributeName="r" from="18" to="52" dur="2.2s" begin={`${ri * 0.7}s`} repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.45;0" dur="2.2s" begin={`${ri * 0.7}s`} repeatCount="indefinite" />
+            </circle>
+          ))
+        ) : (
+          <circle key={`ring-${i}`} cx={p.cx} cy={p.cy} r="30" fill="none"
+            stroke="currentColor" strokeWidth="0.5" opacity="0.06" strokeDasharray="2 4"
+          />
+        )
       ))}
       {/* Platform nodes */}
       {platforms.map((p, i) => (
@@ -442,6 +481,15 @@ function ArtAds() {
       <text x="22" y="56" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">CTR</text>
       <text x="18" y="76" fontSize="16" fill="currentColor" opacity="0.45" fontFamily="monospace" fontWeight="bold">3.2%</text>
       <text x="20" y="90" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">↑ 0.8</text>
+      {/* Funnel particle falling through */}
+      <circle r="4" fill="#e0142c" opacity="0.9">
+        <animateMotion dur="2.6s" repeatCount="indefinite" path="M180,34 L180,90 L180,138 L180,166" />
+        <animate attributeName="opacity" values="0.9;0.9;0.7;0" keyTimes="0;0.35;0.75;1" dur="2.6s" repeatCount="indefinite" />
+      </circle>
+      {/* ROAS badge pulse */}
+      <rect x="296" y="38" width="50" height="60" rx="6" fill="#e0142c" opacity="0">
+        <animate attributeName="opacity" values="0;0.05;0" dur="2.4s" begin="1s" repeatCount="indefinite" />
+      </rect>
     </svg>
   );
 }
@@ -500,6 +548,12 @@ function ArtWorkflow() {
       ))}
       {/* n8n watermark */}
       <text x="28" y="170" fontSize="9" fill="currentColor" opacity="0.1" fontFamily="monospace">n8n · make.com · zapier</text>
+      {/* Packet travelling Trigger → Filter → Notify → Done */}
+      <circle r="3.5" fill="#e0142c" opacity="0.9">
+        <animateMotion dur="3s" repeatCount="indefinite"
+          path="M94,104 C114,104 114,82 134,82 L190,82 C211,82 211,82 232,82 L288,82 C294,82 294,104 300,104" />
+        <animate attributeName="opacity" values="0;0.9;0.9;0.3" keyTimes="0;0.05;0.9;1" dur="3s" repeatCount="indefinite" />
+      </circle>
     </svg>
   );
 }
@@ -561,6 +615,17 @@ function ArtAI() {
       <text x="278" y="96" fontSize="7" fill="#e0142c" opacity="0.5" fontFamily="monospace">RAG Pipeline</text>
       <rect x="278" y="102" width="48" height="5" rx="2" fill="#e0142c" opacity="0.2" />
       <rect x="278" y="110" width="36" height="5" rx="2" fill="#e0142c" opacity="0.12" />
+      {/* Inference signal pulse from Input → Output */}
+      <circle r="5" fill="#e0142c" opacity="0">
+        <animateMotion dur="2s" repeatCount="indefinite" path="M180,26 L180,72 L180,118 L180,164" />
+        <animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.08;0.85;1" dur="2s" repeatCount="indefinite" />
+      </circle>
+      {/* Central nodes light up in sequence */}
+      {[26, 72, 118, 164].map((y, li) => (
+        <circle key={li} cx="180" cy={y} r="13" fill="#e0142c" opacity="0">
+          <animate attributeName="opacity" values="0;0.3;0" dur="2s" begin={`${li * 0.48}s`} repeatCount="indefinite" />
+        </circle>
+      ))}
     </svg>
   );
 }
