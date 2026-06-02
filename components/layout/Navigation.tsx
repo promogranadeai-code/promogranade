@@ -57,7 +57,10 @@ export function Navigation() {
             className="flex items-center gap-2 group"
           >
             <Logo />
-            <span className="font-display text-lg font-bold tracking-tight">
+            <span className={cn(
+              "font-display text-lg font-bold tracking-tight transition-colors duration-500",
+              scrolled ? "text-foreground" : "text-white"
+            )}>
               PROMOGRANADE
             </span>
           </Link>
@@ -68,7 +71,12 @@ export function Navigation() {
                 key={l.href}
                 href={l.href}
                 data-cursor="visit"
-                className="relative px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors group"
+                className={cn(
+                  "relative px-4 py-2 text-sm font-medium transition-colors duration-500 group",
+                  scrolled
+                    ? "text-foreground/70 hover:text-foreground"
+                    : "text-white/80 hover:text-white"
+                )}
               >
                 <span className="relative z-10">{l.label}</span>
                 <span className="absolute inset-0 rounded-full bg-[var(--accent)]/10 scale-0 group-hover:scale-100 transition-transform duration-300 origin-center" />
@@ -85,13 +93,18 @@ export function Navigation() {
               Let&apos;s talk
               <span className="inline-block">→</span>
             </Link>
-            <ThemeToggle />
+            <ThemeToggle forceWhite={!scrolled} />
             <button
               type="button"
               aria-label="Toggle menu"
               data-cursor="menu"
               onClick={() => setOpen((o) => !o)}
-              className="lg:hidden h-10 w-10 rounded-full border border-[var(--nav-border)] flex items-center justify-center"
+              className={cn(
+                "lg:hidden h-10 w-10 rounded-full border flex items-center justify-center transition-colors duration-500",
+                scrolled
+                  ? "border-[var(--nav-border)] text-foreground"
+                  : "border-white/30 text-white"
+              )}
             >
               {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
