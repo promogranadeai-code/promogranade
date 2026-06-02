@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -8,6 +9,8 @@ export function Cursor() {
   const [mounted, setMounted] = useState(false);
   const [hover, setHover] = useState(false);
   const [label, setLabel] = useState<string | null>(null);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   useEffect(() => {
     setMounted(true);
@@ -68,28 +71,43 @@ export function Cursor() {
   return (
     <>
       {/* Lagging ring — expands and fills grey on hover */}
+      {/* Ring */}
       <div
         ref={ringRef}
-        className={`pointer-events-none fixed left-0 top-0 z-[9998] hidden lg:flex items-center justify-center rounded-full transition-[width,height,background-color,border-color] duration-300 ease-out ${
-          hover
-            ? "w-20 h-20 bg-black/[0.07] dark:bg-white/[0.15] border border-black/10 dark:border-white/25"
-            : "w-9 h-9 border-2 border-black/40 dark:border-white bg-transparent"
-        }`}
-        style={{ willChange: "transform" }}
+        className="pointer-events-none fixed left-0 top-0 z-[9998] hidden lg:flex items-center justify-center rounded-full transition-[width,height,background-color,border-color] duration-300 ease-out"
+        style={{
+          willChange: "transform",
+          width: hover ? "80px" : "36px",
+          height: hover ? "80px" : "36px",
+          border: hover
+            ? `1px solid ${isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.12)"}`
+            : `2px solid ${isDark ? "#ffffff" : "#000000"}`,
+          background: hover
+            ? isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.06)"
+            : "transparent",
+        }}
       >
         {label && hover && (
-          <span className="text-[10px] font-medium uppercase tracking-widest text-black dark:text-white">
+          <span
+            className="text-[10px] font-medium uppercase tracking-widest"
+            style={{ color: isDark ? "#ffffff" : "#000000" }}
+          >
             {label}
           </span>
         )}
       </div>
 
+      {/* Dot */}
       <div
         ref={dotRef}
-        className={`pointer-events-none fixed left-0 top-0 z-[9999] hidden lg:block rounded-full bg-black dark:bg-white transition-[width,height,opacity] duration-200 ${
-          hover ? "w-0 h-0 opacity-0" : "w-2 h-2 opacity-100"
-        }`}
-        style={{ willChange: "transform" }}
+        className="pointer-events-none fixed left-0 top-0 z-[9999] hidden lg:block rounded-full transition-[width,height,opacity] duration-200"
+        style={{
+          willChange: "transform",
+          width: hover ? "0px" : "8px",
+          height: hover ? "0px" : "8px",
+          opacity: hover ? 0 : 1,
+          background: isDark ? "#ffffff" : "#000000",
+        }}
       />
     </>
   );
