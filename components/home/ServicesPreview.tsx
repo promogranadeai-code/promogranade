@@ -197,6 +197,7 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
 function ArtWebsite() {
   return (
     <svg viewBox="0 0 360 200" className="absolute inset-0 w-full h-full" aria-hidden>
+      {/* Browser chrome */}
       <rect x="28" y="20" width="304" height="168" rx="8" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.18" />
       <rect x="28" y="20" width="304" height="30" rx="8" fill="currentColor" opacity="0.06" />
       <line x1="28" y1="50" x2="332" y2="50" stroke="currentColor" strokeWidth="0.8" opacity="0.15" />
@@ -206,27 +207,39 @@ function ArtWebsite() {
       <rect x="95" y="27" width="150" height="16" rx="4" fill="currentColor" opacity="0.07" />
       <circle cx="105" cy="35" r="3" fill="currentColor" opacity="0.12" />
       <rect x="112" y="32" width="70" height="6" rx="2" fill="currentColor" opacity="0.12" />
-      {/* Blinking cursor in URL bar */}
-      <rect x="185" y="30" width="1.5" height="10" rx="0.5" fill="currentColor" opacity="0.5">
-        <animate attributeName="opacity" values="0.5;0;0.5" dur="1.1s" repeatCount="indefinite" />
+      {/* Page-load progress bar */}
+      <rect x="28" y="49" height="2" rx="1" fill="#e0142c" opacity="0.8" width="0">
+        <animate attributeName="width" values="0;304;304;0" keyTimes="0;0.5;0.85;1" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.9;0.9;0;0" keyTimes="0;0.5;0.52;1" dur="3s" repeatCount="indefinite" />
       </rect>
-      {/* Hero block — shimmer */}
-      <rect x="40" y="62" width="180" height="80" rx="5" fill="#e0142c" opacity="0.08">
-        <animate attributeName="opacity" values="0.06;0.15;0.06" dur="3s" repeatCount="indefinite" />
+      {/* Hero block fades in after load */}
+      <rect x="40" y="62" width="180" height="80" rx="5" fill="#e0142c" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.12;0.12;0" keyTimes="0;0.18;0.28;0.88;1" dur="3s" repeatCount="indefinite" />
       </rect>
-      <rect x="40" y="62" width="180" height="80" rx="5" stroke="#e0142c" strokeWidth="1" fill="none" opacity="0.25" />
-      <rect x="54" y="80" width="90" height="8" rx="2" fill="#e0142c" opacity="0.3" />
-      <rect x="54" y="94" width="110" height="5" rx="2" fill="currentColor" opacity="0.15" />
-      <rect x="54" y="104" width="95" height="5" rx="2" fill="currentColor" opacity="0.1" />
-      {/* CTA button pulse */}
-      <rect x="54" y="118" width="56" height="14" rx="7" fill="#e0142c" opacity="0.6">
-        <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite" />
+      <rect x="40" y="62" width="180" height="80" rx="5" fill="none" stroke="#e0142c" strokeWidth="1" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.3;0.3;0" keyTimes="0;0.18;0.28;0.88;1" dur="3s" repeatCount="indefinite" />
       </rect>
+      {/* Headline fades in */}
+      <rect x="54" y="80" width="90" height="8" rx="2" fill="#e0142c" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.35;0.35;0" keyTimes="0;0.24;0.34;0.88;1" dur="3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="54" y="94" width="110" height="5" rx="2" fill="currentColor" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.18;0.18;0" keyTimes="0;0.28;0.38;0.88;1" dur="3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="54" y="104" width="80" height="5" rx="2" fill="currentColor" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.13;0.13;0" keyTimes="0;0.30;0.40;0.88;1" dur="3s" repeatCount="indefinite" />
+      </rect>
+      {/* CTA button — bright pulse */}
+      <rect x="54" y="118" width="60" height="16" rx="8" fill="#e0142c" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.9;0.5;0.9;0.5;0" keyTimes="0;0.34;0.44;0.55;0.65;0.88;1" dur="3s" repeatCount="indefinite" />
+      </rect>
+      {/* Sidebar */}
       <rect x="234" y="66" width="84" height="72" rx="5" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" />
       <rect x="242" y="76" width="50" height="5" rx="2" fill="currentColor" opacity="0.15" />
       <rect x="242" y="86" width="60" height="5" rx="2" fill="currentColor" opacity="0.1" />
       <rect x="242" y="96" width="44" height="5" rx="2" fill="currentColor" opacity="0.1" />
       <rect x="242" y="110" width="38" height="10" rx="5" fill="currentColor" opacity="0.1" />
+      {/* Bottom feature cards */}
       <rect x="40" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
       <rect x="130" y="154" width="82" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
       <rect x="220" y="154" width="92" height="26" rx="5" fill="currentColor" opacity="0.07" stroke="currentColor" strokeWidth="0.8" />
@@ -262,15 +275,18 @@ function ArtApps() {
       {/* Line chart */}
       <rect x="82" y="102" width="146" height="72" rx="5" fill="currentColor" opacity="0.04" stroke="currentColor" strokeWidth="0.8" />
       <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.2" strokeLinejoin="round" />
-      {/* Chart line draws itself then resets */}
-      <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118" fill="none" stroke="#e0142c" strokeWidth="2" strokeLinejoin="round" strokeDasharray="140" opacity="0.7">
-        <animate attributeName="strokeDashoffset" values="140;0;0;140" keyTimes="0;0.45;0.85;1" dur="4s" repeatCount="indefinite" />
+      {/* Chart line — fix: use hyphenated SVG attribute name */}
+      <polyline points="96,160 116,148 136,152 156,138 176,142 196,126 216,118"
+        fill="none" stroke="#e0142c" strokeWidth="2.5" strokeLinejoin="round"
+        strokeDasharray="145" strokeDashoffset="145" opacity="0.85">
+        <animate attributeName="stroke-dashoffset" values="145;0;0;145" keyTimes="0;0.5;0.8;1" dur="3.5s" repeatCount="indefinite" />
       </polyline>
-      {/* Peak dot pulses */}
-      <circle cx="216" cy="118" r="4" fill="#e0142c" opacity="0.9">
-        <animate attributeName="r" values="4;8;4" dur="2s" begin="1.8s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.9;0.2;0.9" dur="2s" begin="1.8s" repeatCount="indefinite" />
+      {/* Peak dot — ripple burst when line finishes */}
+      <circle cx="216" cy="118" r="4" fill="#e0142c" opacity="0">
+        <animate attributeName="r" values="4;12;4" dur="1s" begin="1.75s;3.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.95;0;0.95" dur="1s" begin="1.75s;3.5s" repeatCount="indefinite" />
       </circle>
+      <circle cx="216" cy="118" r="4" fill="#e0142c" opacity="0.9" />
       {/* Floating panel */}
       <rect x="250" y="30" width="90" height="140" rx="8" fill="currentColor" opacity="0.06" stroke="currentColor" strokeWidth="1" />
       <rect x="260" y="44" width="50" height="5" rx="2" fill="currentColor" opacity="0.15" />
@@ -331,7 +347,7 @@ function ArtAgents() {
           {n.accent && <circle cx={n.cx} cy={n.cy} r={n.r - 4} fill="none" stroke="white" strokeWidth="1.5" opacity="0.6" />}
         </g>
       ))}
-      <text x="170" y="104" fontSize="8" fill="white" opacity="0.9" fontFamily="monospace" fontWeight="bold">AI</text>
+      <text x="180" y="104" fontSize="9" fill="white" opacity="0.95" fontFamily="monospace" fontWeight="bold" textAnchor="middle">AI</text>
       {/* Animated data packets travelling outward from centre */}
       <circle r="3" fill="#e0142c" opacity="0.85">
         <animateMotion dur="2s" repeatCount="indefinite" path="M180,100 L76,58" />
@@ -467,29 +483,29 @@ function ArtAds() {
       <path d="M80 30 L280 30 L230 90 L130 90 Z" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="1" />
       <path d="M130 94 L230 94 L210 138 L150 138 Z" fill="#e0142c" opacity="0.14" stroke="#e0142c" strokeWidth="1" />
       <path d="M150 142 L210 142 L200 174 L160 174 Z" fill="#e0142c" opacity="0.55" stroke="#e0142c" strokeWidth="1" />
-      {/* Funnel labels */}
-      <text x="164" y="65" fontSize="9" fill="currentColor" opacity="0.4" fontFamily="monospace">IMPRESSIONS</text>
-      <text x="158" y="120" fontSize="9" fill="currentColor" opacity="0.4" fontFamily="monospace">CLICKS</text>
-      <text x="158" y="162" fontSize="9" fill="white" opacity="0.8" fontFamily="monospace">SALES</text>
-      {/* Right side ROAS metric */}
-      <rect x="296" y="38" width="50" height="60" rx="6" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" />
-      <text x="303" y="56" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">ROAS</text>
-      <text x="298" y="76" fontSize="16" fill="#e0142c" opacity="0.85" fontFamily="monospace" fontWeight="bold">4.8x</text>
-      <text x="300" y="90" fontSize="7" fill="#e0142c" opacity="0.4" fontFamily="monospace">↑ 24%</text>
+      {/* Funnel labels — all centered at x=180 */}
+      <text x="180" y="65" fontSize="9" fill="currentColor" opacity="0.4" fontFamily="monospace" textAnchor="middle">IMPRESSIONS</text>
+      <text x="180" y="120" fontSize="9" fill="currentColor" opacity="0.5" fontFamily="monospace" textAnchor="middle">CLICKS</text>
+      <text x="180" y="162" fontSize="9" fill="white" opacity="0.9" fontFamily="monospace" textAnchor="middle">SALES</text>
+      {/* Right ROAS metric */}
+      <rect x="296" y="38" width="50" height="60" rx="6" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8">
+        <animate attributeName="opacity" values="0.05;0.12;0.05" dur="2.4s" repeatCount="indefinite" />
+      </rect>
+      <text x="321" y="56" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace" textAnchor="middle">ROAS</text>
+      <text x="321" y="76" fontSize="16" fill="#e0142c" opacity="0.85" fontFamily="monospace" fontWeight="bold" textAnchor="middle">4.8x</text>
+      <text x="321" y="90" fontSize="7" fill="#e0142c" opacity="0.5" fontFamily="monospace" textAnchor="middle">↑ 24%</text>
       {/* Left CTR */}
       <rect x="14" y="38" width="50" height="60" rx="6" fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="0.8" />
-      <text x="22" y="56" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">CTR</text>
-      <text x="18" y="76" fontSize="16" fill="currentColor" opacity="0.45" fontFamily="monospace" fontWeight="bold">3.2%</text>
-      <text x="20" y="90" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace">↑ 0.8</text>
-      {/* Funnel particle falling through */}
-      <circle r="4" fill="#e0142c" opacity="0.9">
-        <animateMotion dur="2.6s" repeatCount="indefinite" path="M180,34 L180,90 L180,138 L180,166" />
-        <animate attributeName="opacity" values="0.9;0.9;0.7;0" keyTimes="0;0.35;0.75;1" dur="2.6s" repeatCount="indefinite" />
-      </circle>
-      {/* ROAS badge pulse */}
-      <rect x="296" y="38" width="50" height="60" rx="6" fill="#e0142c" opacity="0">
-        <animate attributeName="opacity" values="0;0.05;0" dur="2.4s" begin="1s" repeatCount="indefinite" />
-      </rect>
+      <text x="39" y="56" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace" textAnchor="middle">CTR</text>
+      <text x="39" y="76" fontSize="14" fill="currentColor" opacity="0.45" fontFamily="monospace" fontWeight="bold" textAnchor="middle">3.2%</text>
+      <text x="39" y="90" fontSize="7" fill="currentColor" opacity="0.3" fontFamily="monospace" textAnchor="middle">↑ 0.8</text>
+      {/* 3 particles falling through funnel at staggered intervals */}
+      {[0, 0.9, 1.8].map((delay, i) => (
+        <circle key={i} r="3.5" fill="#e0142c" opacity="0">
+          <animateMotion dur="2.6s" begin={`${delay}s`} repeatCount="indefinite" path="M180,34 L180,90 L180,138 L180,166" />
+          <animate attributeName="opacity" values="0;0.9;0.85;0.6;0" keyTimes="0;0.05;0.4;0.85;1" dur="2.6s" begin={`${delay}s`} repeatCount="indefinite" />
+        </circle>
+      ))}
     </svg>
   );
 }
@@ -529,7 +545,7 @@ function ArtWorkflow() {
         return <path key={`a${i}`} d={`M${x-7},${y-4} L${x},${y} L${x-7},${y+4}`}
           fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.2" strokeLinecap="round" strokeLinejoin="round" />;
       })}
-      {/* Nodes */}
+      {/* Nodes — textAnchor middle for perfect centering */}
       {nodes.map((n, i) => (
         <g key={i}>
           <rect x={n.x} y={n.y} width={n.w} height={n.h} rx="6"
@@ -539,21 +555,27 @@ function ArtWorkflow() {
             strokeWidth={n.accent ? "0" : "0.8"}
             strokeOpacity="0.2"
           />
-          <text x={n.x + n.w/2 - n.label.length*2.6} y={n.y + n.h/2 + 3.5}
-            fontSize="8.5" fontFamily="monospace"
+          <text
+            x={n.x + n.w / 2}
+            y={n.y + n.h / 2 + 3.5}
+            fontSize="8.5"
+            fontFamily="monospace"
+            textAnchor="middle"
             fill={n.accent ? "white" : "currentColor"}
             opacity={n.accent ? 0.95 : 0.45}
           >{n.label}</text>
         </g>
       ))}
       {/* n8n watermark */}
-      <text x="28" y="170" fontSize="9" fill="currentColor" opacity="0.1" fontFamily="monospace">n8n · make.com · zapier</text>
-      {/* Packet travelling Trigger → Filter → Notify → Done */}
-      <circle r="3.5" fill="#e0142c" opacity="0.9">
-        <animateMotion dur="3s" repeatCount="indefinite"
-          path="M94,104 C114,104 114,82 134,82 L190,82 C211,82 211,82 232,82 L288,82 C294,82 294,104 300,104" />
-        <animate attributeName="opacity" values="0;0.9;0.9;0.3" keyTimes="0;0.05;0.9;1" dur="3s" repeatCount="indefinite" />
-      </circle>
+      <text x="180" y="185" fontSize="9" fill="currentColor" opacity="0.1" fontFamily="monospace" textAnchor="middle">n8n · make.com · zapier</text>
+      {/* Two packets at offset timing — one via top path, one via bottom */}
+      {[0, 1.5].map((delay, i) => (
+        <circle key={i} r="3.5" fill="#e0142c" opacity="0">
+          <animateMotion dur="3s" begin={`${delay}s`} repeatCount="indefinite"
+            path="M94,104 C114,104 114,82 134,82 L190,82 C211,82 211,82 232,82 L288,82 C294,82 294,104 300,104" />
+          <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.06;0.88;1" dur="3s" begin={`${delay}s`} repeatCount="indefinite" />
+        </circle>
+      ))}
     </svg>
   );
 }
@@ -611,20 +633,29 @@ function ArtAI() {
         <text key={i} x="14" y={l.y + 4} fontSize="7.5" fill="currentColor" opacity="0.25" fontFamily="monospace">{l.label}</text>
       ))}
       {/* RAG badge */}
-      <rect x="270" y="78" width="72" height="44" rx="6" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="0.8" />
-      <text x="278" y="96" fontSize="7" fill="#e0142c" opacity="0.5" fontFamily="monospace">RAG Pipeline</text>
-      <rect x="278" y="102" width="48" height="5" rx="2" fill="#e0142c" opacity="0.2" />
-      <rect x="278" y="110" width="36" height="5" rx="2" fill="#e0142c" opacity="0.12" />
-      {/* Inference signal pulse from Input → Output */}
-      <circle r="5" fill="#e0142c" opacity="0">
+      <rect x="266" y="78" width="76" height="44" rx="6" fill="#e0142c" opacity="0.08" stroke="#e0142c" strokeWidth="0.8" />
+      <text x="304" y="96" fontSize="7" fill="#e0142c" opacity="0.5" fontFamily="monospace" textAnchor="middle">RAG Pipeline</text>
+      <rect x="276" y="102" width="52" height="5" rx="2" fill="#e0142c" opacity="0.2" />
+      <rect x="276" y="110" width="38" height="5" rx="2" fill="#e0142c" opacity="0.12" />
+      {/* Inference signal — bright travelling pulse */}
+      <circle r="6" fill="#e0142c" opacity="0">
         <animateMotion dur="2s" repeatCount="indefinite" path="M180,26 L180,72 L180,118 L180,164" />
-        <animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.08;0.85;1" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.88;1" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite" />
       </circle>
-      {/* Central nodes light up in sequence */}
+      {/* Layer nodes light up in sequence as signal passes */}
       {[26, 72, 118, 164].map((y, li) => (
-        <circle key={li} cx="180" cy={y} r="13" fill="#e0142c" opacity="0">
-          <animate attributeName="opacity" values="0;0.3;0" dur="2s" begin={`${li * 0.48}s`} repeatCount="indefinite" />
+        <circle key={li} cx="180" cy={y} r="15" fill="#e0142c" opacity="0">
+          <animate attributeName="opacity" values="0;0.45;0" dur="2s" begin={`${li * 0.47}s`} repeatCount="indefinite" />
+          <animate attributeName="r" values="11;18;11" dur="2s" begin={`${li * 0.47}s`} repeatCount="indefinite" />
         </circle>
+      ))}
+      {/* Connection lines flash as signal travels */}
+      {[[26,72],[72,118],[118,164]].map(([y1,y2], li) => (
+        <line key={li} x1="180" y1={y1+9} x2="180" y2={y2-9}
+          stroke="#e0142c" strokeWidth="2" opacity="0">
+          <animate attributeName="opacity" values="0;0.7;0" dur="2s" begin={`${li * 0.47 + 0.2}s`} repeatCount="indefinite" />
+        </line>
       ))}
     </svg>
   );
