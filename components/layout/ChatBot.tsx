@@ -3,10 +3,65 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 /* ─── Types ─────────────────────────────────────────────── */
 
 type Msg = { role: "user" | "assistant"; content: string };
+
+/* ─── Message renderer — handles \n and [text](url) links ── */
+
+function MessageContent({ text, onNavigate }: { text: string; onNavigate: () => void }) {
+  const lines = text.split("\n");
+  return (
+    <div className="space-y-1">
+      {lines.map((line, i) => {
+        if (!line.trim()) return <div key={i} className="h-0.5" />;
+
+        // Full-line link: [label](url) — render as a CTA chip
+        const fullLink = line.match(/^\[(.+)\]\((.+)\)$/);
+        if (fullLink) {
+          return (
+            <Link
+              key={i}
+              href={fullLink[2]}
+              onClick={onNavigate}
+              className="group flex items-center justify-between gap-2 w-full px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+              style={{ background: "rgba(224,20,44,0.14)", color: "#e0142c" }}
+            >
+              <span>{fullLink[1]}</span>
+              <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-150" />
+            </Link>
+          );
+        }
+
+        // Inline links within a line — render as underlined accent text
+        const inlineLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+        const parts: React.ReactNode[] = [];
+        let last = 0;
+        let m: RegExpExecArray | null;
+        while ((m = inlineLinkRegex.exec(line)) !== null) {
+          if (m.index > last) parts.push(line.slice(last, m.index));
+          parts.push(
+            <Link key={m.index} href={m[2]} onClick={onNavigate}
+              className="underline underline-offset-2 hover:no-underline"
+              style={{ color: "#e0142c" }}>
+              {m[1]}
+            </Link>
+          );
+          last = m.index + m[0].length;
+        }
+        if (last < line.length) parts.push(line.slice(last));
+
+        return (
+          <p key={i} className="text-sm leading-relaxed">
+            {parts.length ? parts : line}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
 
 /* ─── Quick-start suggestions ───────────────────────────── */
 
@@ -158,23 +213,17 @@ export function ChatBot() {
                   className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[82%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                      m.role === "user"
-                        ? "text-white rounded-br-sm"
-                        : "rounded-bl-sm"
+                    className={`max-w-[88%] rounded-2xl px-4 py-2.5 ${
+                      m.role === "user" ? "text-white rounded-br-sm text-sm leading-relaxed" : "rounded-bl-sm"
                     }`}
                     style={
                       m.role === "user"
                         ? { background: "var(--accent)" }
-                        : {
-                            background: "var(--foreground)",
-                            color: "var(--background)",
-                            opacity: 1,
-                          }
+                        : { background: "var(--foreground)", color: "var(--background)", opacity: 0.9 }
                     }
                   >
                     {m.role === "assistant" ? (
-                      <span style={{ opacity: 0.88 }}>{m.content}</span>
+                      <MessageContent text={m.content} onNavigate={() => setOpen(false)} />
                     ) : (
                       m.content
                     )}

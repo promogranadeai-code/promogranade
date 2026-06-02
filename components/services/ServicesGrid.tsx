@@ -1,11 +1,32 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
 
 import { services } from "@/components/home/ServicesPreview";
 
 export function ServicesGrid() {
+  const [highlighted, setHighlighted] = useState<string | null>(null);
+
+  useEffect(() => {
+    const activate = () => {
+      const hash = window.location.hash.replace("#service-", "");
+      if (hash && services.some((s) => s.n === hash)) {
+        setHighlighted(hash);
+        // Scroll the card into view
+        setTimeout(() => {
+          document.getElementById(`service-${hash}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 150);
+        // Clear highlight after 3 s
+        setTimeout(() => setHighlighted(null), 3200);
+      }
+    };
+    activate();
+    window.addEventListener("hashchange", activate);
+    return () => window.removeEventListener("hashchange", activate);
+  }, []);
+
   return (
     <section className="section-a relative overflow-hidden py-24 lg:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -39,15 +60,28 @@ export function ServicesGrid() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => {
             const { Art } = s;
+            const isHighlighted = highlighted === s.n;
             return (
               <motion.div
                 key={s.n}
+                id={`service-${s.n}`}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.75, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="relative flex flex-col h-full rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden">
+                <motion.div
+                  className="relative flex flex-col h-full rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden"
+                  animate={isHighlighted ? {
+                    boxShadow: [
+                      "0 0 0 0px rgba(224,20,44,0)",
+                      "0 0 0 3px rgba(224,20,44,0.85), 0 0 32px rgba(224,20,44,0.35)",
+                      "0 0 0 3px rgba(224,20,44,0.85), 0 0 32px rgba(224,20,44,0.35)",
+                      "0 0 0 0px rgba(224,20,44,0)",
+                    ],
+                  } : { boxShadow: "0 0 0 0px rgba(224,20,44,0)" }}
+                  transition={isHighlighted ? { duration: 3.2, times: [0, 0.07, 0.85, 1], ease: "easeOut" } : { duration: 0.4 }}
+                >
                   {/* Illustration */}
                   <div className="relative h-44 shrink-0 border-b border-[color:var(--section-border)] overflow-hidden bg-[color:var(--section-surface)]">
                     <Art />
@@ -77,7 +111,7 @@ export function ServicesGrid() {
                       ))}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             );
           })}

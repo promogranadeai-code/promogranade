@@ -26,7 +26,7 @@ const RULES: Rule[] = [
   /* ── All services ── */
   {
     match: ["services", "what do you offer", "offerings", "what can you do", "capabilities", "what you build", "work you do"],
-    reply: `We offer 8 focused services:\n\n1. 🌐 Website Development — WordPress, Shopify, Next.js\n2. ⚙️ Custom Applications — SaaS, ERP, Dashboards\n3. 🤖 AI Agentic Development — LangGraph, Claude, Multi-agent\n4. 📈 SEO / GEO / AEO — Search + AI engine optimisation\n5. 📱 Social Media Marketing — Instagram, LinkedIn, YouTube\n6. 📣 Meta & Google Ads — Performance campaigns\n7. 🔄 Workflow Automation — n8n, Make.com, Zapier\n8. 🧠 Custom AI Systems — RAG pipelines, fine-tuning, LLMs\n\nWant details on any specific service?`,
+    reply: `We offer 8 services — tap any to explore it:\n\n[🌐 Website Development](/services#service-01)\n[⚙️ Custom Applications](/services#service-02)\n[🤖 AI Agentic Development](/services#service-03)\n[📈 SEO / GEO / AEO](/services#service-04)\n[📱 Social Media Marketing](/services#service-05)\n[📣 Meta & Google Ads](/services#service-06)\n[🔄 Workflow Automation](/services#service-07)\n[🧠 Custom AI Systems](/services#service-08)`,
   },
 
   /* ── Website / Web dev ── */
