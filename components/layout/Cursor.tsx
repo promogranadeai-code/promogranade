@@ -67,24 +67,27 @@ export function Cursor() {
 
   return (
     <>
+      {/* Lagging ring — expands and fills grey on hover */}
       <div
         ref={ringRef}
-        className={`pointer-events-none fixed left-0 top-0 z-[9998] hidden lg:flex items-center justify-center rounded-full mix-blend-difference transition-[width,height,background] duration-300 ease-out ${
+        className={`pointer-events-none fixed left-0 top-0 z-[9998] hidden lg:flex items-center justify-center rounded-full transition-[width,height,background-color,border-color,opacity] duration-300 ease-out ${
           hover
-            ? "w-20 h-20 bg-white/90"
-            : "w-9 h-9 border border-white/80 bg-transparent"
+            ? "w-20 h-20 bg-foreground/[0.08] border border-foreground/[0.12]"
+            : "w-9 h-9 border border-foreground/25 bg-transparent"
         }`}
         style={{ willChange: "transform" }}
       >
         {label && hover && (
-          <span className="text-[10px] font-medium uppercase tracking-widest text-black">
+          <span className="text-[10px] font-medium uppercase tracking-widest text-foreground/70">
             {label}
           </span>
         )}
       </div>
+
+      {/* Fast dot — disappears on hover */}
       <div
         ref={dotRef}
-        className={`pointer-events-none fixed left-0 top-0 z-[9999] hidden lg:block rounded-full bg-white mix-blend-difference transition-[width,height,opacity] duration-200 ${
+        className={`pointer-events-none fixed left-0 top-0 z-[9999] hidden lg:block rounded-full bg-foreground transition-[width,height,opacity] duration-200 ${
           hover ? "w-0 h-0 opacity-0" : "w-1.5 h-1.5 opacity-100"
         }`}
         style={{ willChange: "transform" }}

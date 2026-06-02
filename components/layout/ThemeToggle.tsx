@@ -21,7 +21,7 @@ export function ThemeToggle({ forceWhite = false }: { forceWhite?: boolean }) {
       className={`relative h-10 w-10 rounded-full border flex items-center justify-center overflow-hidden group transition-all duration-500 backdrop-blur-md hover:border-[var(--accent)] ${
         forceWhite
           ? "border-white/30 bg-white/10 text-white"
-          : "border-[var(--nav-border)] bg-[var(--background)]/60"
+          : "border-foreground/20 bg-foreground/[0.06] text-foreground"
       }`}
     >
       <Sun
