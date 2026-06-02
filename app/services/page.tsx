@@ -1,4 +1,3 @@
-import { Footer } from "@/components/layout/Footer";
 import { ContactPreview } from "@/components/home/ContactPreview";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { PageHero } from "@/components/ui/PageHero";
@@ -18,7 +17,6 @@ export default function ServicesPage() {
       />
       <ServicesGrid />
       <ContactPreview />
-      <Footer />
     </>
   );
 }

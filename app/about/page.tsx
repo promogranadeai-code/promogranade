@@ -1,5 +1,4 @@
 import { PageHero } from "@/components/ui/PageHero";
-import { Footer } from "@/components/layout/Footer";
 import { ContactPreview } from "@/components/home/ContactPreview";
 import { AboutStory } from "@/components/about/AboutStory";
 import { AboutTeam } from "@/components/about/AboutTeam";
@@ -21,7 +20,6 @@ export default function AboutPage() {
       <AboutTeam />
       <AboutTestimonials />
       <ContactPreview />
-      <Footer />
     </>
   );
 }

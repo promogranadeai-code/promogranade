@@ -76,7 +76,8 @@ export function ArcadeShowcase() {
   return (
     <section
       id="arcade"
-      className="section-b relative overflow-hidden py-24 lg:py-36"
+      className="section-b relative overflow-hidden py-24 lg:py-36 isolate"
+      style={{ zIndex: 1 }}
     >
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
 
