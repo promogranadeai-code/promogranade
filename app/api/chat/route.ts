@@ -74,7 +74,7 @@ const RULES: Rule[] = [
   /* ── Pricing ── */
   {
     match: ["price", "pricing", "cost", "how much", "rate", "budget", "fee", "charge", "quote", "estimate"],
-    reply: "We price per project rather than hourly — this keeps us focused on outcomes, not hours. Pricing depends on scope, complexity, and timeline. The best next step is a free scoping call where we understand your needs and give you a clear quote. Email us at hello@promogranade.com or WhatsApp +91 95117 84952.",
+    reply: "Pricing varies from project to project depending on scope and requirements. Reach out to us at hello@promogranade.com or WhatsApp +91 95117 84952 and we'll get back to you.",
   },
 
   /* ── Timeline / how long ── */
