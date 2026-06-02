@@ -25,7 +25,7 @@ const linkGroups: { title: string; links: FooterLink[] }[] = [
       { href: "/about",   label: "About"   },
       { href: "/career",  label: "Careers" },
       { href: "/blog",    label: "Blog"    },
-      { href: "/#arcade", label: "Arcade"  },
+      { href: "/arcade",  label: "Arcade"  },
     ],
   },
   {

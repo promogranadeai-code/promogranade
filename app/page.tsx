@@ -3,7 +3,6 @@ import { AboutPreview } from "@/components/home/AboutPreview";
 import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { CareerPreview } from "@/components/home/CareerPreview";
 import { BlogPreview } from "@/components/home/BlogPreview";
-import { ArcadeShowcase } from "@/components/home/ArcadeShowcase";
 import { ContactPreview } from "@/components/home/ContactPreview";
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       <ServicesPreview />
       <CareerPreview />
       <BlogPreview />
-      <ArcadeShowcase />
       <ContactPreview />
     </>
   );
