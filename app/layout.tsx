@@ -8,6 +8,7 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { SiteLiquid } from "@/components/layout/SiteLiquid";
 import { IntroAnimation } from "@/components/layout/IntroAnimation";
 import { Cursor } from "@/components/layout/Cursor";
+import { ChatBot } from "@/components/layout/ChatBot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Cursor />
+          <ChatBot />
           <IntroAnimation />
           <SmoothScroll>
             <SiteLiquid />
