@@ -97,6 +97,7 @@ export function Navigation() {
             <button
               type="button"
               aria-label="Toggle menu"
+              aria-expanded={open}
               data-cursor="menu"
               onClick={() => setOpen((o) => !o)}
               className={cn(

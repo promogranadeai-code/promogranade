@@ -1,6 +1,9 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
+
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
 
@@ -84,7 +87,7 @@ export function ServicesPreview() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [dragRange, setDragRange] = useState(0);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const measure = () => {
       if (!trackRef.current) return;
       setDragRange(Math.max(0, trackRef.current.scrollWidth - window.innerWidth));

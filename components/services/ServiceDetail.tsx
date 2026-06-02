@@ -236,13 +236,13 @@ function CtaStrip() {
               Tell us the outcome — we&apos;ll scope the shortest path to it.
             </p>
           </div>
-          <Link
+          <a
             href="mailto:hello@promogranade.com"
             className="inline-flex items-center gap-3 rounded-full bg-[var(--accent)] text-white px-6 py-3.5 text-sm font-semibold hover:bg-[color:var(--sec-b-fg)] hover:text-[color:var(--sec-b-bg)] transition-colors"
           >
             Start a project
             <ArrowUpRight className="h-4 w-4" />
-          </Link>
+          </a>
         </div>
       </div>
     </section>

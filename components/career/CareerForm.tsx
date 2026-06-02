@@ -47,9 +47,8 @@ const initialState: FormState = {
   resume: null,
 };
 
-// Submissions are POSTed to FormSubmit which forwards to this inbox.
-// First-time use requires confirming the inbox once via a verification email.
-const FORM_ENDPOINT = "https://formsubmit.co/promogranade.ai@gmail.com";
+// AJAX endpoint — returns JSON and supports CORS so we can detect real failures.
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/promogranade.ai@gmail.com";
 
 export function CareerForm() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -92,16 +91,14 @@ export function CareerForm() {
       fd.append("_captcha", "false");
       fd.append("_replyto", form.email);
 
-      // mode: "no-cors" — FormSubmit's standard endpoint doesn't return CORS
-      // headers for cross-origin AJAX, but the POST still goes through.
-      // We treat completion-without-throw as a successful submission.
-      await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        body: fd,
-        mode: "no-cors",
-      });
+      const res = await fetch(FORM_ENDPOINT, { method: "POST", body: fd });
+      const json = await res.json().catch(() => ({ success: "false" }));
 
-      setSubmitted(true);
+      if (res.ok && json.success === "true") {
+        setSubmitted(true);
+      } else {
+        setError("Failed to send the form. Please email us at hello@promogranade.com directly.");
+      }
     } catch (err) {
       console.error(err);
       setError(
@@ -205,7 +202,7 @@ export function CareerForm() {
                   <input
                     type="tel"
                     required
-                    pattern="[0-9+\-\s()]{7,}"
+                    pattern="\+?[0-9][0-9\s\-()]{6,}"
                     value={form.contact}
                     onChange={update("contact")}
                     placeholder="+91 98765 43210"

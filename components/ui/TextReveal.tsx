@@ -19,7 +19,10 @@ export function TextReveal({
   delay = 0,
   stagger = 0.08,
 }: TextRevealProps) {
-  const words = useMemo(() => children.split(" "), [children]);
+  const words = useMemo(
+    () => (typeof children === "string" ? children.split(" ") : [String(children)]),
+    [children]
+  );
   const Tag = motion[as] as typeof motion.div;
 
   return (

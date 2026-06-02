@@ -7,6 +7,7 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { SiteLiquid } from "@/components/layout/SiteLiquid";
 import { IntroAnimation } from "@/components/layout/IntroAnimation";
+import { Cursor } from "@/components/layout/Cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({
     >
       <body>
         <Providers>
+          <Cursor />
           <IntroAnimation />
           <SmoothScroll>
             <SiteLiquid />

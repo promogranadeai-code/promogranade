@@ -1,6 +1,6 @@
-import { ContactPreview } from "@/components/home/ContactPreview";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { PageHero } from "@/components/ui/PageHero";
+import { Footer } from "@/components/layout/Footer";
 
 export const metadata = {
   title: "Services — Promogranade",
@@ -16,7 +16,7 @@ export default function ServicesPage() {
         tone="b"
       />
       <ServicesGrid />
-      <ContactPreview />
+      <Footer />
     </>
   );
 }
