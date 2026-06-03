@@ -52,10 +52,11 @@ const fragmentShader = /* glsl */ `
     return 130.0 * dot(m, g);
   }
 
+  // 3 octaves instead of 4 — visually identical, 25% fewer noise evals per pixel
   float fbm(vec2 p) {
     float v = 0.0;
     float a = 0.5;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
       v += a * snoise(p);
       p *= 2.0;
       a *= 0.5;
@@ -112,6 +113,7 @@ function Liquid() {
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const { resolvedTheme } = useTheme();
   const mouseTarget = useRef(new THREE.Vector2(0.5, 0.5));
+  const _bgColor = useRef(new THREE.Color()); // reused each frame — avoids GC pressure
 
   const uniforms = useMemo(
     () => ({
@@ -143,11 +145,8 @@ function Liquid() {
     current.x += (mouseTarget.current.x - current.x) * 0.05;
     current.y += (mouseTarget.current.y - current.y) * 0.05;
 
-    const targetBg = resolvedTheme === "dark" ? "#0a0a0a" : "#fafafa";
-    (m.uniforms.uBg.value as THREE.Color).lerp(
-      new THREE.Color(targetBg),
-      0.06
-    );
+    _bgColor.current.set(resolvedTheme === "dark" ? "#0a0a0a" : "#fafafa");
+    (m.uniforms.uBg.value as THREE.Color).lerp(_bgColor.current, 0.06);
   });
 
   return (
@@ -175,11 +174,13 @@ export function SiteLiquid() {
       aria-hidden
     >
       <Canvas
-        dpr={[0.55, 1]}
+        dpr={[0.5, 0.75]}
         gl={{
           antialias: false,
           alpha: true,
           powerPreference: "low-power",
+          depth: false,
+          stencil: false,
         }}
         camera={{ position: [0, 0, 1] }}
         frameloop="always"
@@ -189,3 +190,5 @@ export function SiteLiquid() {
     </div>
   );
 }
+
+export default SiteLiquid;

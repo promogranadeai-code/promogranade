@@ -159,3 +159,5 @@ function LogoMark({ size }: { size: number }) {
     </svg>
   );
 }
+
+export default IntroAnimation;

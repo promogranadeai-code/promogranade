@@ -1,34 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
+import { Geist, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Navigation } from "@/components/layout/Navigation";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { SiteLiquid } from "@/components/layout/SiteLiquid";
-import { IntroAnimation } from "@/components/layout/IntroAnimation";
-import { Cursor } from "@/components/layout/Cursor";
-import { ChatBot } from "@/components/layout/ChatBot";
+import { DeferredShell } from "@/components/layout/DeferredShell";
 
+// ── Fonts: only the two actually used in globals.css ─────────────────────────
+// Inter + Geist Mono were loaded before but --font-inter / --font-geist-mono
+// are never referenced in the CSS — removing them saves 2 network round-trips.
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const display = Space_Grotesk({
+const displayFont = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -50,16 +42,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${display.variable} antialiased`}
+      className={`${geistSans.variable} ${displayFont.variable} antialiased`}
       suppressHydrationWarning
     >
       <body>
         <Providers>
-          <Cursor />
-          <ChatBot />
-          <IntroAnimation />
+          {/* Three.js background, cursor, chatbot, intro — all deferred client-side */}
+          <DeferredShell />
           <SmoothScroll>
-            <SiteLiquid />
             <div className="noise-overlay" aria-hidden />
             <Navigation />
             <main>
