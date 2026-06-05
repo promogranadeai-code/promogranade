@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
 import { ArrowUpRight } from "lucide-react";
+import { BlogVisual } from "@/components/blog/BlogVisual";
 import { featuredPosts } from "@/lib/blog";
 
 export function BlogPreview() {
@@ -62,12 +63,14 @@ export function BlogPreview() {
                   </span>
                 </span>
 
-                {/* Gradient swatch + title */}
+                {/* Infographic swatch + title */}
                 <span className="col-span-6 md:col-span-7 flex items-center gap-4">
-                  <span
-                    aria-hidden
+                  <BlogVisual
+                    slug={p.slug}
+                    category={p.category}
+                    gradient={p.categoryColor}
+                    variant="mini"
                     className="hidden md:block h-14 w-20 rounded-lg shrink-0 opacity-90"
-                    style={{ background: p.categoryColor }}
                   />
                   <p className="font-display text-xl md:text-3xl font-bold leading-snug tracking-tight group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all duration-500">
                     {p.title}

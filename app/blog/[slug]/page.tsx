@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, ArrowUpRight } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
+import { BlogVisual } from "@/components/blog/BlogVisual";
+import { SectionVisual } from "@/components/blog/SectionVisual";
 import { allPosts, getPost } from "@/lib/blog";
 
 /* ─── Static params (pre-render all post pages at build time) ── */
@@ -87,6 +89,19 @@ export default async function BlogPostPage({
         className="pt-32 pb-20 relative overflow-hidden"
         style={{ background: post.categoryColor }}
       >
+        {/* Animated topic infographic, faded behind the headline */}
+        <BlogVisual
+          slug={post.slug}
+          category={post.category}
+          gradient={post.categoryColor}
+          variant="hero"
+          transparent
+          className="absolute inset-0 opacity-50"
+        />
+        {/* Legibility scrim — darkens the left where the text sits */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
         <div className="relative mx-auto max-w-4xl px-6 lg:px-10">
           <Link
             href="/blog"
@@ -121,6 +136,11 @@ export default async function BlogPostPage({
           <article className="prose-custom">
             {post.content.map((section, i) => (
               <div key={i} className="mb-14">
+                <SectionVisual
+                  slug={post.slug}
+                  category={post.category}
+                  index={i}
+                />
                 <h2 className="font-display text-2xl md:text-3xl font-black leading-tight tracking-tight mb-5 text-[color:var(--sec-a-fg)]">
                   {section.heading}
                 </h2>
@@ -184,7 +204,13 @@ export default async function BlogPostPage({
                   href={`/blog/${rp.slug}`}
                   className="group flex flex-col rounded-2xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden hover:border-[var(--accent)] transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="h-24 shrink-0" style={{ background: rp.categoryColor }} />
+                  <BlogVisual
+                    slug={rp.slug}
+                    category={rp.category}
+                    gradient={rp.categoryColor}
+                    variant="card"
+                    className="h-24 shrink-0"
+                  />
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-display text-lg font-bold leading-snug tracking-tight mb-2 group-hover:text-[var(--accent)] transition-colors duration-200">
                       {rp.title}

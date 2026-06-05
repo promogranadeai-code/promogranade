@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
+import { BlogVisual } from "@/components/blog/BlogVisual";
 import { allPosts } from "@/lib/blog";
 
 export const metadata = {
@@ -48,10 +49,13 @@ export default function BlogPage() {
             className="group block rounded-3xl overflow-hidden border border-[color:var(--section-border)] hover:border-[var(--accent)] transition-colors duration-300"
           >
             <div className="grid lg:grid-cols-2">
-              {/* Gradient thumbnail */}
-              <div
+              {/* Topic infographic */}
+              <BlogVisual
+                slug={hero.slug}
+                category={hero.category}
+                gradient={hero.categoryColor}
+                variant="hero"
                 className="h-56 lg:h-auto min-h-[280px]"
-                style={{ background: hero.categoryColor }}
               />
               {/* Content */}
               <div className="p-8 md:p-12 flex flex-col justify-between bg-[color:var(--section-surface)]">
@@ -111,10 +115,13 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group flex flex-col rounded-2xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden hover:border-[var(--accent)] transition-all duration-300 hover:-translate-y-1"
               >
-                {/* Mini gradient */}
-                <div
+                {/* Topic infographic */}
+                <BlogVisual
+                  slug={post.slug}
+                  category={post.category}
+                  gradient={post.categoryColor}
+                  variant="card"
                   className="h-36 shrink-0"
-                  style={{ background: post.categoryColor }}
                 />
                 {/* Card body */}
                 <div className="flex flex-col flex-1 p-6">
