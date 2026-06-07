@@ -92,12 +92,12 @@ const fragmentShader = /* glsl */ `
     float n2 = fbm(distorted * 4.0 - t * 0.7);
     float pattern = (n1 * 0.6 + n2 * 0.4) * 0.5 + 0.5;
 
-    float liquid = smoothstep(0.34, 0.84, pattern);
-    float streak = pow(smoothstep(0.56, 0.90, pattern), 1.3);
+    float liquid = smoothstep(0.30, 0.80, pattern);
+    float streak = pow(smoothstep(0.52, 0.88, pattern), 1.2);
 
-    vec3 deep = uAccent * 0.52;
-    vec3 color = mix(uBg, deep, liquid * 0.65);
-    color = mix(color, uAccent * 0.90, streak * 0.48);
+    vec3 deep = uAccent * 0.58;
+    vec3 color = mix(uBg, deep, liquid * 0.78);
+    color = mix(color, uAccent * 0.92, streak * 0.58);
 
     float glow = exp(-dist * 4.0);
     color = mix(color, uAccent, glow * 0.38);
