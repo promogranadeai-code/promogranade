@@ -14,7 +14,7 @@ export function PageHero({
   eyebrow,
   title,
   description,
-  tone = "b",
+  tone = "a",
 }: PageHeroProps) {
   return (
     <section

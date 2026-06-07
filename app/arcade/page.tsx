@@ -10,7 +10,7 @@ export default function ArcadePage() {
   return (
     <>
       <div className="pt-20" />
-      <ArcadeShowcase />
+      <ArcadeShowcase tone="a" />
       <Footer />
     </>
   );

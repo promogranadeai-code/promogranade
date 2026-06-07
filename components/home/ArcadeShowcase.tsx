@@ -72,11 +72,11 @@ const stacks: Stack[] = [
   },
 ];
 
-export function ArcadeShowcase() {
+export function ArcadeShowcase({ tone = "b" }: { tone?: "a" | "b" }) {
   return (
     <section
       id="arcade"
-      className="section-b relative overflow-hidden py-24 lg:py-36 isolate"
+      className={`${tone === "a" ? "section-a" : "section-b"} relative overflow-hidden py-24 lg:py-36 isolate`}
       style={{ zIndex: 1 }}
     >
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">

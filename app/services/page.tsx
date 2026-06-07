@@ -13,7 +13,6 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="What we do."
         description="Eight disciplines. One senior team. From first pixel to first paying customer — we own the outcome end to end."
-        tone="b"
       />
       <ServicesGrid />
       <Footer />

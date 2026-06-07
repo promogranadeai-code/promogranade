@@ -25,13 +25,13 @@ export default function BlogPage() {
   return (
     <>
       {/* ── Header ─────────────────────────────────────────────── */}
-      <div className="pt-32 pb-20 section-b">
+      <div className="pt-32 pb-20 section-a">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-8">
             <span className="h-px w-12 bg-[color:var(--section-border)]" />
             <span>Field notes</span>
           </div>
-          <h1 className="font-display text-[clamp(3rem,8vw,7rem)] font-black leading-[0.9] tracking-[-0.04em] text-[color:var(--sec-b-fg)] mb-6">
+          <h1 className="font-display text-[clamp(3rem,8vw,7rem)] font-black leading-[0.9] tracking-[-0.04em] text-[color:var(--sec-a-fg)] mb-6">
             The Build Log.
           </h1>
           <p className="text-base md:text-lg text-[color:var(--section-muted)] max-w-2xl leading-relaxed">
