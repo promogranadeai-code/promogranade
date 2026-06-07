@@ -57,10 +57,7 @@ export function Navigation() {
             className="flex items-center gap-2 group"
           >
             <Logo />
-            <span className={cn(
-              "font-display text-lg font-bold tracking-tight transition-colors duration-500",
-              scrolled ? "text-foreground" : "text-white"
-            )}>
+            <span className="font-display text-lg font-bold tracking-tight text-foreground transition-colors duration-500">
               PROMOGRANADE
             </span>
           </Link>
@@ -71,12 +68,7 @@ export function Navigation() {
                 key={l.href}
                 href={l.href}
                 data-cursor="visit"
-                className={cn(
-                  "relative px-4 py-2 text-sm font-medium transition-colors duration-500 group",
-                  scrolled
-                    ? "text-foreground/70 hover:text-foreground"
-                    : "text-white/80 hover:text-white"
-                )}
+                className="relative px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-500 group"
               >
                 <span className="relative z-10">{l.label}</span>
                 <span className="absolute inset-0 rounded-full bg-[var(--accent)]/10 scale-0 group-hover:scale-100 transition-transform duration-300 origin-center" />
@@ -93,19 +85,14 @@ export function Navigation() {
               Let&apos;s talk
               <span className="inline-block">→</span>
             </Link>
-            <ThemeToggle forceWhite={!scrolled} />
+            <ThemeToggle />
             <button
               type="button"
               aria-label="Toggle menu"
               aria-expanded={open}
               data-cursor="menu"
               onClick={() => setOpen((o) => !o)}
-              className={cn(
-                "lg:hidden h-10 w-10 rounded-full border flex items-center justify-center transition-colors duration-500",
-                scrolled
-                  ? "border-[var(--nav-border)] text-foreground"
-                  : "border-white/30 text-white"
-              )}
+              className="lg:hidden h-10 w-10 rounded-full border border-[var(--nav-border)] text-foreground flex items-center justify-center transition-colors duration-500"
             >
               {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
