@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
@@ -107,86 +106,7 @@ export function AboutPreview() {
             </div>
           </div>
         </FadeUp>
-
-        <ProcessDiagram />
       </div>
     </section>
-  );
-}
-
-function ProcessDiagram() {
-  const steps = [
-    { n: "01", title: "Discover", blurb: "Goals, constraints, real users." },
-    { n: "02", title: "Design", blurb: "Brand, flow, prototype." },
-    { n: "03", title: "Build", blurb: "Senior team, weekly demos." },
-    { n: "04", title: "Grow", blurb: "Measure. Iterate. Scale." },
-  ];
-
-  return (
-    <div className="mt-32 lg:mt-40 mx-auto max-w-4xl">
-      <FadeUp>
-        <div className="flex items-center justify-between gap-6 mb-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)]">
-            How we work
-          </p>
-          <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] hidden md:block">
-            Typical engagement: 4–12 weeks
-          </p>
-        </div>
-      </FadeUp>
-
-      <div className="relative grid grid-cols-1 md:grid-cols-4 gap-6">
-        {steps.map((s, i) => (
-          <motion.div
-            key={s.n}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{
-              duration: 0.8,
-              delay: i * 0.25,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="relative"
-          >
-            <div className="flex items-center gap-3 mb-5">
-              <motion.span
-                initial={{ scale: 0.4, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  type: "spring",
-                  stiffness: 220,
-                  damping: 16,
-                  delay: i * 0.25 + 0.05,
-                }}
-                className="relative z-10 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[var(--accent)] text-white font-display font-bold text-lg shrink-0"
-              >
-                {s.n}
-              </motion.span>
-              {i < steps.length - 1 && (
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: i * 0.25 + 0.3,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="hidden md:inline-block flex-1 h-px bg-[color:var(--section-border)] origin-left"
-                />
-              )}
-            </div>
-            <p className="font-display text-2xl font-bold tracking-tight mb-1">
-              {s.title}
-            </p>
-            <p className="text-sm text-[color:var(--section-muted)] leading-relaxed">
-              {s.blurb}
-            </p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
   );
 }
