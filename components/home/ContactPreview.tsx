@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
+import { SiteLiquid } from "../layout/SiteLiquid";
 import { ArrowUpRight, Phone, MessageCircle, Mail } from "lucide-react";
 
 const EMAIL     = "hello@promogranade.com";
@@ -44,6 +45,7 @@ export function ContactPreview() {
       id="contact"
       className="section-a relative overflow-hidden py-28 lg:py-44"
     >
+      <SiteLiquid />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
 
         {/* Heading */}

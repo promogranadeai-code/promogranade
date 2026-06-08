@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
+import { SiteLiquid } from "@/components/layout/SiteLiquid";
 
 import { services } from "@/components/home/ServicesPreview";
 
@@ -29,6 +30,7 @@ export function ServicesGrid() {
 
   return (
     <section className="section-a relative overflow-hidden py-24 lg:py-36">
+      <SiteLiquid />
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
         {/* Eyebrow + heading */}

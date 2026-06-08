@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { SiteLiquid } from "@/components/layout/SiteLiquid";
 
 interface PageHeroProps {
   eyebrow: string;
@@ -17,14 +18,15 @@ export function PageHero({
   tone = "a",
 }: PageHeroProps) {
   return (
-    <>
+    <div className="relative overflow-hidden">
+      <SiteLiquid />
       {/* transparent spacer — keeps the area behind the fixed nav free of the
           tone overlay so the liquid animation reads there exactly as it does
           on Career/Contact/Arcade, instead of looking dulled. */}
       <div className="pt-16" />
       <section
         className={cn(
-          "relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden",
+          "relative pt-12 pb-24 lg:pt-20 lg:pb-32",
           tone === "a" ? "section-a" : "section-b"
         )}
       >
@@ -55,6 +57,6 @@ export function PageHero({
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }

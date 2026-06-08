@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Wrench, Sparkles, Workflow as WorkflowIcon } from "lucide-react";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
+import { SiteLiquid } from "../layout/SiteLiquid";
 
 interface Stack {
   id: string;
@@ -79,6 +80,7 @@ export function ArcadeShowcase({ tone = "b" }: { tone?: "a" | "b" }) {
       className={`${tone === "a" ? "section-a" : "section-b"} relative overflow-hidden py-24 lg:py-36 isolate`}
       style={{ zIndex: 1 }}
     >
+      <SiteLiquid />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
 
         {/* Eyebrow */}

@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import Link from "next/link";
 import { MagneticButton } from "../ui/MagneticButton";
+import { SiteLiquid } from "../layout/SiteLiquid";
 
 export function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden flex items-center">
+      <SiteLiquid />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-10 pt-32 pb-16">
         <motion.div
           initial={{ opacity: 0, y: 8 }}

@@ -20,6 +20,7 @@ const fragmentShader = /* glsl */ `
   uniform vec2 uResolution;
   uniform vec3 uBg;
   uniform vec3 uAccent;
+  uniform float uIntensity;
   varying vec2 vUv;
 
   vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -96,11 +97,11 @@ const fragmentShader = /* glsl */ `
     float streak = pow(smoothstep(0.52, 0.88, pattern), 1.2);
 
     vec3 deep = uAccent * 0.58;
-    vec3 color = mix(uBg, deep, liquid * 0.78);
-    color = mix(color, uAccent * 0.92, streak * 0.58);
+    vec3 color = mix(uBg, deep, liquid * 0.78 * uIntensity);
+    color = mix(color, uAccent * 0.92, streak * 0.58 * uIntensity);
 
     float glow = exp(-dist * 4.0);
-    color = mix(color, uAccent, glow * 0.38);
+    color = mix(color, uAccent, glow * 0.38 * uIntensity);
 
     float v = smoothstep(1.5, 0.3, length(uv - 0.5));
     color *= 0.88 + 0.12 * v;
@@ -122,6 +123,7 @@ function Liquid() {
       uResolution: { value: new THREE.Vector2(1, 1) },
       uBg: { value: new THREE.Color("#0a0a0a") },
       uAccent: { value: new THREE.Color("#e0142c") },
+      uIntensity: { value: 0.78 },
     }),
     []
   );
@@ -147,6 +149,12 @@ function Liquid() {
 
     _bgColor.current.set(resolvedTheme === "dark" ? "#0a0a0a" : "#fafafa");
     (m.uniforms.uBg.value as THREE.Color).lerp(_bgColor.current, 0.06);
+
+    // Light theme reads "heavier" with the same mix strength — a white
+    // canvas makes the deep-red swirls look much darker/denser than they
+    // do against the near-black dark-theme canvas, so soften it slightly.
+    const targetIntensity = resolvedTheme === "dark" ? 0.78 : 0.66;
+    m.uniforms.uIntensity.value += (targetIntensity - m.uniforms.uIntensity.value) * 0.05;
   });
 
   return (
@@ -162,17 +170,17 @@ function Liquid() {
   );
 }
 
+/**
+ * Contained liquid background — fills its nearest `relative` ancestor
+ * (a hero section) rather than the whole viewport. Mount one per hero.
+ */
 export function SiteLiquid() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
   return (
-    <div
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: -1 }}
-      aria-hidden
-    >
+    <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden>
       <Canvas
         dpr={[0.5, 0.75]}
         gl={{
