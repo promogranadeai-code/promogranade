@@ -24,7 +24,7 @@ export function AboutPreview() {
           </div>
         </FadeUp>
 
-        <div className="grid gap-16 lg:grid-cols-12 items-end">
+        <div className="grid gap-16 lg:grid-cols-12 items-center">
           <div className="lg:col-span-7">
             <TextReveal
               as="h2"
