@@ -21,10 +21,10 @@ export function PageHero({
       {/* transparent spacer — keeps the area behind the fixed nav free of the
           tone overlay so the liquid animation reads there exactly as it does
           on Career/Contact/Arcade, instead of looking dulled. */}
-      <div className="pt-24" />
+      <div className="pt-16" />
       <section
         className={cn(
-          "relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden",
+          "relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden",
           tone === "a" ? "section-a" : "section-b"
         )}
       >
