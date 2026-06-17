@@ -299,7 +299,6 @@ function CtaSection({ serviceName }: { serviceName: string }) {
 
   return (
     <section className="section-a relative overflow-hidden py-24 lg:py-36">
-      <SiteLiquid />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="relative overflow-hidden rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] p-10 md:p-16">
           {/* background accent orb */}
