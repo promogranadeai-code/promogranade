@@ -326,6 +326,91 @@ export const posts: BlogPost[] = [
 
   // ──────────────────────────────────────────────────────────────
   {
+    slug: "shopify-vs-custom-ecommerce-2025",
+    title: "Shopify vs Custom Development: The E-Commerce Decision That Changes Your Ceiling",
+    category: "Development",
+    categoryColor: "linear-gradient(135deg,#0f0f0f 0%,#e0142c 100%)",
+    date: "June 2025",
+    dateISO: "2025-06-10",
+    read: "6 min",
+    featured: true,
+    excerpt:
+      "Shopify can take you from zero to your first million. It's what comes after that tells the real story. Here's exactly when to build custom and when Shopify still wins.",
+    metaDescription:
+      "Shopify vs custom e-commerce development in 2025: an honest comparison of cost, speed, flexibility, and long-term scalability to help you pick the right platform for your business.",
+    keywords: [
+      "Shopify vs custom development", "e-commerce platform 2025", "headless commerce",
+      "Shopify limitations", "custom e-commerce build", "Shopify Hydrogen", "WooCommerce alternative",
+    ],
+    content: [
+      {
+        heading: "The Real Question Isn't Platform — It's Ceiling",
+        body: `Every e-commerce business hits a ceiling at some point. The platform you choose determines where that ceiling is and how expensive it is to break through it.\n\nShopify is a remarkable product. It solves a genuinely hard problem — payments, inventory, checkout, tax, shipping — and makes it accessible to non-technical founders. The trade-off is that Shopify's ceiling is defined by Shopify's priorities, not yours. When your business needs something outside those priorities, you're either waiting for an app or working around the constraint.`,
+      },
+      {
+        heading: "Where Shopify Is the Correct Answer",
+        body: `Shopify is the right choice for most e-commerce businesses at most stages. It wins when: your catalogue is standard (products with variants, not complex configurators), you're a team of one to ten and can't afford a dedicated engineering resource, you need to launch fast and prove demand before investing in infrastructure, and your gross margins support Shopify's transaction fees.\n\nShopify Hydrogen — Shopify's React-based headless framework — has also closed much of the performance gap with custom builds. A Hydrogen storefront with Shopify as the backend gives you excellent Core Web Vitals, a headless architecture, and the full Shopify commerce stack beneath it.`,
+      },
+      {
+        heading: "When Custom Development Changes the Equation",
+        body: `Four scenarios make custom development not just viable but necessary:\n\n**Complex product configuration**: Bespoke furniture, custom-fitted clothing, professional equipment with interdependent options. Shopify's variant system breaks at ~100 variants per product. A custom configurator, connected to a real-time inventory or manufacturing API, handles unlimited complexity.\n\n**Multi-channel inventory**: If you're selling across a retail network, wholesale partners, and direct-to-consumer simultaneously, with a single inventory pool, Shopify's native tools and even its best third-party apps reach their limits. A custom OMS and a headless storefront connected to it is the right architecture.\n\n**Proprietary checkout logic**: Subscription bundles with complex upgrade/downgrade paths, B2B net terms and purchase orders, or region-specific checkout flows with local payment methods often require logic that Shopify's checkout extensibility can't support without significant workarounds.\n\n**Margin pressure at scale**: At $10M+ GMV, Shopify's transaction fees and app subscriptions add up to a meaningful cost. The break-even on a custom platform moves closer as revenue grows.`,
+      },
+      {
+        heading: "The Architecture We Recommend for Most Growing Brands",
+        body: `For brands doing £500k-£5M GMV who want flexibility without a full custom build, the sweet spot is Shopify as the commerce engine (checkout, payments, inventory) with a Next.js headless frontend. You get Shopify's conversion-optimised checkout and payment reliability, combined with a custom frontend that lets you implement any design, animation, or UX pattern without constraint.\n\nThis architecture also future-proofs the migration: if you outgrow Shopify's backend, the frontend stays as-is and you swap the data source.`,
+      },
+      {
+        heading: "Making the Decision",
+        body: `The question to ask is not "which platform is better?" but "what does my business need to do in the next 18 months that my current platform can't support?" If you're operating inside Shopify's capabilities, stay on Shopify and invest in creative and marketing instead of engineering. If you're actively fighting the platform to do what your business needs, that friction compounds — and the right time to rebuild is before the pain becomes critical.\n\nAt Promogranade we build both. If you're not sure which path is right for your next stage, a 30-minute conversation with our team will tell you.`,
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: "ai-content-strategy-2025",
+    title: "AI Content at Scale: How Smart Brands Are Publishing 10x More Without Losing Their Voice",
+    category: "AI",
+    categoryColor: "linear-gradient(135deg,#e0142c 0%,#0a0a0a 100%)",
+    date: "June 2025",
+    dateISO: "2025-06-14",
+    read: "5 min",
+    featured: true,
+    excerpt:
+      "The brands winning at content in 2025 aren't writing more — they're building smarter pipelines. Here's how to use AI to scale content production without the output sounding like everyone else.",
+    metaDescription:
+      "How to use AI tools like Claude and GPT-4 to scale content marketing in 2025 while preserving brand voice. A practical guide to AI content pipelines for marketing teams.",
+    keywords: [
+      "AI content marketing 2025", "scale content with AI", "AI writing tools",
+      "Claude content strategy", "brand voice AI", "content pipeline automation",
+      "AI blog writing", "content marketing strategy 2025",
+    ],
+    content: [
+      {
+        heading: "Why Most AI Content Looks the Same",
+        body: `Open any AI-written article from 2024 and you can recognise it within two sentences. The tells are consistent: an opening that restates the title, a numbered list where none was needed, a closing paragraph that summarises everything already said, and zero specific opinions or data that couldn't have been generated from the same three Wikipedia articles.\n\nThis isn't a capability limitation — it's a prompt limitation. Untrained use of AI writing tools produces generic output because generic prompts produce generic outputs. The brands doing this well are not using AI differently; they're using it with far more specificity, constraint, and editorial process around it.`,
+      },
+      {
+        heading: "The Three Layers of a Good AI Content Pipeline",
+        body: `**Layer 1 — The voice document**: Before any AI writes anything, it needs a detailed brief on your brand's voice. Not "professional but approachable" — every brand says that. Specific: sentences start with the subject, never with participle clauses. We never use the word "leverage." We cite specific numbers when we have them and say "we don't have data on this" when we don't. We take positions. The more specific the constraint document, the more distinctive the output.\n\n**Layer 2 — The research input**: AI doesn't know what you know. Feed it your proprietary data, your client examples, your specific methodology, and your opinions before asking it to write. The output becomes distinctive because the input is distinctive.\n\n**Layer 3 — Human editorial**: AI drafts at speed; humans add judgment. The pipeline is AI for first draft and structure, human editor for voice, specificity, and positions that require genuine expertise. The ratio depends on content type: for SEO-driven informational content, 70% AI / 30% human. For thought leadership, 30% AI / 70% human.`,
+      },
+      {
+        heading: "The Content Types That AI Handles Best",
+        body: `AI is significantly better than average at certain content types and significantly worse at others.\n\nBest: SEO-optimised informational content (how-to guides, comparison articles, FAQ pages), content repurposing (turning a long article into LinkedIn posts, email newsletters, and social captions), structured data extraction (turning transcripts or research into structured summaries), and first-draft generation when given detailed outlines.\n\nWorst: Genuine thought leadership that requires a defensible position based on experience, content that requires current real-world examples, anything that depends on relationships or institutional knowledge, and long-form narrative writing that needs a consistent authorial voice across thousands of words.`,
+      },
+      {
+        heading: "The Measurement Framework That Keeps Quality Honest",
+        body: `AI content pipelines drift toward mediocrity without measurement. Track two things: editorial quality score (does every published piece pass a checklist of voice, specificity, and value standards?) and downstream performance (do AI-assisted pieces perform as well as fully human-written pieces on the metrics that matter — time on page, backlinks, leads generated?).\n\nIf AI-assisted pieces underperform on any metric, that's the signal to increase the human editorial layer on that content type. The goal is output that performs; AI is a means to that end, not the end itself.`,
+      },
+      {
+        heading: "Building Your Own Pipeline",
+        body: `The practical starting point: take your three best-performing pieces of content and use them to train your AI voice document. Identify every stylistic choice in those pieces — sentence length patterns, how you handle data, your stance on common industry debates, your specific vocabulary. Build that into a system prompt.\n\nThen run three AI-assisted pieces through your normal editorial process and measure how long the editorial round takes. If it's taking longer than writing from scratch, the research input layer needs more work. If it's flowing fast and the quality is holding, you've found your pipeline.\n\nAt Promogranade we build content pipelines for our clients that include AI drafting, brand-voice prompts, and performance measurement built in. If you want to scale your content without scaling your headcount, let's talk.`,
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  {
     slug: "building-saas-product-2025",
     title: "Building a SaaS Product in 2025: The Architecture, Stack, and Decisions That Matter",
     category: "Engineering",
@@ -370,8 +455,8 @@ export const posts: BlogPost[] = [
 
 // ── Helpers ─────────────────────────────────────────────────────
 
-/** The three most recent featured posts for the home page preview */
-export const featuredPosts = posts.filter(p => p.featured).slice(0, 3);
+/** The five most recent featured posts for the home page preview */
+export const featuredPosts = posts.filter(p => p.featured).slice(0, 5);
 
 /** All posts sorted newest first */
 export const allPosts = [...posts].sort(

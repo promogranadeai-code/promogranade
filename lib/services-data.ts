@@ -109,8 +109,8 @@ export const SERVICE_PAGES: ServicePage[] = [
           },
           {
             title: "Headless CMS",
-            blurb: "Sanity, Contentful, or Payload — we choose the one that matches your editorial workflow and content complexity.",
-            tags: ["Sanity", "Contentful", "Payload CMS"],
+            blurb: "Sanity, Contentful, Payload, or headless WordPress — we choose the one that matches your editorial workflow and content complexity.",
+            tags: ["Sanity", "Contentful", "Payload CMS", "WordPress"],
           },
           {
             title: "Edge & CDN",

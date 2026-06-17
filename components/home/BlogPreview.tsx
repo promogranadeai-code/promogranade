@@ -93,7 +93,7 @@ export function BlogPreview() {
               href="/blog"
               className="group inline-flex items-center gap-3 rounded-full border border-[color:var(--section-border)] px-7 py-3.5 text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all duration-300"
             >
-              Read all {featuredPosts.length < 8 ? "8" : ""} posts
+              Read all 10 posts
               <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </Link>
           </div>
