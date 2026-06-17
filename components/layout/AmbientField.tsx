@@ -1,43 +1,73 @@
 "use client";
 
 /**
- * Premium ambient backdrop for everything OUTSIDE the hero sections.
+ * Ambient backdrop for non-hero sections.
  *
- * The heavy WebGL liquid (`SiteLiquid`) is scoped to hero sections only —
- * everywhere else gets this layered, CSS-driven scene: drifting gradient
- * meshes, a slow-rotating conic glow, and a sparse field of twinkling
- * particles. Cheap (no WebGL), theme-aware via CSS variables, and tuned
- * to read as quiet depth rather than compete with foreground content.
+ * Slow-morphing organic blobs that feel like an extension of the hero
+ * liquid animation — same accent palette, same fluid character, but
+ * CSS-driven and much cheaper than WebGL. Shape-morphing via
+ * border-radius keyframes gives the blobs a living, breathing quality.
  */
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useMemo } from "react";
 
-const orbs = [
-  { className: "h-[38rem] w-[38rem] -left-48 -top-40", duration: 50, accent: true, opacity: 0.09 },
-  { className: "h-[30rem] w-[30rem] right-[-10rem] top-[28%]", duration: 58, accent: false, opacity: 0.05 },
-  { className: "h-[34rem] w-[34rem] left-[20%] bottom-[-14rem]", duration: 64, accent: true, opacity: 0.07 },
-  { className: "h-[22rem] w-[22rem] right-[12%] bottom-[8%]", duration: 42, accent: false, opacity: 0.045 },
+/* Each blob has a base position, two alternating border-radius shapes,
+   a drift path, and an opacity level. */
+const blobs = [
+  {
+    size: "50rem",
+    pos: "-left-56 -top-40",
+    accent: true,
+    opacity: 0.08,
+    duration: 38,
+    drift: { x: [0, 80, -30, 0], y: [0, -60, 50, 0] },
+    r1: "62% 38% 46% 54% / 60% 44% 56% 40%",
+    r2: "44% 56% 60% 40% / 38% 62% 42% 58%",
+  },
+  {
+    size: "42rem",
+    pos: "right-[-10rem] top-[20%]",
+    accent: false,
+    opacity: 0.055,
+    duration: 52,
+    drift: { x: [0, -60, 40, 0], y: [0, 40, -50, 0] },
+    r1: "38% 62% 54% 46% / 48% 52% 44% 56%",
+    r2: "60% 40% 38% 62% / 54% 46% 60% 40%",
+  },
+  {
+    size: "46rem",
+    pos: "left-[15%] bottom-[-12rem]",
+    accent: true,
+    opacity: 0.065,
+    duration: 46,
+    drift: { x: [0, 50, -60, 0], y: [0, -40, 30, 0] },
+    r1: "54% 46% 38% 62% / 42% 58% 50% 50%",
+    r2: "40% 60% 54% 46% / 58% 42% 38% 62%",
+  },
+  {
+    size: "32rem",
+    pos: "right-[8%] bottom-[5%]",
+    accent: false,
+    opacity: 0.04,
+    duration: 60,
+    drift: { x: [0, -40, 30, 0], y: [0, 50, -40, 0] },
+    r1: "48% 52% 62% 38% / 56% 44% 52% 48%",
+    r2: "62% 38% 44% 56% / 40% 60% 48% 52%",
+  },
+  {
+    size: "28rem",
+    pos: "left-[38%] top-[-8rem]",
+    accent: true,
+    opacity: 0.042,
+    duration: 44,
+    drift: { x: [0, -50, 40, 0], y: [0, 60, -30, 0] },
+    r1: "56% 44% 40% 60% / 44% 56% 62% 38%",
+    r2: "38% 62% 56% 44% / 60% 40% 44% 56%",
+  },
 ];
-
-function useParticles(count: number) {
-  return useMemo(
-    () =>
-      Array.from({ length: count }, (_, i) => ({
-        id: i,
-        left: `${(i * 137.5) % 100}%`,
-        top: `${(i * 61.8) % 100}%`,
-        size: 2 + ((i * 7) % 5),
-        duration: 5 + ((i * 3) % 7),
-        delay: (i * 0.6) % 6,
-      })),
-    [count]
-  );
-}
 
 export function AmbientField() {
   const reduceMotion = useReducedMotion();
-  const particles = useParticles(18);
 
   return (
     <div
@@ -45,69 +75,60 @@ export function AmbientField() {
       style={{ zIndex: -2 }}
       aria-hidden
     >
-      {/* Slow-rotating conic glow — gives the scene a sense of depth and motion */}
-      <motion.div
-        className="absolute left-1/2 top-1/2 h-[80rem] w-[80rem] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          background:
-            "conic-gradient(from 0deg, transparent 0%, var(--accent) 18%, transparent 38%, transparent 60%, var(--foreground) 75%, transparent 92%)",
-          opacity: 0.035,
-          filter: "blur(140px)",
-        }}
-        animate={reduceMotion ? undefined : { rotate: 360 }}
-        transition={{ duration: 140, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* Drifting gradient meshes */}
-      {orbs.map((o, i) => (
+      {/* Shape-morphing organic blobs */}
+      {blobs.map((b, i) => (
         <motion.div
           key={i}
-          className={`absolute rounded-full blur-[120px] ${o.className}`}
+          className={`absolute blur-[100px] ${b.pos}`}
           style={{
-            background: o.accent
-              ? "radial-gradient(circle, var(--accent) 0%, transparent 70%)"
-              : "radial-gradient(circle, var(--foreground) 0%, transparent 70%)",
-            opacity: o.opacity,
+            width: b.size,
+            height: b.size,
+            background: b.accent
+              ? "radial-gradient(circle at 40% 40%, var(--accent) 0%, transparent 65%)"
+              : "radial-gradient(circle at 60% 60%, var(--foreground) 0%, transparent 65%)",
+            opacity: b.opacity,
+            borderRadius: b.r1,
           }}
           animate={
             reduceMotion
               ? undefined
-              : { x: [0, 60, -40, 0], y: [0, -50, 40, 0], scale: [1, 1.08, 0.96, 1] }
+              : {
+                  x: b.drift.x,
+                  y: b.drift.y,
+                  borderRadius: [b.r1, b.r2, b.r1],
+                  scale: [1, 1.06, 0.97, 1],
+                }
           }
-          transition={{ duration: o.duration, repeat: Infinity, ease: "easeInOut" }}
+          transition={{
+            duration: b.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            times: [0, 0.33, 0.66, 1],
+          }}
         />
       ))}
 
-      {/* Sparse twinkling particle field — adds quiet texture/depth */}
-      {!reduceMotion &&
-        particles.map((p) => (
-          <motion.span
-            key={p.id}
-            className="absolute rounded-full"
-            style={{
-              left: p.left,
-              top: p.top,
-              width: p.size,
-              height: p.size,
-              background: "var(--foreground)",
-            }}
-            animate={{ opacity: [0, 0.18, 0], scale: [0.6, 1, 0.6] }}
-            transition={{
-              duration: p.duration,
-              repeat: Infinity,
-              delay: p.delay,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-
-      {/* Fine grain overlay for a premium, textured finish */}
-      <div
-        className="absolute inset-0 mix-blend-overlay"
+      {/* Subtle slow-rotating conic gradient — very faint depth layer */}
+      <motion.div
+        className="absolute left-1/2 top-1/2 h-[90rem] w-[90rem] -translate-x-1/2 -translate-y-1/2"
         style={{
-          opacity: 0.03,
+          background:
+            "conic-gradient(from 0deg, transparent 0%, var(--accent) 15%, transparent 35%, transparent 55%, var(--foreground) 72%, transparent 88%)",
+          opacity: 0.025,
+          filter: "blur(160px)",
+        }}
+        animate={reduceMotion ? undefined : { rotate: 360 }}
+        transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Fine noise grain for a premium, textured finish */}
+      <div
+        className="absolute inset-0"
+        style={{
+          opacity: 0.028,
+          mixBlendMode: "overlay",
           backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
     </div>
