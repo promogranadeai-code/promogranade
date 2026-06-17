@@ -228,7 +228,9 @@ function GroupSection({ group, index }: { group: ServicePage["groups"][0]; index
           className={`grid gap-5 ${
             group.items.length >= 5
               ? "md:grid-cols-2 lg:grid-cols-3"
-              : group.items.length >= 3
+              : group.items.length === 4
+              ? "md:grid-cols-2 lg:grid-cols-2"
+              : group.items.length === 3
               ? "md:grid-cols-2 lg:grid-cols-3"
               : "md:grid-cols-2"
           }`}
