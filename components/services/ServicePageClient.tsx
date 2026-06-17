@@ -211,7 +211,7 @@ function GroupSection({ group, index }: { group: ServicePage["groups"][0]; index
               as="h2"
               className="font-display text-[clamp(1.75rem,4vw,3.5rem)] font-black leading-[0.92] tracking-[-0.035em]"
             >
-              {group.label}.
+              {`${group.label}.`}
             </TextReveal>
           </div>
           {group.intro && (
