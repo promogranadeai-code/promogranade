@@ -4,7 +4,9 @@ import { useRef, useEffect, useLayoutEffect, useState } from "react";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
 
 export const services = [
@@ -14,7 +16,7 @@ export const services = [
     blurb:
       "Conversion-focused websites built on WordPress, Shopify, or fully custom Next.js — pixel-perfect, fast, and built to grow.",
     tags: ["WordPress", "Shopify", "Next.js"],
-    slug: "/services/web-development",
+    slug: "/services/website-development",
     Art: ArtWebsite,
   },
   {
@@ -23,7 +25,7 @@ export const services = [
     blurb:
       "Bespoke web apps, SaaS platforms, ERP systems, and agentic dashboards engineered exactly to your specification.",
     tags: ["SaaS", "ERP", "Dashboards"],
-    slug: "/services/web-development",
+    slug: "/services/custom-applications",
     Art: ArtApps,
   },
   {
@@ -32,7 +34,7 @@ export const services = [
     blurb:
       "Intelligent agents that plan, act, and self-correct — from single-model tools to full multi-agent orchestration.",
     tags: ["LangGraph", "Claude", "Multi-agent"],
-    slug: "/services/ai-automations",
+    slug: "/services/ai-agents",
     Art: ArtAgents,
   },
   {
@@ -41,7 +43,7 @@ export const services = [
     blurb:
       "Get found by people and AI alike. Search, generative engine, and answer engine optimisation that compounds monthly.",
     tags: ["SEO", "GEO", "AEO"],
-    slug: "/services/marketing",
+    slug: "/services/seo-geo-aeo",
     Art: ArtSEO,
   },
   {
@@ -50,7 +52,7 @@ export const services = [
     blurb:
       "Content strategy, creative production, and community management across every platform that matters.",
     tags: ["Instagram", "LinkedIn", "YouTube"],
-    slug: "/services/marketing",
+    slug: "/services/social-media",
     Art: ArtSocial,
   },
   {
@@ -59,7 +61,7 @@ export const services = [
     blurb:
       "Performance campaigns with sharp targeting, rigorous A/B testing, and spend that scales with results.",
     tags: ["Meta Ads", "Google Ads", "Performance"],
-    slug: "/services/marketing",
+    slug: "/services/ads",
     Art: ArtAds,
   },
   {
@@ -68,7 +70,7 @@ export const services = [
     blurb:
       "Make.com, n8n, and custom integrations that eliminate manual work from your business — running 24/7.",
     tags: ["n8n", "Make.com", "Zapier"],
-    slug: "/services/ai-automations",
+    slug: "/services/workflow-automation",
     Art: ArtWorkflow,
   },
   {
@@ -77,7 +79,7 @@ export const services = [
     blurb:
       "Full-stack AI builds — RAG pipelines, fine-tuned models, vector databases, and production-grade inference.",
     tags: ["RAG", "Fine-tuning", "LLMs"],
-    slug: "/services/ai-automations",
+    slug: "/services/ai-systems",
     Art: ArtAI,
   },
 ];
@@ -159,7 +161,10 @@ export function ServicesPreview() {
 function ServiceCard({ service }: { service: (typeof services)[number] }) {
   const { Art } = service;
   return (
-    <div className="relative flex flex-col w-[280px] md:w-[340px] lg:w-[360px] h-full flex-shrink-0 rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden">
+    <Link
+      href={service.slug}
+      className="group relative flex flex-col w-[280px] md:w-[340px] lg:w-[360px] h-full flex-shrink-0 rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden hover:border-[var(--accent)]/50 transition-colors duration-300"
+    >
       {/* Illustration */}
       <div className="relative shrink-0 h-[44%] bg-[color:var(--section-surface)] border-b border-[color:var(--section-border)] overflow-hidden">
         <Art />
@@ -167,9 +172,12 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-6 md:p-7">
-        <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)] mb-4">
-          {service.n}
-        </span>
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
+            {service.n}
+          </span>
+          <ArrowUpRight className="h-4 w-4 text-[color:var(--section-muted)] opacity-0 group-hover:opacity-100 group-hover:text-[var(--accent)] transition-all duration-300" />
+        </div>
 
         <h3 className="font-display text-2xl md:text-[1.6rem] font-bold leading-tight tracking-tight mb-3">
           {service.title}
@@ -188,7 +196,7 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

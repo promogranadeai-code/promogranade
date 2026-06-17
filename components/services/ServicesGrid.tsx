@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
 import { SiteLiquid } from "@/components/layout/SiteLiquid";
 
@@ -72,8 +74,9 @@ export function ServicesGrid() {
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.75, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
+                <Link href={s.slug} className="block h-full">
                 <motion.div
-                  className="relative flex flex-col h-full rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden"
+                  className="group relative flex flex-col h-full rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] overflow-hidden hover:border-[var(--accent)]/50 transition-colors duration-300"
                   animate={isHighlighted ? {
                     boxShadow: [
                       "0 0 0 0px rgba(224,20,44,0)",
@@ -91,9 +94,12 @@ export function ServicesGrid() {
 
                   {/* Content */}
                   <div className="flex flex-col flex-1 p-6">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)] mb-4">
-                      {s.n}
-                    </span>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-[10px] uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
+                        {s.n}
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-[color:var(--section-muted)] opacity-0 group-hover:opacity-100 group-hover:text-[var(--accent)] transition-all duration-300" />
+                    </div>
 
                     <h3 className="font-display text-xl md:text-2xl font-bold leading-tight tracking-tight mb-3">
                       {s.title}
@@ -114,6 +120,7 @@ export function ServicesGrid() {
                     </div>
                   </div>
                 </motion.div>
+                </Link>
               </motion.div>
             );
           })}

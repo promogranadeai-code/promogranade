@@ -5,13 +5,6 @@ import { motion } from "framer-motion";
 
 /* ─── Constants ────────────────────────────────────────────── */
 
-const MARQUEE_ITEMS = [
-  "Next.js", "React", "TypeScript", "Node.js", "AI Agents", "LangGraph",
-  "Claude API", "RAG Pipelines", "Fine-tuning", "n8n", "Make.com",
-  "WordPress", "Shopify", "SEO", "GEO", "AEO", "Meta Ads", "Google Ads",
-  "Social Media",
-];
-
 const WA_LINK = `https://wa.me/919511784952?text=${encodeURIComponent(
   "Hi Promogranade, I'd like to talk about a project."
 )}`;
@@ -31,12 +24,12 @@ const linkGroups: { title: string; links: FooterLink[] }[] = [
   {
     title: "Services",
     links: [
-      { href: "/services", label: "Website Development" },
-      { href: "/services", label: "Custom Applications" },
-      { href: "/services", label: "AI Development"      },
-      { href: "/services", label: "SEO / GEO / AEO"     },
-      { href: "/services", label: "Social Media"        },
-      { href: "/services", label: "Workflow Automation" },
+      { href: "/services/website-development",  label: "Website Development" },
+      { href: "/services/custom-applications", label: "Custom Applications" },
+      { href: "/services/ai-agents",           label: "AI Development"      },
+      { href: "/services/seo-geo-aeo",         label: "SEO / GEO / AEO"     },
+      { href: "/services/social-media",        label: "Social Media"        },
+      { href: "/services/workflow-automation", label: "Workflow Automation" },
     ],
   },
   {
@@ -82,12 +75,6 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden" style={{ background: "#070707" }}>
-      {/* Marquee keyframe */}
-      <style>{`
-        @keyframes fm { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .fm-track { animation: fm 65s linear infinite; }
-      `}</style>
-
       {/* ── Red gradient top border ── */}
       <div
         aria-hidden
@@ -226,26 +213,6 @@ export function Footer() {
             ))}
           </div>
 
-        </div>
-      </div>
-
-      {/* ══════════════════════════════════════════════════════ */}
-      {/*  MARQUEE STRIP  (full-width)                          */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <div
-        className="overflow-hidden border-y py-[18px]"
-        style={{ borderColor: "rgba(255,255,255,0.07)" }}
-      >
-        <div className="fm-track flex w-max">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-            <span
-              key={i}
-              className="shrink-0 px-6 text-[10px] uppercase tracking-[0.38em] text-white/20"
-            >
-              {item}
-              <span className="mx-4 opacity-45" style={{ color: "var(--accent)" }}>✦</span>
-            </span>
-          ))}
         </div>
       </div>
 
