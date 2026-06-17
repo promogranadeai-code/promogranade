@@ -5,7 +5,7 @@ import { Counter } from "@/components/ui/Counter";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const stats = [
-  { n: 12, suffix: "+", label: "Projects served" },
+  { n: 12, suffix: "+", label: "Projects shipped" },
   { n: 5,  suffix: "+", label: "Industries served" },
   { n: 4,  suffix: "+ yrs", label: "Avg. experience" },
   { n: 100, suffix: "%", label: "On-time delivery" },
@@ -54,20 +54,54 @@ export function AboutStory() {
           </FadeUp>
         </div>
 
-        {/* Stats row */}
-        <FadeUp delay={0.25} className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[color:var(--section-border)] pt-10">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <Counter
-                value={s.n}
-                suffix={s.suffix}
-                className="font-display text-4xl md:text-6xl font-bold tracking-tight tabular-nums"
-              />
-              <p className="mt-2 text-xs uppercase tracking-widest text-[color:var(--section-muted)]">
-                {s.label}
+        {/* Stats panel — matches home page track-record block */}
+        <FadeUp delay={0.25} className="mt-20">
+          <div className="relative overflow-hidden rounded-3xl border border-[color:var(--section-border)] bg-[color:var(--section-surface)] p-8 md:p-12">
+            {/* accent glow */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[var(--accent)] opacity-[0.14] blur-3xl"
+            />
+            {/* accent left edge */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-[var(--accent)]"
+            />
+
+            {/* header */}
+            <div className="relative mb-10 flex flex-wrap items-center justify-between gap-4">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-white">
+                <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                Track record
+              </span>
+              <p className="text-xs uppercase tracking-[0.25em] text-[color:var(--section-muted)]">
+                Small team · outsized output
               </p>
             </div>
-          ))}
+
+            {/* stats grid */}
+            <div className="relative grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4 md:gap-0">
+              {stats.map((s) => (
+                <div
+                  key={s.label}
+                  data-cursor="stat"
+                  className="group/stat md:border-l md:border-[color:var(--section-border)] md:pl-8 md:first:border-l-0 md:first:pl-0"
+                >
+                  <span className="mb-4 block h-1 w-8 rounded-full bg-[var(--accent)] transition-all duration-300 group-hover/stat:w-16" />
+                  <div className="flex items-baseline gap-0.5 font-display text-5xl md:text-6xl font-black tracking-tight tabular-nums">
+                    <Counter value={s.n} />
+                    <span className="text-[var(--accent)]">{s.suffix.replace(" yrs", "")}</span>
+                    {s.suffix.includes("yrs") && (
+                      <span className="ml-1.5 text-base md:text-lg font-bold text-[color:var(--section-muted)]">yrs</span>
+                    )}
+                  </div>
+                  <p className="mt-3 text-xs uppercase tracking-widest text-[color:var(--section-muted)]">
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </FadeUp>
       </div>
     </section>
