@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/contact`, changeFrequency: "yearly", priority: 0.6 },
     { url: `${BASE_URL}/career`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE_URL}/arcade`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${BASE_URL}/terms`, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = SERVICE_PAGES.map((s) => ({

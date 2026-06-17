@@ -21,11 +21,11 @@ export function Counter({
   value,
   suffix = "",
   prefix = "",
-  duration = 2,
+  duration = 1.3,
   className,
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 200px 0px" });
   const count = useMotionValue(0);
   const rounded = useTransform(count, (v) => Math.floor(v).toString());
 

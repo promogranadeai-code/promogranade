@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
 import { SiteLiquid } from "../layout/SiteLiquid";
+import { ContactForm } from "./ContactForm";
 import { ArrowUpRight, Phone, MessageCircle, Mail } from "lucide-react";
 
 const EMAIL     = "hello@promogranade.com";
@@ -67,38 +68,9 @@ export function ContactPreview() {
         <FadeUp delay={0.25}>
           <div className="grid gap-5 lg:grid-cols-12">
 
-            {/* Primary CTA card */}
+            {/* Primary CTA: contact form */}
             <div className="lg:col-span-7">
-              <motion.a
-                href={`mailto:${EMAIL}`}
-                data-cursor="start"
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative flex flex-col justify-between rounded-3xl bg-[var(--accent)] p-8 md:p-10 overflow-hidden min-h-[220px] cursor-pointer"
-              >
-                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.06] transition-colors duration-500 pointer-events-none" />
-                <div className="absolute -right-12 -top-12 h-52 w-52 rounded-full border border-white/10 group-hover:border-white/20 transition-colors duration-500" />
-                <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full border border-white/10 group-hover:border-white/20 transition-colors duration-500" />
-
-                <div className="relative flex items-start justify-between">
-                  <p className="text-white/60 text-[10px] uppercase tracking-[0.3em] font-medium">
-                    Send us a message
-                  </p>
-                  <div className="h-10 w-10 rounded-full border border-white/25 flex items-center justify-center group-hover:border-white/60 group-hover:bg-white/10 transition-all duration-300">
-                    <ArrowUpRight className="h-4 w-4 text-white group-hover:rotate-45 transition-transform duration-300" />
-                  </div>
-                </div>
-
-                <div className="relative mt-8">
-                  <p className="font-display text-4xl md:text-5xl font-black text-white leading-[0.92] tracking-tight">
-                    Start a project
-                  </p>
-                  <p className="text-white/55 text-sm mt-3 max-w-xs leading-relaxed">
-                    We reply within one business day. Expect questions before
-                    quotes — we scope projects only when we understand them.
-                  </p>
-                </div>
-              </motion.a>
+              <ContactForm />
             </div>
 
             {/* Secondary: Email / WhatsApp / Call */}

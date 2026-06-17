@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 /* ─── Constants ────────────────────────────────────────────── */
@@ -238,6 +239,11 @@ export function Footer() {
               <p className="mt-0.5 text-[10px] tracking-wide text-white/28">
                 © {year} · Solutions that scale businesses.
               </p>
+              <div className="mt-1.5 flex items-center gap-3 text-[10px] tracking-wide text-white/28">
+                <Link href="/privacy" className="hover:text-white/60 transition-colors">Privacy Policy</Link>
+                <span className="text-white/15">·</span>
+                <Link href="/terms" className="hover:text-white/60 transition-colors">Terms of Service</Link>
+              </div>
             </div>
           </motion.div>
 
@@ -275,13 +281,13 @@ export function Footer() {
 function FooterLogo() {
   return (
     <span className="relative inline-flex h-9 w-9 flex-shrink-0 items-center justify-center">
-      <svg viewBox="0 0 64 64" className="h-full w-full" aria-hidden>
-        <circle cx="32" cy="32" r="30" fill="#dc1428" />
-        <g transform="rotate(-30, 32, 32)" fill="#0a0a0a">
-          <rect x="28.5" y="12" width="7" height="40" rx="3.5" />
-          <rect x="12" y="28.5" width="40" height="7" rx="3.5" />
-        </g>
-      </svg>
+      <Image
+        src="/logo-mark.png"
+        alt="Promogranade logo mark"
+        width={64}
+        height={64}
+        className="h-full w-full object-contain"
+      />
     </span>
   );
 }

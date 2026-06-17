@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -141,29 +142,14 @@ export function Navigation() {
 function Logo() {
   return (
     <span className="relative inline-flex h-10 w-10 items-center justify-center flex-shrink-0">
-      {/*
-        Exact recreation of the Promogranade logo mark:
-        Red circle + black 4-arm rounded asterisk rotated ~30° CCW.
-        SVG so it works on any background color with no white-bg hack.
-      */}
-      <svg
-        viewBox="0 0 64 64"
-        className="h-full w-full"
-        aria-label="Promogranade logo mark"
-        role="img"
-      >
-        {/* Red circle background */}
-        <circle cx="32" cy="32" r="30" fill="#dc1428" />
-
-        {/* Black 4-arm asterisk — two rounded rectangles crossing at centre,
-            rotated 30° counter-clockwise to match the actual logo */}
-        <g transform="rotate(-30, 32, 32)" fill="#0a0a0a">
-          {/* vertical arm */}
-          <rect x="28.5" y="12" width="7" height="40" rx="3.5" />
-          {/* horizontal arm */}
-          <rect x="12" y="28.5" width="40" height="7" rx="3.5" />
-        </g>
-      </svg>
+      <Image
+        src="/logo-mark.png"
+        alt="Promogranade logo mark"
+        width={64}
+        height={64}
+        className="h-full w-full object-contain"
+        priority
+      />
     </span>
   );
 }

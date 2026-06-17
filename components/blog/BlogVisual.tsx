@@ -134,7 +134,7 @@ function Flow({
     <motion.circle
       r={2.6}
       fill={A}
-      initial={{ opacity: 0 }}
+      initial={{ cx: from[0], cy: from[1], opacity: 0 }}
       animate={{ cx: [from[0], to[0]], cy: [from[1], to[1]], opacity: [0, 1, 1, 0] }}
       transition={{ duration: dur, repeat: Infinity, ease: "easeInOut", delay, times: [0, 0.15, 0.85, 1] }}
     />
