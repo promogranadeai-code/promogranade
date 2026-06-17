@@ -23,17 +23,71 @@ const displayFont = Space_Grotesk({
   display: "swap",
 });
 
+const SITE_URL = "https://promogranade.com";
+const SITE_NAME = "Promogranade";
+const SITE_TITLE = "Promogranade — Solutions that scale businesses";
+const SITE_DESCRIPTION =
+  "We build web applications, ship AI automations, and run growth engines for ambitious teams. One studio for the entire stack — web development, custom apps, AI agents, SEO/GEO/AEO, social media, and paid ads.";
+
 export const metadata: Metadata = {
-  title: "Promogranade — Solutions that scale businesses",
-  description:
-    "We build web applications, ship AI automations, and run growth engines for ambitious teams. One studio for the entire stack.",
-  metadataBase: new URL("https://promogranade.com"),
+  title: {
+    default: SITE_TITLE,
+    template: `%s — ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
+  keywords: [
+    "web development agency", "AI agent development", "custom software development",
+    "SEO GEO AEO services", "Meta ads agency", "Google ads agency",
+    "workflow automation", "AI systems development", "Promogranade",
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
-    title: "Promogranade — Solutions that scale businesses",
+    title: SITE_TITLE,
     description:
       "Web applications, AI automations, SEO and marketing. One senior team, end to end.",
     type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "en_US",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/favicon.ico`,
+  description: SITE_DESCRIPTION,
+  email: "hello@promogranade.com",
+  sameAs: [
+    "https://www.instagram.com/promogranade",
+    "https://linkedin.com/in/abhinandanjain-dubai/",
+  ],
 };
 
 export default function RootLayout({
@@ -46,6 +100,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Providers>
           {/* Three.js background, cursor, chatbot, intro — all deferred client-side */}
           <DeferredShell />

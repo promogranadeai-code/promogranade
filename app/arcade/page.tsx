@@ -2,8 +2,15 @@ import { ArcadeShowcase } from "@/components/home/ArcadeShowcase";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata = {
-  title: "Arcade — Promogranade",
+  title: "Arcade",
   description: "The tools, prompt patterns, and orchestration layer behind every Promogranade project.",
+  alternates: { canonical: "/arcade" },
+  openGraph: {
+    title: "Arcade — Promogranade",
+    description: "The tools, prompt patterns, and orchestration layer behind every Promogranade project.",
+    type: "website",
+    url: "https://promogranade.com/arcade",
+  },
 };
 
 export default function ArcadePage() {

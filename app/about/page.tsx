@@ -5,7 +5,16 @@ import { AboutTestimonials } from "@/components/about/AboutTestimonials";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata = {
-  title: "About — Promogranade",
+  title: "About",
+  description:
+    "Promogranade is a senior team of designers, engineers, and marketers building web applications, AI systems, and growth engines. Meet the studio behind the work.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About — Promogranade",
+    description: "A studio built to ship. Meet the senior team behind Promogranade.",
+    type: "website",
+    url: "https://promogranade.com/about",
+  },
 };
 
 export default function AboutPage() {

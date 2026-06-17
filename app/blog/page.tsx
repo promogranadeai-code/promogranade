@@ -6,17 +6,19 @@ import { BlogVisual } from "@/components/blog/BlogVisual";
 import { allPosts } from "@/lib/blog";
 
 export const metadata = {
-  title: "Blog — Promogranade",
+  title: "Blog",
   description:
     "Field notes from Promogranade. In-depth articles on AI agents, SEO, workflow automation, web development, and digital marketing.",
   keywords: [
     "AI blog 2025", "digital marketing blog", "web development blog",
     "SEO tips 2025", "workflow automation guide", "Promogranade blog",
   ],
+  alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog — Promogranade",
     description: "Field notes on AI, SEO, automation, and growth from the Promogranade team.",
     type: "website",
+    url: "https://promogranade.com/blog",
   },
 };
 

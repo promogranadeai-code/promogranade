@@ -11,9 +11,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) return {};
+
+  const keywords = service.groups
+    .flatMap((g) => g.items.flatMap((i) => i.tags ?? []))
+    .filter((t, i, arr) => arr.indexOf(t) === i)
+    .slice(0, 12);
+
   return {
-    title: `${service.title} — Promogranade`,
+    title: service.title,
     description: service.description,
+    keywords: [service.title, ...keywords],
+    alternates: { canonical: `/services/${service.slug}` },
+    openGraph: {
+      title: `${service.title} — Promogranade`,
+      description: service.description,
+      type: "website",
+      url: `https://promogranade.com/services/${service.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.title} — Promogranade`,
+      description: service.description,
+    },
   };
 }
 
@@ -22,8 +41,25 @@ export default async function ServiceSlugPage({ params }: { params: Promise<{ sl
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.description,
+    provider: {
+      "@type": "Organization",
+      name: "Promogranade",
+      url: "https://promogranade.com",
+    },
+    url: `https://promogranade.com/services/${service.slug}`,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ServicePageClient service={service} />
       <Footer />
     </>

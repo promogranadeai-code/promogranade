@@ -25,14 +25,16 @@ export async function generateMetadata({
   if (!post) return { title: "Post Not Found" };
 
   return {
-    title: `${post.title} — Promogranade Blog`,
+    title: post.title,
     description: post.metaDescription,
     keywords: post.keywords,
     authors: [{ name: "Promogranade" }],
+    alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.metaDescription,
       type: "article",
+      url: `https://promogranade.com/blog/${post.slug}`,
       publishedTime: post.dateISO,
       authors: ["Promogranade"],
     },
