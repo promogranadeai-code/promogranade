@@ -10,6 +10,11 @@ export interface ServiceGroup {
   items: ServiceItem[];
 }
 
+export interface ServiceFaq {
+  question: string;
+  answer: string;
+}
+
 export interface ServicePage {
   slug: string;
   eyebrow: string;
@@ -17,6 +22,7 @@ export interface ServicePage {
   description: string;
   iconKey: string;
   groups: ServiceGroup[];
+  faqs: ServiceFaq[];
 }
 
 export const SERVICE_PAGES: ServicePage[] = [
@@ -120,6 +126,20 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: "Does Promogranade build websites with WordPress or Next.js?",
+        answer: "Both. We build custom WordPress platforms for content-heavy sites that need editorial flexibility, and Next.js sites for businesses that need maximum speed, custom interactions, or app-like functionality. We recommend the right platform after understanding your team and goals — not before.",
+      },
+      {
+        question: "How long does it take to build a business website?",
+        answer: "A marketing site typically takes 3-6 weeks from kickoff to launch. E-commerce stores and multi-language platforms take 6-10 weeks depending on catalogue size and integration complexity.",
+      },
+      {
+        question: "Do you offer ongoing website maintenance after launch?",
+        answer: "Yes. We offer post-launch support packages covering security updates, performance monitoring, content updates, and feature additions, so the site keeps improving after it ships.",
+      },
+    ],
   },
 
   {
@@ -201,6 +221,20 @@ export const SERVICE_PAGES: ServicePage[] = [
             tags: ["Sentry", "Datadog", "OpenTelemetry"],
           },
         ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is a custom web application?",
+        answer: "A custom web application is software built specifically around your business workflow — a SaaS product, internal tool, client portal, or dashboard — rather than a generic off-the-shelf product configured to approximate what you need.",
+      },
+      {
+        question: "How much does custom software development cost?",
+        answer: "Cost depends on scope, but most custom applications we build range from a focused internal tool (a few weeks of work) to a full multi-tenant SaaS platform (3-6 months). We scope every project with a fixed estimate before work begins, so there are no surprises.",
+      },
+      {
+        question: "Do you build SaaS products from scratch?",
+        answer: "Yes. We've built SaaS products from initial architecture through their first hundred paying customers, covering multi-tenancy, billing, authentication, and the dashboard your customers actually use.",
       },
     ],
   },
@@ -285,6 +319,20 @@ export const SERVICE_PAGES: ServicePage[] = [
             tags: ["Evals", "LangSmith", "Monitoring"],
           },
         ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is an AI agent?",
+        answer: "An AI agent is a system that plans, takes actions through tools, observes the results, and corrects course — pursuing a goal across multiple steps rather than just responding to a single prompt. It's the difference between a chatbot and software that actually completes a task.",
+      },
+      {
+        question: "What is the difference between an AI agent and a chatbot?",
+        answer: "A chatbot responds to messages. An AI agent receives a goal, breaks it into steps, uses tools to take action across systems, checks whether the outcome matches the intention, and retries if it doesn't — with little to no human involvement.",
+      },
+      {
+        question: "Can AI agents replace manual business workflows?",
+        answer: "Yes, for workflows with clear inputs and judgment-based decisions — lead qualification, support triage, research synthesis, and document processing are common starting points. We scope which of your processes are agent-ready in an initial call.",
       },
     ],
   },
@@ -379,6 +427,20 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: "What is GEO (Generative Engine Optimization)?",
+        answer: "GEO is the practice of structuring content so it gets retrieved and cited by generative AI platforms like ChatGPT, Perplexity, and Google AI Overviews — through answer-first writing, clear entity signals, and structured data, rather than traditional keyword-and-backlink SEO alone.",
+      },
+      {
+        question: "What is AEO (Answer Engine Optimization)?",
+        answer: "AEO is optimising content to win featured snippets, People Also Ask boxes, and voice assistant answers — the zero-click results that appear above organic search listings. It relies on direct, structured answers and schema markup like FAQPage and HowTo.",
+      },
+      {
+        question: "Is traditional SEO still relevant in 2025?",
+        answer: "Yes. Traditional SEO (rankings, backlinks, technical health) still drives the majority of search traffic, and it's also the foundation GEO and AEO depend on — AI platforms cite authoritative, well-structured, technically sound sites first. We run all three simultaneously.",
+      },
+    ],
   },
 
   {
@@ -468,6 +530,20 @@ export const SERVICE_PAGES: ServicePage[] = [
             tags: ["Analytics", "Reporting", "Insights"],
           },
         ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Which social media platforms does Promogranade manage?",
+        answer: "We manage Instagram, LinkedIn, TikTok, and YouTube, tailoring strategy and content format to each platform rather than cross-posting the same content everywhere.",
+      },
+      {
+        question: "How much does social media management cost?",
+        answer: "Pricing depends on platform count, content volume, and whether you need video production or paid promotion layered in. We scope a package after understanding your goals on a discovery call.",
+      },
+      {
+        question: "Do you create the content or just schedule it?",
+        answer: "We do both — strategy, content production (video, graphics, copy), scheduling, community management, and monthly performance reporting are all included in a managed engagement.",
       },
     ],
   },
@@ -567,6 +643,20 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: "Should my business advertise on Meta or Google?",
+        answer: "Google Ads captures existing demand from people actively searching for your category; Meta Ads creates demand by reaching people who weren't looking for you yet. Most businesses benefit from both, weighted toward whichever platform converts better for their specific product.",
+      },
+      {
+        question: "What budget do I need to start running ads?",
+        answer: "There's no universal minimum, but we generally recommend at least $1,500-2,000/month in ad spend to gather enough data for the algorithm to optimise effectively, separate from our management fee.",
+      },
+      {
+        question: "How is ad performance reported?",
+        answer: "You get a live Looker Studio dashboard showing real-time spend, ROAS, CPL, and CAC, plus a structured monthly review covering what we tested, what worked, and where budget is moving next.",
+      },
+    ],
   },
 
   {
@@ -651,6 +741,20 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: "What business processes can be automated?",
+        answer: "Any rule-based process with a defined input and output: lead routing, invoicing, content publishing, onboarding checklists, inventory alerts, and reporting are the most common starting points we see.",
+      },
+      {
+        question: "Which automation tool should I use — n8n, Make, or Zapier?",
+        answer: "n8n suits complex logic and self-hosted data privacy needs. Make.com fits visual, branching workflows your team wants to maintain themselves. Zapier is best for simple, high-volume triggers between popular SaaS tools. We pick based on your specific use case, not a default preference.",
+      },
+      {
+        question: "How much time can workflow automation actually save?",
+        answer: "The average knowledge worker spends about 4.5 hours a week on tasks that could be automated. Across a 10-person team, that's more than one full-time employee's worth of time reclaimed.",
+      },
+    ],
   },
 
   {
@@ -733,6 +837,20 @@ export const SERVICE_PAGES: ServicePage[] = [
             tags: ["Guardrails", "PII", "Compliance"],
           },
         ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is RAG (Retrieval-Augmented Generation)?",
+        answer: "RAG is a technique that lets an AI model answer questions using your proprietary data — documents, contracts, product catalogues — by retrieving the most relevant passages at query time and grounding the model's answer in them, instead of relying on what it learned during training.",
+      },
+      {
+        question: "How do you stop an AI system from hallucinating?",
+        answer: "We combine retrieval grounding (so answers are based on real source documents), source citation, evaluation pipelines that measure hallucination rate before launch, and guardrails that catch low-confidence or out-of-scope responses before they reach a user.",
+      },
+      {
+        question: "Do you fine-tune AI models or only use APIs?",
+        answer: "Both. We use foundation model APIs (Claude, GPT-4o) for most tasks, and fine-tune smaller models for specific, repeatable tasks like classification or extraction where a fine-tuned model is faster and cheaper at scale.",
       },
     ],
   },

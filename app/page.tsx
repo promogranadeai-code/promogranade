@@ -6,6 +6,8 @@ import { BlogPreview } from "@/components/home/BlogPreview";
 import { MarqueeTicker } from "@/components/layout/MarqueeTicker";
 import { HomeTestimonials } from "@/components/home/HomeTestimonials";
 import { ArcadeShowcase } from "@/components/home/ArcadeShowcase";
+import { HomeFAQ } from "@/components/home/HomeFAQ";
+import { homeFaqs } from "@/lib/home-faqs";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata = {
@@ -19,12 +21,29 @@ const websiteJsonLd = {
   url: "https://promogranade.com",
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function Home() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Hero />
       <AboutPreview />
@@ -34,6 +53,7 @@ export default function Home() {
       <MarqueeTicker />
       <ArcadeShowcase />
       <HomeTestimonials />
+      <HomeFAQ />
       <Footer />
     </>
   );
