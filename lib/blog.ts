@@ -455,8 +455,11 @@ export const posts: BlogPost[] = [
 
 // ── Helpers ─────────────────────────────────────────────────────
 
-/** The five most recent featured posts for the home page preview */
-export const featuredPosts = posts.filter(p => p.featured).slice(0, 5);
+/** The four most recent featured posts for the home page preview */
+export const featuredPosts = posts
+  .filter(p => p.featured)
+  .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime())
+  .slice(0, 4);
 
 /** All posts sorted newest first */
 export const allPosts = [...posts].sort(

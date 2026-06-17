@@ -297,7 +297,7 @@ function ServiceCard({ item, index }: { item: ServicePage["groups"][0]["items"][
 /* ─── FAQ section ──────────────────────────────────────────── */
 
 function FaqSection({ faqs }: { faqs: ServicePage["faqs"] }) {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section className="section-b relative overflow-hidden py-20 lg:py-32">

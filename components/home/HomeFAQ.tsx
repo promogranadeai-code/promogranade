@@ -7,7 +7,7 @@ import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
 import { homeFaqs as FAQS } from "@/lib/home-faqs";
 
 export function HomeFAQ() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section className="section-b relative overflow-hidden py-24 lg:py-36">
