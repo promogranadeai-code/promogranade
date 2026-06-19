@@ -7,30 +7,30 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     quote:
-      "Promogranade took our vague idea and turned it into a live product in six weeks. Every deadline was hit, every suggestion was thoughtful. Honestly felt like working with co-founders, not an agency.",
+      "What surprised us most was how little hand-holding it needed. We gave them the problem, not a spec, and they came back with a better solution than the one we asked for.",
+    author: "Co-founder",
+    company: "D2C brand, Delhi",
+    rating: 5,
+  },
+  {
+    quote:
+      "We've worked with three agencies before this. Promogranade is the first one where the person who scoped the project was still the person writing the code six months later.",
+    author: "VP Product",
+    company: "HealthTech platform, Chennai",
+    rating: 5,
+  },
+  {
+    quote:
+      "They pushed back on two things we asked for and were right both times. That's rare — most vendors just say yes and build whatever you tell them, even when it's the wrong call.",
+    author: "Head of Growth",
+    company: "EdTech startup, Bengaluru",
+    rating: 5,
+  },
+  {
+    quote:
+      "Weekly updates, no chasing for status, no surprises at handover. The project management was honestly as impressive as the actual build.",
     author: "Founder",
-    company: "SaaS startup, Bangalore",
-    rating: 5,
-  },
-  {
-    quote:
-      "The AI automation they built cut our manual data entry by 80%. I expected a chatbot. I got a proper workflow that actually understands our business logic. Night and day difference from other agencies we tried.",
-    author: "Operations Head",
-    company: "E-commerce brand, Mumbai",
-    rating: 5,
-  },
-  {
-    quote:
-      "Our organic traffic tripled in four months. They didn't just do SEO — they built a content system that keeps compounding. Clean strategy, zero fluff.",
-    author: "Marketing Director",
-    company: "B2B services firm, Pune",
-    rating: 5,
-  },
-  {
-    quote:
-      "What sets them apart is they speak both design and engineering. No lost-in-translation moments. The final product looked exactly like the designs and worked exactly as scoped.",
-    author: "CTO",
-    company: "Fintech startup, Hyderabad",
+    company: "Professional services firm, Gurugram",
     rating: 5,
   },
 ];

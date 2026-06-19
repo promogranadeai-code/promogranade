@@ -30,7 +30,9 @@ const linkGroups: { title: string; links: FooterLink[] }[] = [
       { href: "/services/ai-agents",           label: "AI Development"      },
       { href: "/services/seo-geo-aeo",         label: "SEO / GEO / AEO"     },
       { href: "/services/social-media",        label: "Social Media"        },
+      { href: "/services/ads",                 label: "Meta & Google Ads"   },
       { href: "/services/workflow-automation", label: "Workflow Automation" },
+      { href: "/services/ai-systems",          label: "Custom AI Systems"   },
     ],
   },
   {

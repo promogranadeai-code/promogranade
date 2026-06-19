@@ -1,4 +1,6 @@
 import { ArcadeShowcase } from "@/components/home/ArcadeShowcase";
+import { ArcadePrinciples } from "@/components/arcade/ArcadePrinciples";
+import { PageHero } from "@/components/ui/PageHero";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata = {
@@ -16,8 +18,13 @@ export const metadata = {
 export default function ArcadePage() {
   return (
     <>
-      <div className="pt-20" />
-      <ArcadeShowcase tone="a" />
+      <PageHero
+        eyebrow="Arcade"
+        title="The stack behind the work."
+        description="No mystery, no secret sauce. The toolkit, the prompt patterns, and the orchestration layer behind every Promogranade project — and the principles that keep it from cutting corners."
+      />
+      <ArcadeShowcase tone="b" />
+      <ArcadePrinciples />
       <Footer />
     </>
   );

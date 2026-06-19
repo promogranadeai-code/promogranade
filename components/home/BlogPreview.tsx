@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
 import { ArrowUpRight } from "lucide-react";
 import { BlogVisual } from "@/components/blog/BlogVisual";
-import { featuredPosts } from "@/lib/blog";
+import { featuredPosts, getCategoryColor } from "@/lib/blog";
 
 export function BlogPreview() {
   return (
@@ -56,9 +56,15 @@ export function BlogPreview() {
                   {p.date}
                 </span>
 
-                {/* Category badge */}
+                {/* Category badge — coloured per category so topics are distinguishable at a glance */}
                 <span className="col-span-3 md:col-span-2 text-[10px] uppercase tracking-widest">
-                  <span className="rounded-full border border-[color:var(--section-border)] px-3 py-1 text-[color:var(--section-muted)] group-hover:border-[var(--accent)] group-hover:text-[var(--accent)] transition-colors">
+                  <span
+                    className="rounded-full border px-3 py-1 font-semibold transition-colors"
+                    style={{
+                      borderColor: `${getCategoryColor(p.category)}66`,
+                      color: getCategoryColor(p.category),
+                    }}
+                  >
                     {p.category}
                   </span>
                 </span>

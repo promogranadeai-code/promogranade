@@ -38,6 +38,16 @@ export function Navigation() {
 
   return (
     <>
+      {/* Permanent scrim behind the unscrolled nav — guarantees the logo and
+          links stay readable even on pages with no colourful hero behind them
+          (e.g. the 404 page), instead of gambling on whatever content sits underneath. */}
+      <div
+        aria-hidden
+        className={cn(
+          "fixed top-0 left-0 right-0 z-40 h-28 pointer-events-none transition-opacity duration-500 bg-gradient-to-b from-[var(--nav-bg)] to-transparent",
+          scrolled ? "opacity-0" : "opacity-100"
+        )}
+      />
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",

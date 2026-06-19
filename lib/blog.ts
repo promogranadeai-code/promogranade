@@ -470,12 +470,18 @@ export function getPost(slug: string): BlogPost | undefined {
   return posts.find(p => p.slug === slug);
 }
 
-/** Category colour map for badges */
+/** Category colour map for badges — distinct per category so the tag
+    actually communicates something, instead of every badge reading
+    the same brand red regardless of topic. */
 export const categoryColors: Record<string, string> = {
   AI: "#e0142c",
-  SEO: "#c0392b",
-  Automation: "#e0142c",
-  Development: "#e0142c",
-  Marketing: "#e0142c",
-  Engineering: "#e0142c",
+  SEO: "#ea580c",
+  Automation: "#d97706",
+  Development: "#be123c",
+  Marketing: "#a21caf",
+  Engineering: "#7c2d12",
 };
+
+export function getCategoryColor(category: string): string {
+  return categoryColors[category] ?? "#e0142c";
+}

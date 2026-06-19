@@ -3,7 +3,7 @@ import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Footer } from "@/components/layout/Footer";
 import { BlogVisual } from "@/components/blog/BlogVisual";
-import { allPosts } from "@/lib/blog";
+import { allPosts, getCategoryColor } from "@/lib/blog";
 
 export const metadata = {
   title: "Blog",
@@ -55,7 +55,7 @@ export default function BlogPage() {
                   <div className="flex items-center gap-3 mb-6">
                     <span
                       className="text-[10px] uppercase tracking-[0.3em] font-semibold px-3 py-1.5 rounded-full"
-                      style={{ background: "var(--accent)", color: "#fff" }}
+                      style={{ background: getCategoryColor(hero.category), color: "#fff" }}
                     >
                       {hero.category}
                     </span>
@@ -120,7 +120,7 @@ export default function BlogPage() {
                   <div className="flex items-center gap-2 mb-4">
                     <span
                       className="text-[9px] uppercase tracking-[0.3em] font-semibold px-2.5 py-1 rounded-full"
-                      style={{ background: "var(--accent)", color: "#fff" }}
+                      style={{ background: getCategoryColor(post.category), color: "#fff" }}
                     >
                       {post.category}
                     </span>

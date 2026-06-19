@@ -1,5 +1,7 @@
 import { Footer } from "@/components/layout/Footer";
 import { CareerForm } from "@/components/career/CareerForm";
+import { CareerCulture } from "@/components/career/CareerCulture";
+import { PageHero } from "@/components/ui/PageHero";
 
 export const metadata = {
   title: "Careers",
@@ -17,8 +19,12 @@ export const metadata = {
 export default function CareerPage() {
   return (
     <>
-      {/* spacer so the form clears the fixed nav */}
-      <div className="pt-24" />
+      <PageHero
+        eyebrow="Careers"
+        title="Build with us."
+        description="A lean, senior team of developers, AI engineers, and marketing operators. No juniors handed your account, no fluff — just people who ship."
+      />
+      <CareerCulture />
       <CareerForm />
       <Footer />
     </>
