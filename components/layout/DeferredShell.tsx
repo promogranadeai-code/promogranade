@@ -11,7 +11,7 @@
 import dynamic from "next/dynamic";
 
 const AmbientField   = dynamic(() => import("./AmbientField"),   { ssr: false });
-const IntroAnimation = dynamic(() => import("./IntroAnimation"), { ssr: false });
+const IntroAnimation = dynamic(() => import("@/components/intro/PromoGrenadeIntro"), { ssr: false });
 const Cursor         = dynamic(() => import("./Cursor"),         { ssr: false });
 const ChatBot        = dynamic(() => import("./ChatBot"),        { ssr: false });
 
