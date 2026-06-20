@@ -98,7 +98,7 @@ export default function PromoGrenadeIntro() {
     []
   );
 
-  if (!mounted || skip || phase === "done") return null;
+  if (!mounted || skip) return null;
 
   return (
     <AnimatePresence>
