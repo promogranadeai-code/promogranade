@@ -16,7 +16,8 @@ const initialState: FormState = { name: "", email: "", phone: "", message: "" };
 // Google Apps Script Web App — logs every submission to a Google Sheet
 // AND emails hello@promogranade.com. See scripts/contact-form-apps-script.gs
 // for the script to deploy and paste the resulting /exec URL below.
-const FORM_ENDPOINT = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+const FORM_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycby2xgmG0-oE0Err7JRhcm96PxCXManlGw0ERO1fb2FY_3Yx4MF97hsDvJ5n7ZB1pn54cw/exec";
 
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
