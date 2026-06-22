@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, ChevronDown } from "lucide-react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
 import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
+import { ServiceVisual } from "@/components/services/ServiceVisual";
 import type { ServicePage } from "@/lib/services-data";
 
 /* ─── Icon map ─────────────────────────────────────────────── */
@@ -137,38 +138,42 @@ export function ServicePageClient({ service }: { service: ServicePage }) {
             </div>
           </FadeUp>
 
-          {/* Icon + title */}
-          <div className="grid gap-8 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-10">
+          {/* Title + description + CTA (left) / infographic (right) */}
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-stretch">
+            <div className="lg:col-span-7">
               <TextReveal
                 as="h1"
-                className="font-display text-[clamp(2.75rem,8vw,8.5rem)] font-black leading-[0.88] tracking-[-0.045em]"
+                className="font-display text-[clamp(2.75rem,6.5vw,6.5rem)] font-black leading-[0.9] tracking-[-0.04em]"
               >
                 {service.title}
               </TextReveal>
-            </div>
-            <FadeUp delay={0.15} className="lg:col-span-2 flex lg:justify-end">
-              <div className="inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--accent)] text-white shadow-[0_24px_60px_-16px_rgba(224,20,44,0.55)]">
-                {icon}
-              </div>
-            </FadeUp>
-          </div>
 
-          {/* Description + CTA */}
-          <div className="mt-10 grid gap-10 lg:grid-cols-12">
-            <FadeUp delay={0.2} className="lg:col-span-8">
-              <p className="text-lg md:text-xl leading-relaxed text-[color:var(--section-muted)]">
-                {service.description}
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.3} className="lg:col-span-4 flex lg:justify-end items-start">
-              <a
-                href="mailto:hello@promogranade.com"
-                className="inline-flex items-center gap-3 rounded-full bg-[var(--accent)] text-white px-7 py-4 text-sm font-semibold hover:opacity-90 transition-opacity"
-              >
-                Start a project
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
+              <FadeUp delay={0.2} className="mt-8">
+                <p className="text-lg md:text-xl leading-relaxed text-[color:var(--section-muted)]">
+                  {service.description}
+                </p>
+              </FadeUp>
+
+              <FadeUp delay={0.3} className="mt-8">
+                <a
+                  href="mailto:hello@promogranade.com"
+                  className="inline-flex items-center gap-3 rounded-full bg-[var(--accent)] text-white px-7 py-4 text-sm font-semibold hover:opacity-90 transition-opacity"
+                >
+                  Start a project
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </FadeUp>
+            </div>
+
+            {/* Per-service animated infographic — fills the space that used
+                to be empty beside the heading, instead of a lone icon badge. */}
+            <FadeUp delay={0.15} className="lg:col-span-5">
+              <div className="relative h-full min-h-[320px]">
+                <ServiceVisual iconKey={service.iconKey} className="absolute inset-0" />
+                <div className="absolute top-6 left-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md ring-1 ring-white/15">
+                  {icon}
+                </div>
+              </div>
             </FadeUp>
           </div>
         </div>

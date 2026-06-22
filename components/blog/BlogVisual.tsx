@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 
 type Variant = "hero" | "card" | "mini";
 
-type SceneKind =
+export type SceneKind =
   | "agents"
   | "retrieval"
   | "search"
@@ -159,7 +159,7 @@ function Pulse({ cx, cy, reduce, r = 10 }: { cx: number; cy: number; reduce: boo
 
 /* ── Scenes ──────────────────────────────────────────────────────── */
 
-function Scene({ kind, reduce }: { kind: SceneKind; reduce: boolean }) {
+export function Scene({ kind, reduce }: { kind: SceneKind; reduce: boolean }) {
   switch (kind) {
     /* AI agents — orchestrator with satellite tools + data pulses */
     case "agents": {
