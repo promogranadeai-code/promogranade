@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
-import { SiteLiquid } from "@/components/layout/SiteLiquid";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 
 import { services } from "@/components/home/ServicesPreview";
 
@@ -32,7 +32,7 @@ export function ServicesGrid() {
 
   return (
     <section className="section-a relative overflow-hidden py-24 lg:py-36">
-      <SiteLiquid />
+      <HeroBackdrop />
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
         {/* Eyebrow + heading */}

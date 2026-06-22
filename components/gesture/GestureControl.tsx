@@ -53,8 +53,13 @@ const DEADZONE = 0.0015;
 // Caps a single frame's contribution so a momentary mis-detection (hand
 // re-entering frame, occlusion) can't cause a jarring jump.
 const MAX_FRAME_DELTA = 0.05;
-// Exponential moving average factor for the fingertip's y position.
-const SMOOTHING = 0.35;
+// Exponential moving average factor for the fingertip's y position. Lower
+// = heavier smoothing on the raw landmark, less camera/detector jitter.
+const SMOOTHING = 0.2;
+// Second-stage smoothing applied to the resulting scroll velocity itself,
+// so starting/stopping the gesture eases in and out instead of jumping
+// frame-to-frame — this is what actually reads as "smooth" scrolling.
+const VELOCITY_SMOOTHING = 0.18;
 
 function isExtended(landmarks: { y: number }[], [tip, pip]: [number, number]) {
   return landmarks[tip].y < landmarks[pip].y - EXTEND_MARGIN;
@@ -90,6 +95,7 @@ export default function GestureControl() {
     let confirmedMode: GestureMode = "none";
     let pendingMode: GestureMode = "none";
     let pendingCount = 0;
+    let velocity = 0;
 
     async function start() {
       setStatus("loading");
@@ -173,6 +179,7 @@ export default function GestureControl() {
           smoothedY == null ? rawY : smoothedY + (rawY - smoothedY) * SMOOTHING;
         smoothedY = nextSmoothedY;
 
+        let targetVelocity = 0;
         if (prevY != null) {
           let deltaY = nextSmoothedY - prevY;
           deltaY = Math.max(-MAX_FRAME_DELTA, Math.min(MAX_FRAME_DELTA, deltaY));
@@ -183,12 +190,17 @@ export default function GestureControl() {
           // gesture is deliberately one-directional so the two can't be
           // confused for each other.
           if (confirmedMode === "one" && movingDown) {
-            window.scrollBy({ top: deltaY * SENSITIVITY, behavior: "auto" });
+            targetVelocity = deltaY * SENSITIVITY;
           } else if (confirmedMode === "two" && movingUp) {
-            window.scrollBy({ top: deltaY * SENSITIVITY, behavior: "auto" });
+            targetVelocity = deltaY * SENSITIVITY;
           }
         }
         prevY = nextSmoothedY;
+
+        // Ease the applied velocity toward its target rather than jumping
+        // straight to each frame's raw value — this is what makes starting
+        // and stopping the scroll feel smooth instead of jerky.
+        velocity += (targetVelocity - velocity) * VELOCITY_SMOOTHING;
       } else {
         setStatus("no-hand");
         prevY = null;
@@ -198,6 +210,12 @@ export default function GestureControl() {
           confirmedMode = "none";
           setActiveMode("none");
         }
+        // No hand in frame: ease the scroll to a stop instead of cutting it dead.
+        velocity += (0 - velocity) * VELOCITY_SMOOTHING;
+      }
+
+      if (Math.abs(velocity) > 0.05) {
+        window.scrollBy({ top: velocity, behavior: "auto" });
       }
 
       rafId = requestAnimationFrame(loop);

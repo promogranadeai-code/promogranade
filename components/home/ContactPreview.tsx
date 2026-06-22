@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
-import { SiteLiquid } from "../layout/SiteLiquid";
+import { HeroBackdrop } from "../ui/HeroBackdrop";
 import { ContactForm } from "./ContactForm";
 import { ArrowUpRight, Phone, MessageCircle, Mail } from "lucide-react";
 
@@ -46,7 +46,7 @@ export function ContactPreview() {
       id="contact"
       className="section-a relative overflow-hidden py-28 lg:py-44"
     >
-      <SiteLiquid />
+      <HeroBackdrop />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
 
         {/* Heading */}

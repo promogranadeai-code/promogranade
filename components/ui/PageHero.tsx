@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { SiteLiquid } from "@/components/layout/SiteLiquid";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 
 interface PageHeroProps {
   eyebrow: string;
@@ -19,9 +19,8 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <div className="relative overflow-hidden">
-      <SiteLiquid />
       {/* transparent spacer — keeps the area behind the fixed nav free of the
-          tone overlay so the liquid animation reads there exactly as it does
+          tone overlay so the backdrop reads there exactly as it does
           on Career/Contact/Arcade, instead of looking dulled. */}
       <div className="pt-16" />
       <section
@@ -30,6 +29,7 @@ export function PageHero({
           tone === "a" ? "section-a" : "section-b"
         )}
       >
+        <HeroBackdrop />
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-8">
             <span className="h-px w-12 bg-[color:var(--section-border)]" />

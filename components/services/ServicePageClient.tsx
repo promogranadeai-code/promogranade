@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, ChevronDown } from "lucide-react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
-import { SiteLiquid } from "@/components/layout/SiteLiquid";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import type { ServicePage } from "@/lib/services-data";
 
 /* ─── Icon map ─────────────────────────────────────────────── */
@@ -113,7 +113,7 @@ export function ServicePageClient({ service }: { service: ServicePage }) {
     <>
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="section-a relative overflow-hidden">
-        <SiteLiquid />
+        <HeroBackdrop />
 
         {/* spacer behind nav */}
         <div className="pt-16" />
