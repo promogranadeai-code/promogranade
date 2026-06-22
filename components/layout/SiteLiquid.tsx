@@ -116,15 +116,24 @@ function Liquid() {
   const mouseTarget = useRef(new THREE.Vector2(0.5, 0.5));
   const _bgColor = useRef(new THREE.Color()); // reused each frame — avoids GC pressure
 
+  // Initialize bg/intensity from whichever theme is already resolved at
+  // mount (this component only mounts after the outer SiteLiquid's own
+  // "mounted" gate fires, by which point next-themes has already resolved)
+  // instead of always starting dark-biased and lerping down — that lerp
+  // is a fine touch-up for a live theme *toggle*, but as a startup default
+  // it meant light-theme visitors saw an over-saturated red wash for the
+  // first second or so before it settled.
+  const isDark = resolvedTheme === "dark";
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uResolution: { value: new THREE.Vector2(1, 1) },
-      uBg: { value: new THREE.Color("#0a0a0a") },
+      uBg: { value: new THREE.Color(isDark ? "#0a0a0a" : "#fafafa") },
       uAccent: { value: new THREE.Color("#e0142c") },
-      uIntensity: { value: 0.78 },
+      uIntensity: { value: isDark ? 0.78 : 0.18 },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -152,8 +161,10 @@ function Liquid() {
 
     // Light theme reads "heavier" with the same mix strength — a white
     // canvas makes the deep-red swirls look much darker/denser than they
-    // do against the near-black dark-theme canvas, so soften it slightly.
-    const targetIntensity = resolvedTheme === "dark" ? 0.78 : 0.66;
+    // do against the near-black dark-theme canvas, so soften it a lot more:
+    // the hero should read as a light page with a red accent, not a solid
+    // red page with a light theme nominally applied.
+    const targetIntensity = resolvedTheme === "dark" ? 0.78 : 0.18;
     m.uniforms.uIntensity.value += (targetIntensity - m.uniforms.uIntensity.value) * 0.05;
   });
 

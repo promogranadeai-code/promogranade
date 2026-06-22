@@ -78,6 +78,18 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden" style={{ background: "#070707" }}>
+      {/* ── Seam fade — the footer is intentionally always dark, but on the
+          light theme that's a hard white-to-black cut against the section
+          above it. Fade from the page's current --background down into the
+          footer's dark base so the transition reads as deliberate. In dark
+          theme --background is already ~#0a0a0a, nearly identical to the
+          footer's #070707, so this is invisible there. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-32 md:h-40"
+        style={{ background: "linear-gradient(to bottom, var(--background) 0%, transparent 100%)" }}
+      />
+
       {/* ── Red gradient top border ── */}
       <div
         aria-hidden
