@@ -13,8 +13,10 @@ interface FormState {
 
 const initialState: FormState = { name: "", email: "", phone: "", message: "" };
 
-// AJAX endpoint — delivers straight to hello@promogranade.com
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/hello@promogranade.com";
+// Google Apps Script Web App — logs every submission to a Google Sheet
+// AND emails hello@promogranade.com. See scripts/contact-form-apps-script.gs
+// for the script to deploy and paste the resulting /exec URL below.
+const FORM_ENDPOINT = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -38,15 +40,11 @@ export function ContactForm() {
       fd.append("Email", form.email);
       fd.append("Phone", form.phone || "Not provided");
       fd.append("Message", form.message);
-      fd.append("_subject", `New project enquiry — ${form.name}`);
-      fd.append("_template", "table");
-      fd.append("_captcha", "false");
-      fd.append("_replyto", form.email);
 
       const res = await fetch(FORM_ENDPOINT, { method: "POST", body: fd });
-      const json = await res.json().catch(() => ({ success: "false" }));
+      const json = await res.json().catch(() => ({ success: false }));
 
-      if (res.ok && json.success === "true") {
+      if (res.ok && json.success) {
         setSubmitted(true);
       } else {
         setError("Couldn't send that. Please email us directly at hello@promogranade.com.");
