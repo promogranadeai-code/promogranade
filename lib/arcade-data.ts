@@ -34,6 +34,7 @@ export const arcadeCategories: ArcadeCategory[] = [
       { name: "Wispr Flow", description: "Voice-to-text dictation we use to draft briefs, specs, and copy faster than typing." },
       { name: "Higgsfield", description: "AI image and video generation for campaign creative and ad concepts." },
       { name: "Magnific", description: "AI upscaling that turns rough generated images into client-ready, high-resolution assets." },
+      { name: "Gemini", description: "Google's model family for long-context research, multimodal analysis, and a second opinion alongside Claude and GPT." },
     ],
   },
   {
@@ -54,6 +55,8 @@ export const arcadeCategories: ArcadeCategory[] = [
       { name: "RAG context-fill", description: "Retrieving the right documents or data first, then grounding the model's answer in them." },
       { name: "Tree-of-thought", description: "Exploring multiple reasoning paths in parallel and keeping the best one, for harder problems." },
       { name: "Reflexion", description: "Letting an agent learn from its own failed attempts within the same session before trying again." },
+      { name: "Prompt chaining", description: "Breaking a complex ask into smaller prompts where each output feeds the next, instead of one giant instruction." },
+      { name: "Negative prompting", description: "Explicitly stating what to avoid — tone, format, content — so the model doesn't default to its worst habits." },
     ],
   },
   {
@@ -74,6 +77,8 @@ export const arcadeCategories: ArcadeCategory[] = [
       { name: "Trigger.dev", description: "Code-first background jobs and scheduled tasks, version-controlled with the rest of the app." },
       { name: "Airflow", description: "Scheduling and monitoring data pipelines for larger reporting and analytics builds." },
       { name: "Pipedream", description: "Fast, code-level glue between APIs when no off-the-shelf integration exists." },
+      { name: "Retool", description: "Internal tools and admin dashboards we stand up fast for client-side ops without a full custom build." },
+      { name: "Webhooks", description: "The plain HTTP glue underneath most of the above — direct, dependency-free triggers between systems." },
     ],
   },
 ];

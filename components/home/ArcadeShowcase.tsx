@@ -73,11 +73,12 @@ function StackColumn({ stack, index }: { stack: ArcadeCategory; index: number })
         delay: index * 0.1,
         ease: [0.22, 1, 0.36, 1],
       }}
+      className="h-full"
     >
       <Link
         href={`/arcade/${id}`}
         data-cursor="visit"
-        className="arc-card group relative block rounded-3xl p-7 md:p-8 overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+        className="arc-card group relative flex h-full flex-col rounded-3xl p-7 md:p-8 overflow-hidden transition-transform duration-300 hover:-translate-y-1"
       >
         {/* Header row: icon + index number */}
         <div className="mb-5 flex items-start justify-between gap-3">
@@ -125,8 +126,10 @@ function StackColumn({ stack, index }: { stack: ArcadeCategory; index: number })
           ))}
         </ul>
 
-        {/* View details affordance */}
-        <p className="relative mt-6 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+        {/* View details affordance — mt-auto anchors it to the bottom so all
+            three cards line up evenly regardless of how many items/how much
+            text wrapping each category's chip list has. */}
+        <p className="relative mt-auto pt-6 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
           View details
           <ArrowUpRight className="h-3 w-3" />
         </p>
