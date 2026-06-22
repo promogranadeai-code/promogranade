@@ -90,7 +90,7 @@ export function Navigation() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="mailto:hello@promogranade.com"
+              href="/contact"
               data-cursor="hire"
               className="hidden md:inline-flex items-center gap-2 rounded-full bg-[var(--accent)] text-[var(--accent-foreground)] px-5 py-2.5 text-sm font-semibold hover:bg-[var(--accent)]/90 transition-colors"
             >
