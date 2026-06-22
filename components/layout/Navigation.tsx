@@ -151,12 +151,7 @@ export function Navigation() {
 
 function Logo() {
   return (
-    // layoutId matches components/intro/PromoGrenadeIntro.tsx so the intro
-    // logo can fly here via Framer Motion's shared layout animation.
-    <motion.span
-      layoutId="promogranade-logo"
-      className="relative inline-flex h-10 w-10 items-center justify-center flex-shrink-0"
-    >
+    <span className="relative inline-flex h-10 w-10 items-center justify-center flex-shrink-0">
       <Image
         src="/logo-mark.png"
         alt="Promogranade logo mark"
@@ -165,6 +160,6 @@ function Logo() {
         className="h-full w-full object-contain"
         priority
       />
-    </motion.span>
+    </span>
   );
 }

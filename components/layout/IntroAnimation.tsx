@@ -152,7 +152,7 @@ function ExpandingScreen() {
 function LogoMark({ size }: { size: number }) {
   return (
     <Image
-      src="/logo-mark.png"
+      src="/logo.png"
       alt=""
       width={size}
       height={size}
