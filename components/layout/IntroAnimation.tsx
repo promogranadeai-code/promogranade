@@ -96,9 +96,6 @@ function Laptop({ phase }: { phase: Phase }) {
             >
               <LogoMark size={44} />
             </motion.div>
-            <p className="text-white text-[10px] font-bold tracking-[0.28em] uppercase opacity-90">
-              PROMOGRANADE
-            </p>
           </motion.div>
         </div>
       </motion.div>
@@ -141,9 +138,6 @@ function ExpandingScreen() {
         transition={{ duration: 0.3, delay: 0.4 }}
       >
         <LogoMark size={52} />
-        <p className="text-white text-[10px] font-bold tracking-[0.28em] uppercase">
-          PROMOGRANADE
-        </p>
       </motion.div>
     </motion.div>
   );
