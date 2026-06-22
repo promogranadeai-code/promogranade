@@ -3,11 +3,19 @@
 /**
  * Place this file at: components/gesture/GestureControl.tsx
  *
- * Webcam hand-tracking that drives page scroll: move your index fingertip
- * up to scroll up, down to scroll down. Toggled from the header
- * (components/layout/Navigation.tsx, via lib/gesture-control-context.tsx)
- * and mounted globally in components/layout/DeferredShell.tsx so it can
- * run on any page.
+ * Webcam hand-tracking that drives page scroll with two distinct
+ * gestures, so accidental hand movement doesn't trigger scrolling:
+ *   - 1 finger (index only) moving down  -> scroll down
+ *   - 2 fingers (index + middle) moving up -> scroll up
+ *
+ * A gesture only counts once it's held for a few consecutive frames
+ * (see GESTURE_HOLD_FRAMES) — this is the "training" pass that filters
+ * out transient/ambiguous hand shapes instead of reacting to every
+ * frame's raw landmark output.
+ *
+ * Toggled from the header (components/layout/Navigation.tsx, via
+ * lib/gesture-control-context.tsx) and mounted globally in
+ * components/layout/DeferredShell.tsx so it can run on any page.
  *
  * Uses @mediapipe/tasks-vision's HandLandmarker, which runs fully
  * client-side (WASM + a small model fetched from Google's CDN on first
@@ -20,9 +28,22 @@ import { Hand, X } from "lucide-react";
 import { useGestureControl } from "@/lib/gesture-control-context";
 
 type Status = "loading" | "tracking" | "no-hand" | "denied" | "error";
+type GestureMode = "one" | "two" | "none";
 
-// Index fingertip landmark id in the MediaPipe hand model.
-const INDEX_FINGER_TIP = 8;
+// MediaPipe hand-landmark ids: [tip, pip] per finger.
+const INDEX: [number, number] = [8, 6];
+const MIDDLE: [number, number] = [12, 10];
+const RING: [number, number] = [16, 14];
+const PINKY: [number, number] = [20, 18];
+
+// A finger counts as "extended" only when its tip clears the pip joint
+// by this margin (normalized 0-1 frame height) — avoids false positives
+// from a half-curled finger.
+const EXTEND_MARGIN = 0.02;
+
+// A raw gesture reading must repeat this many consecutive frames before
+// it's accepted, so a momentary mis-read can't flip the active mode.
+const GESTURE_HOLD_FRAMES = 4;
 
 // How much normalized fingertip movement (0-1 of frame height) per frame
 // translates into scroll pixels. Tuned for a smooth, controllable feel.
@@ -35,10 +56,26 @@ const MAX_FRAME_DELTA = 0.05;
 // Exponential moving average factor for the fingertip's y position.
 const SMOOTHING = 0.35;
 
+function isExtended(landmarks: { y: number }[], [tip, pip]: [number, number]) {
+  return landmarks[tip].y < landmarks[pip].y - EXTEND_MARGIN;
+}
+
+function classifyGesture(landmarks: { y: number }[]): GestureMode {
+  const index = isExtended(landmarks, INDEX);
+  const middle = isExtended(landmarks, MIDDLE);
+  const ring = isExtended(landmarks, RING);
+  const pinky = isExtended(landmarks, PINKY);
+
+  if (index && !middle && !ring && !pinky) return "one";
+  if (index && middle && !ring && !pinky) return "two";
+  return "none";
+}
+
 export default function GestureControl() {
   const { enabled, toggle } = useGestureControl();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [status, setStatus] = useState<Status>("loading");
+  const [activeMode, setActiveMode] = useState<GestureMode>("none");
 
   useEffect(() => {
     if (!enabled) return;
@@ -50,6 +87,9 @@ export default function GestureControl() {
     let landmarker: any = null;
     let prevY: number | null = null;
     let smoothedY: number | null = null;
+    let confirmedMode: GestureMode = "none";
+    let pendingMode: GestureMode = "none";
+    let pendingCount = 0;
 
     async function start() {
       setStatus("loading");
@@ -113,7 +153,22 @@ export default function GestureControl() {
 
       if (landmarks) {
         setStatus("tracking");
-        const rawY = landmarks[INDEX_FINGER_TIP].y;
+
+        // Hysteresis on the gesture classification: only switch modes
+        // once the same reading has held for GESTURE_HOLD_FRAMES.
+        const rawMode = classifyGesture(landmarks);
+        if (rawMode === pendingMode) {
+          pendingCount += 1;
+        } else {
+          pendingMode = rawMode;
+          pendingCount = 1;
+        }
+        if (pendingCount >= GESTURE_HOLD_FRAMES && confirmedMode !== pendingMode) {
+          confirmedMode = pendingMode;
+          setActiveMode(confirmedMode);
+        }
+
+        const rawY = landmarks[INDEX[0]].y;
         const nextSmoothedY: number =
           smoothedY == null ? rawY : smoothedY + (rawY - smoothedY) * SMOOTHING;
         smoothedY = nextSmoothedY;
@@ -121,8 +176,15 @@ export default function GestureControl() {
         if (prevY != null) {
           let deltaY = nextSmoothedY - prevY;
           deltaY = Math.max(-MAX_FRAME_DELTA, Math.min(MAX_FRAME_DELTA, deltaY));
-          if (Math.abs(deltaY) > DEADZONE) {
-            // Finger moves up (y decreases) -> scroll up; finger moves down -> scroll down.
+          const movingDown = deltaY > DEADZONE;
+          const movingUp = deltaY < -DEADZONE;
+
+          // 1 finger only scrolls down; 2 fingers only scrolls up — each
+          // gesture is deliberately one-directional so the two can't be
+          // confused for each other.
+          if (confirmedMode === "one" && movingDown) {
+            window.scrollBy({ top: deltaY * SENSITIVITY, behavior: "auto" });
+          } else if (confirmedMode === "two" && movingUp) {
             window.scrollBy({ top: deltaY * SENSITIVITY, behavior: "auto" });
           }
         }
@@ -130,6 +192,12 @@ export default function GestureControl() {
       } else {
         setStatus("no-hand");
         prevY = null;
+        pendingMode = "none";
+        pendingCount = 0;
+        if (confirmedMode !== "none") {
+          confirmedMode = "none";
+          setActiveMode("none");
+        }
       }
 
       rafId = requestAnimationFrame(loop);
@@ -143,6 +211,7 @@ export default function GestureControl() {
       landmarker?.close();
       stream?.getTracks().forEach((t) => t.stop());
       if (videoRef.current) videoRef.current.srcObject = null;
+      setActiveMode("none");
     };
   }, [enabled]);
 
@@ -154,31 +223,69 @@ export default function GestureControl() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 16, scale: 0.95 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed bottom-6 right-6 z-[9998] w-44 overflow-hidden rounded-2xl border border-white/15 bg-black/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
+          className="fixed bottom-6 right-6 z-[9998] w-48"
         >
-          <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
-            <video
-              ref={videoRef}
-              muted
-              playsInline
-              className="h-full w-full object-cover"
-              style={{ transform: "scaleX(-1)" }}
-            />
-            <StatusOverlay status={status} />
+          <div
+            className="overflow-hidden rounded-2xl border"
+            style={{
+              background: "var(--nav-bg)",
+              borderColor: "var(--nav-border)",
+              backdropFilter: "blur(20px)",
+              boxShadow: "0 24px 60px -12px rgba(0,0,0,0.35)",
+            }}
+          >
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
+              <video
+                ref={videoRef}
+                muted
+                playsInline
+                className="h-full w-full object-cover"
+                style={{ transform: "scaleX(-1)" }}
+              />
+              <StatusOverlay status={status} activeMode={activeMode} />
+            </div>
+            <div className="flex items-center justify-between gap-2 px-3 py-2">
+              <span
+                className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider"
+                style={{ color: "var(--foreground)" }}
+              >
+                <Hand className="h-3 w-3 text-[var(--accent)]" />
+                Gesture scroll
+              </span>
+              <button
+                type="button"
+                aria-label="Disable gesture scroll"
+                onClick={toggle}
+                className="flex h-5 w-5 items-center justify-center rounded-full transition-colors"
+                style={{ color: "var(--muted-foreground)" }}
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center justify-between gap-2 px-3 py-2">
-            <span className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-white/70">
-              <Hand className="h-3 w-3 text-[#FF3030]" />
-              Gesture scroll
-            </span>
-            <button
-              type="button"
-              aria-label="Disable gesture scroll"
-              onClick={toggle}
-              className="flex h-5 w-5 items-center justify-center rounded-full text-white/60 hover:text-white transition-colors"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
+
+          {/* Instructions, shown below the preview so users know the gestures. */}
+          <div
+            className="mt-2 space-y-1 rounded-xl border px-3 py-2 text-[10px] leading-relaxed"
+            style={{
+              background: "var(--nav-bg)",
+              borderColor: "var(--nav-border)",
+              color: "var(--muted-foreground)",
+              backdropFilter: "blur(20px)",
+            }}
+          >
+            <p>
+              <span className="font-semibold" style={{ color: "var(--foreground)" }}>
+                ☝️ 1 finger, move down
+              </span>{" "}
+              — scroll down
+            </p>
+            <p>
+              <span className="font-semibold" style={{ color: "var(--foreground)" }}>
+                ✌️ 2 fingers, move up
+              </span>{" "}
+              — scroll up
+            </p>
           </div>
         </motion.div>
       )}
@@ -186,12 +293,24 @@ export default function GestureControl() {
   );
 }
 
-function StatusOverlay({ status }: { status: Status }) {
+function StatusOverlay({
+  status,
+  activeMode,
+}: {
+  status: Status;
+  activeMode: GestureMode;
+}) {
   if (status === "tracking") {
+    const label =
+      activeMode === "one"
+        ? "1 finger — scroll down"
+        : activeMode === "two"
+        ? "2 fingers — scroll up"
+        : "Hand detected";
     return (
-      <span className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-full bg-black/50 px-2 py-1 text-[9px] font-medium text-white">
+      <span className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-full bg-black/55 px-2 py-1 text-[9px] font-medium text-white">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-        Tracking
+        {label}
       </span>
     );
   }
