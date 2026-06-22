@@ -85,7 +85,7 @@ function Laptop({ phase }: { phase: Phase }) {
           />
           {/* logo */}
           <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center gap-3"
+            className="absolute inset-0 flex flex-row items-center justify-center gap-2.5"
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: phase === "logo" ? 1 : 0, y: phase === "logo" ? 0 : 6 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -94,8 +94,11 @@ function Laptop({ phase }: { phase: Phase }) {
               animate={phase === "logo" ? { scale: [1, 1.07, 1] } : { scale: 1 }}
               transition={{ duration: 1.4, ease: "easeInOut", delay: 0.2 }}
             >
-              <LogoMark size={44} />
+              <LogoMark size={36} />
             </motion.div>
+            <span className="text-white text-[13px] font-bold tracking-[0.18em] uppercase">
+              PROMOGRANADE
+            </span>
           </motion.div>
         </div>
       </motion.div>
@@ -132,12 +135,15 @@ function ExpandingScreen() {
       style={{ left: "50%", top: "50%", x: "-50%", y: "-50%" }}
     >
       <motion.div
-        className="flex flex-col items-center gap-3"
+        className="flex flex-row items-center gap-3"
         initial={{ opacity: 1, scale: 1 }}
         animate={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.3, delay: 0.4 }}
       >
-        <LogoMark size={52} />
+        <LogoMark size={44} />
+        <span className="text-white text-[15px] font-bold tracking-[0.18em] uppercase">
+          PROMOGRANADE
+        </span>
       </motion.div>
     </motion.div>
   );
@@ -146,7 +152,7 @@ function ExpandingScreen() {
 function LogoMark({ size }: { size: number }) {
   return (
     <Image
-      src="/logo.png"
+      src="/logo-mark.png"
       alt=""
       width={size}
       height={size}
