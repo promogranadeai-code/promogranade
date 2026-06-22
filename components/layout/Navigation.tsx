@@ -3,10 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Hand, Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useGestureControl } from "@/lib/gesture-control-context";
 
 const links = [
   { href: "/", label: "Home" },
@@ -96,6 +97,7 @@ export function Navigation() {
               Let&apos;s talk
               <span className="inline-block">→</span>
             </Link>
+            <GestureToggle />
             <ThemeToggle />
             <button
               type="button"
@@ -146,6 +148,30 @@ export function Navigation() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+function GestureToggle() {
+  const { enabled, toggle } = useGestureControl();
+  return (
+    <button
+      type="button"
+      aria-label="Toggle gesture scroll control"
+      aria-pressed={enabled}
+      data-cursor="gesture"
+      onClick={toggle}
+      className={cn(
+        "relative h-10 w-10 rounded-full border flex items-center justify-center transition-colors duration-500",
+        enabled
+          ? "border-[var(--accent)] bg-[var(--accent)]/15 text-[var(--accent)]"
+          : "border-[var(--nav-border)] text-foreground"
+      )}
+    >
+      <Hand className="h-4 w-4" />
+      {enabled && (
+        <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse" />
+      )}
+    </button>
   );
 }
 

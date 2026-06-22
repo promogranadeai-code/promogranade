@@ -10,10 +10,11 @@
  */
 import dynamic from "next/dynamic";
 
-const AmbientField   = dynamic(() => import("./AmbientField"),   { ssr: false });
-const IntroAnimation = dynamic(() => import("./IntroAnimation"), { ssr: false });
-const Cursor         = dynamic(() => import("./Cursor"),         { ssr: false });
-const ChatBot        = dynamic(() => import("./ChatBot"),        { ssr: false });
+const AmbientField    = dynamic(() => import("./AmbientField"),   { ssr: false });
+const IntroAnimation  = dynamic(() => import("./IntroAnimation"), { ssr: false });
+const Cursor          = dynamic(() => import("./Cursor"),         { ssr: false });
+const ChatBot         = dynamic(() => import("./ChatBot"),        { ssr: false });
+const GestureControl  = dynamic(() => import("@/components/gesture/GestureControl"), { ssr: false });
 
 export function DeferredShell() {
   return (
@@ -22,6 +23,7 @@ export function DeferredShell() {
       <Cursor />
       <ChatBot />
       <IntroAnimation />
+      <GestureControl />
     </>
   );
 }
