@@ -34,15 +34,20 @@ const ICON_TAG: Record<string, string> = {
   ai: "RETRIEVAL-AUGMENTED GENERATION",
 };
 
+// One consistent panel treatment across every service — same red-to-black
+// diagonal for all of them, so the set reads as one design system instead
+// of a different brightness/mix per card.
+const PANEL_GRADIENT = "linear-gradient(135deg,#e0142c 0%,#0a0a0a 100%)";
+
 const ICON_GRADIENT: Record<string, string> = {
-  web: "linear-gradient(135deg,#e0142c 0%,#111 100%)",
-  apps: "linear-gradient(135deg,#0f0f0f 0%,#e0142c 100%)",
-  agents: "linear-gradient(135deg,#e0142c 0%,#7a0014 100%)",
-  seo: "linear-gradient(135deg,#111 0%,#e0142c 80%)",
-  social: "linear-gradient(135deg,#e0142c 0%,#8b0000 100%)",
-  ads: "linear-gradient(135deg,#e0142c 0%,#4a0010 100%)",
-  workflow: "linear-gradient(135deg,#1a1a1a 0%,#3d0008 100%)",
-  ai: "linear-gradient(135deg,#e0142c 0%,#0a0a0a 100%)",
+  web: PANEL_GRADIENT,
+  apps: PANEL_GRADIENT,
+  agents: PANEL_GRADIENT,
+  seo: PANEL_GRADIENT,
+  social: PANEL_GRADIENT,
+  ads: PANEL_GRADIENT,
+  workflow: PANEL_GRADIENT,
+  ai: PANEL_GRADIENT,
 };
 
 export function ServiceVisual({
