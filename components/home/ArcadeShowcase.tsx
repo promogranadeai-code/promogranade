@@ -1,76 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Wrench, Sparkles, Workflow as WorkflowIcon } from "lucide-react";
+import Link from "next/link";
+import { Wrench, Sparkles, Workflow as WorkflowIcon, ArrowUpRight } from "lucide-react";
 import { TextReveal, FadeUp } from "../ui/TextReveal";
+import { arcadeCategories, type ArcadeCategory } from "@/lib/arcade-data";
 
-interface Stack {
-  id: string;
-  label: string;
-  Icon: typeof Wrench;
-  blurb: string;
-  items: string[];
-}
-
-const stacks: Stack[] = [
-  {
-    id: "tools",
-    label: "Tools",
-    Icon: Wrench,
-    blurb:
-      "The everyday kit. The editors, copilots, design boards and infra we reach for on every project.",
-    items: [
-      "Cursor",
-      "Claude Code",
-      "ChatGPT",
-      "GitHub Copilot",
-      "Figma",
-      "Linear",
-      "Vercel",
-      "Supabase",
-      "PostgreSQL",
-      "Notion",
-    ],
-  },
-  {
-    id: "prompts",
-    label: "Prompts",
-    Icon: Sparkles,
-    blurb:
-      "Battle-tested prompt patterns we use to steer models — from research to code generation to copy.",
-    items: [
-      "Chain-of-thought",
-      "Few-shot examples",
-      "Role priming",
-      "ReAct",
-      "Self-critique",
-      "Plan-and-execute",
-      "Structured output",
-      "RAG context-fill",
-      "Tree-of-thought",
-      "Reflexion",
-    ],
-  },
-  {
-    id: "workflows",
-    label: "Workflows",
-    Icon: WorkflowIcon,
-    blurb:
-      "How work gets stitched together — orchestration tools that turn agents and APIs into running systems.",
-    items: [
-      "n8n",
-      "Zapier",
-      "Make",
-      "LangChain",
-      "LangGraph",
-      "Temporal",
-      "Inngest",
-      "Trigger.dev",
-      "Airflow",
-      "Pipedream",
-    ],
-  },
-];
+const ICONS: Record<ArcadeCategory["id"], typeof Wrench> = {
+  tools: Wrench,
+  prompts: Sparkles,
+  workflows: WorkflowIcon,
+};
 
 export function ArcadeShowcase({ tone = "b" }: { tone?: "a" | "b" }) {
   return (
@@ -110,7 +50,7 @@ export function ArcadeShowcase({ tone = "b" }: { tone?: "a" | "b" }) {
 
         {/* Three stack columns */}
         <div className="grid gap-6 md:grid-cols-3">
-          {stacks.map((stack, i) => (
+          {arcadeCategories.map((stack, i) => (
             <StackColumn key={stack.id} stack={stack} index={i} />
           ))}
         </div>
@@ -119,8 +59,9 @@ export function ArcadeShowcase({ tone = "b" }: { tone?: "a" | "b" }) {
   );
 }
 
-function StackColumn({ stack, index }: { stack: Stack; index: number }) {
-  const { Icon, label, blurb, items } = stack;
+function StackColumn({ stack, index }: { stack: ArcadeCategory; index: number }) {
+  const { label, blurb, items, id } = stack;
+  const Icon = ICONS[id];
 
   return (
     <motion.div
@@ -132,50 +73,64 @@ function StackColumn({ stack, index }: { stack: Stack; index: number }) {
         delay: index * 0.1,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="arc-card group relative rounded-3xl p-7 md:p-8 overflow-hidden"
     >
-      {/* Header row: icon + index number */}
-      <div className="mb-5 flex items-start justify-between gap-3">
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)] text-white shadow-[0_8px_20px_-8px_rgba(220,20,40,0.6)]">
-          <Icon className="h-5 w-5" />
-        </span>
-        <span className="arc-card-muted text-[10px] font-bold uppercase tracking-[0.25em] pt-1">
-          0{index + 1}
-        </span>
-      </div>
+      <Link
+        href={`/arcade/${id}`}
+        data-cursor="visit"
+        className="arc-card group relative block rounded-3xl p-7 md:p-8 overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+      >
+        {/* Header row: icon + index number */}
+        <div className="mb-5 flex items-start justify-between gap-3">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)] text-white shadow-[0_8px_20px_-8px_rgba(220,20,40,0.6)]">
+            <Icon className="h-5 w-5" />
+          </span>
+          <span className="arc-card-muted text-[10px] font-bold uppercase tracking-[0.25em] pt-1">
+            0{index + 1}
+          </span>
+        </div>
 
-      {/* Title */}
-      <p className="font-display text-3xl font-bold tracking-tight leading-tight mb-3">
-        {label}
-      </p>
+        {/* Title */}
+        <div className="flex items-center gap-2 mb-3">
+          <p className="font-display text-3xl font-bold tracking-tight leading-tight">
+            {label}
+          </p>
+          <ArrowUpRight className="h-4 w-4 text-[var(--accent)] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+        </div>
 
-      {/* Blurb */}
-      <p className="arc-card-muted text-sm leading-relaxed mb-6">{blurb}</p>
+        {/* Blurb */}
+        <p className="arc-card-muted text-sm leading-relaxed mb-6">{blurb}</p>
 
-      {/* Divider */}
-      <div className="arc-card-divider h-px mb-6" />
+        {/* Divider */}
+        <div className="arc-card-divider h-px mb-6" />
 
-      {/* Items */}
-      <ul className="flex flex-wrap gap-2">
-        {items.map((item, idx) => (
-          <motion.li
-            key={item}
-            initial={{ opacity: 0, y: 6 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{
-              duration: 0.4,
-              delay: index * 0.1 + 0.2 + idx * 0.02,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <span className="arc-chip">
-              <span className="arc-chip-dot" />
-              {item}
-            </span>
-          </motion.li>
-        ))}
-      </ul>
+        {/* Items */}
+        <ul className="flex flex-wrap gap-2">
+          {items.map((item, idx) => (
+            <motion.li
+              key={item.name}
+              initial={{ opacity: 0, y: 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.4,
+                delay: index * 0.1 + 0.2 + idx * 0.02,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <span className="arc-chip">
+                <span className="arc-chip-dot" />
+                {item.name}
+              </span>
+            </motion.li>
+          ))}
+        </ul>
+
+        {/* View details affordance */}
+        <p className="relative mt-6 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+          View details
+          <ArrowUpRight className="h-3 w-3" />
+        </p>
+      </Link>
     </motion.div>
   );
 }

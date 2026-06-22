@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 
 const IconX = (p: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
@@ -45,7 +46,8 @@ const team = [
 export function AboutTeam() {
   return (
     <section className="section-a relative overflow-hidden py-24 lg:py-36">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <HeroBackdrop />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-12">

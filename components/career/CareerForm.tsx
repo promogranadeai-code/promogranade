@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { Upload, Check, ChevronDown, ArrowRight } from "lucide-react";
 
 const roles = [
@@ -121,6 +122,7 @@ export function CareerForm() {
       id="apply"
       className="section-a relative overflow-hidden py-24 lg:py-36"
     >
+      <HeroBackdrop />
       <div className="relative mx-auto max-w-4xl px-6 lg:px-10">
 
         {/* Eyebrow */}

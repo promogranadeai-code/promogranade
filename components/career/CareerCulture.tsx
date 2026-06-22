@@ -1,6 +1,7 @@
 "use client";
 
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { Sparkles, Users, Rocket, GraduationCap } from "lucide-react";
 
 const VALUES = [
@@ -29,7 +30,8 @@ const VALUES = [
 export function CareerCulture() {
   return (
     <section className="section-b relative overflow-hidden py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <HeroBackdrop />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[color:var(--section-muted)] mb-10">
           <span className="h-px w-12 bg-[color:var(--section-border)]" />
           <span>Why Promogranade</span>
