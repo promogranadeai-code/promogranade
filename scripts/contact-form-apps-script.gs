@@ -30,6 +30,7 @@
  * ────────────────────────────────────────────────────────────────────
  */
 
+var SPREADSHEET_ID = "1Kc03y6oHo4U34U7DA4wuAqMZRfvXv2jfYzjc4O9aRpM";
 var SHEET_NAME = "Contact Submissions";
 var NOTIFY_EMAIL = "hello@promogranade.com";
 
@@ -52,7 +53,10 @@ function doPost(e) {
 }
 
 function appendToSheet(timestamp, name, email, phone, message) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  // openById (not getActiveSpreadsheet) — getActiveSpreadsheet() is
+  // unreliable when the script is triggered by a web request instead of
+  // run from the editor, and can silently target the wrong/no spreadsheet.
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
