@@ -1,114 +1,108 @@
 # SEO automation for promogranade.com
 
-How Promogranade runs end-to-end SEO (technical, on-page, off-page, GEO/AEO,
-tracking) with open-source tools + Claude Code instead of an SEO team.
-Research date: 2026-10-14 — stars/activity were checked on GitHub that day.
+How Promogranade runs end-to-end SEO without an SEO team:
+**OpenSEO** (open-source Ahrefs/Semrush replacement) for data, **Claude Code**
+for analysis and drafting, **this repo's CI** for technical checks, and **one
+trained team member** who decides, edits and approves. We don't use Ahrefs or Semrush.
 
-**What's already wired into this repo**
+- Operator guide (start here if you're the person running SEO): [`TRAINING.md`](./TRAINING.md)
+- Weekly routine: run `/seo-weekly` in Claude Code (monthly report: `/seo-weekly monthly`)
+- OpenSEO reference for Claude: `.claude/skills/openseo/SKILL.md`
+- Full pipeline playbook for Claude: `.claude/skills/seo-automation/SKILL.md`
+
+---
+
+## 1. OpenSEO — the data layer
+
+[every-app/open-seo](https://github.com/every-app/open-seo) (MIT, actively
+released — v0.1.12 on 2026-10-08). It covers keyword research, rank tracking,
+competitor insights, backlinks, site audits, AI visibility (ChatGPT, Gemini,
+Claude, Perplexity) and Google Search Console. Its Claude Code plugin brings an
+MCP server plus 12 ready-made SEO skills, including a beginner `seo-coach` and
+an `seo-audit` written so a non-expert can act on it.
+
+**Install (once per person, inside Claude Code):**
+
+```text
+/plugin marketplace add every-app/open-seo
+/plugin install openseo@openseo
+/mcp            # log in to OpenSEO if not prompted
+```
+
+Then run `/openseo:seo-project-setup` once for the promogranade.com project.
+
+**Hosted vs self-hosted**
+
+| | Hosted (recommended to start) | Self-hosted |
+|---|---|---|
+| Cost | $10/month incl. $10 usage credits; +28% on data costs | Data at cost via your own DataForSEO account (min top-up $50) |
+| Setup | Sign up, install plugin | Docker (localhost only, no login) or Cloudflare free plan + Cloudflare Access |
+| Team access | Organisation + invites | Cloudflare Access users |
+| Good for | Us now | When monthly data spend is large enough that 28% matters |
+
+Self-hosting details are in the `openseo` skill and the upstream
+`docs/SELF_HOSTING_*.md` files.
+
+## 2. What's wired into this repo
 
 | Piece | File | What it does |
 |---|---|---|
-| PR gate | `.github/workflows/seo-audit.yml` → `lighthouse` job | Builds the site, runs Lighthouse on 7 key templates. SEO < 90 **fails** the PR; performance / accessibility / best-practices warn. |
-| Weekly live audit | same workflow → `live-site` job (Mondays + manual) | lychee checks every link on every sitemap URL; Unlighthouse scans the whole live site. Reports land in workflow artifacts. |
-| Lighthouse config | `seo/lighthouserc.json` | URLs + score budgets. Add new page templates here. |
+| PR gate | `.github/workflows/seo-audit.yml` → `lighthouse` | Builds the site and runs Lighthouse on 7 key pages. SEO < 90 **fails** the PR; performance, accessibility and best-practices warn. |
+| Weekly live audit | same workflow → `live-site` (Mondays + manual) | lychee checks every link on every sitemap page; Unlighthouse scans the whole live site. Reports are saved as workflow artifacts. |
+| Lighthouse config | `seo/lighthouserc.json` | Pages and score budgets. Add new page types here. |
 | Link-check ignores | `.lycheeignore` | Social hosts that block bots (LinkedIn, Instagram, wa.me…). |
-| MCP template | `seo/mcp.example.json` | DataForSEO (keywords, SERP, backlinks, ranks) + Google Search Console servers for Claude Code. |
-| Claude Code skill | `.claude/skills/seo-automation/SKILL.md` | The operating playbook Claude follows for every SEO task. |
+| Claude skills | `.claude/skills/{seo-weekly,openseo,seo-automation}` | Weekly routine, OpenSEO reference, full pipeline playbook. |
 
 Already in the site code: dynamic `app/sitemap.ts`, `app/robots.ts` (AI crawlers
 allowed), `public/llms.txt`, FAQPage schema on service pages.
 
-**Baseline (local Lighthouse, 2026-10-14)** — SEO 100 on all 7 templates,
-accessibility 96–100, best-practices 100. Performance: home **36**, others 64–81.
-Unlighthouse full scan (desktop, 28 routes): SEO 100 everywhere, performance
-80–96 — except `/`, where Lighthouse failed the performance audit 3 times and
-skipped it. The home page (WebGL hero + intro animation) is the biggest
-technical-SEO opportunity. Link check: 27 pages, 81 unique URLs, 0 broken.
+**Baseline (2026-10-14).** SEO 100 on all 28 pages. Accessibility 96–100.
+Mobile performance: home **36**, other pages 64–81. Desktop: 80–96, but the home
+page failed its performance audit (WebGL hero + intro animation); that is the
+biggest technical fix. Links: 0 broken across 27 pages.
 
----
+## 3. End-to-end pipeline
 
-## The stack
+| Stage | Tool | Human step |
+|---|---|---|
+| Strategy & setup | `/openseo:seo-project-setup`, `/openseo:competitive-landscape` | **Approve goals and competitors** |
+| Research | `/openseo:keyword-research`, Search Console (inside OpenSEO) | Skim |
+| Plan | `/openseo:keyword-clustering` → page list | **Choose pages** |
+| Create & optimise | Claude Code drafts pages/meta/schema into `lib/blog.ts` / `lib/services-data.ts` on a PR | **Edit for voice + real experience** |
+| Technical | This repo's CI + `/openseo:seo-audit` monthly | Don't merge red PRs |
+| Publish | PR → Vercel preview → merge (sitemap updates automatically) | Merge |
+| Off-page | `/openseo:link-prospecting` (prospects + drafts) | **Personalise and send** |
+| Local | `/openseo:local-seo` (if we target a city) | GBP verification, reviews |
+| AI visibility (GEO/AEO) | `/openseo:ai-prompt-research`, `/openseo:ai-visibility-audit`, AI tracking in OpenSEO | Act on 1–3 changes |
+| Track & report | `/seo-weekly`, `/seo-weekly monthly` (rank tracker + Search Console) | Check before sending |
 
-### Install once per machine (Claude Code plugins / skills)
+## 4. Costs
 
-```bash
-# Audit brain: technical, on-page, schema, GEO, local, backlinks, drift, PDF reports
-/plugin marketplace add AgriciDaniel/claude-seo        # inside Claude Code, then /plugin install
+- OpenSEO hosted: $10/month (includes $10 of data credits). Routine weekly work
+  for one site usually fits; heavy research or daily AI tracking costs more.
+  The app shows estimates before AI-visibility checks.
+- Claude Code: existing plan.
+- Free: Google Search Console, GitHub Actions CI.
 
-# Strategy, site architecture, programmatic SEO, ai-seo skills
-npx skills add coreyhaines31/marketingskills -a claude-code
+## 5. Optional add-ons (only if a need appears)
 
-# Content pipeline: /research, /write, /optimize, /performance-review
-git clone https://github.com/TheCraigHewitt/seomachine ~/tools/seomachine
-```
+- [claude-seo](https://github.com/AgriciDaniel/claude-seo): deeper technical,
+  schema and hreflang audits and PDF reports.
+- [marketingskills](https://github.com/coreyhaines31/marketingskills):
+  programmatic SEO and site-architecture planning.
+- [changedetection.io](https://github.com/dgtlmoon/changedetection.io): alerts
+  for brand mentions and lost links.
+- [SEOnaut](https://github.com/StJudeWasHere/seonaut) or
+  [siteone-crawler](https://github.com/janreges/siteone-crawler): if we start
+  auditing many client sites.
 
-### MCP servers (data access for Claude)
+## 6. What still needs a human
 
-Copy the entries from `seo/mcp.example.json` into your `~/.claude.json` (or a
-local, git-ignored `.mcp.json`) and set:
-
-- `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD` — dataforseo.com, pay-as-you-go.
-- `GSC_CREDENTIALS_PATH` — a Google Cloud service-account JSON that has been
-  added as a user on the promogranade.com Search Console property.
-
-Never commit credentials.
-
-### Full stack by stage
-
-| Stage | What gets automated | Tools | Human step |
-|---|---|---|---|
-| 1. Research | Keywords, competitor gaps, SERP intent, GSC quick wins | DataForSEO MCP (or self-hosted [open-seo](https://github.com/every-app/open-seo)), GSC MCP, seomachine `/research-*`, claude-seo `/seo cluster` | Skim |
-| 2. Plan | Topic clusters, site architecture, calendar, briefs | marketingskills `content-strategy` / `site-architecture` / `programmatic-seo`, claude-seo `content-brief` | **Approve strategy** |
-| 3. Create | Draft blog posts / service copy with citations | seomachine `/write`, [gpt-researcher](https://github.com/assafelovic/gpt-researcher) for facts | **Expert + brand edit** |
-| 4. Optimize | Titles/meta, internal links, schema, GEO citability | seomachine `/optimize`, claude-seo `/seo page` `schema` `geo`, [schema-dts](https://github.com/google/schema-dts) | Spot-check |
-| 5. Technical | Crawl, Core Web Vitals, broken links, indexability | **This repo's CI** (Lighthouse CI, lychee, Unlighthouse); optional [siteone-crawler](https://github.com/janreges/siteone-crawler) / [SEOnaut](https://github.com/StJudeWasHere/seonaut) | None — CI gates |
-| 6. Publish | PR → Vercel preview → merge; sitemap/llms.txt regenerate | Claude Code + GitHub; Next.js `sitemap.ts`; IndexNow/GSC sitemap ping ([seo-monster](https://github.com/avansaber/seo-monster)) | Approve PR |
-| 7. Off-page | Link-gap prospects, unlinked mentions, lost links, outreach drafts | DataForSEO backlinks / open-seo, [changedetection.io](https://github.com/dgtlmoon/changedetection.io) or [huginn](https://github.com/huginn/huginn), optional [Mautic](https://github.com/mautic/mautic) for sending | **Relationships, every send** |
-| 8. Track & report | Rankings, GSC trends, AI share-of-voice, monthly report | open-seo or [SerpBear](https://github.com/towfiqi/serpbear), GSC MCP, [elmo](https://github.com/elmohq/elmo) (AI visibility), claude-seo PDF reports | Review |
-
-### Core 10 (least overlap)
-
-1. [AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo) — MIT. Audit brain.
-2. [TheCraigHewitt/seomachine](https://github.com/TheCraigHewitt/seomachine) — MIT. Content pipeline (swap its WordPress publish step for "edit `lib/blog.ts` + open PR").
-3. [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) — MIT. Strategy / architecture / programmatic SEO.
-4. [every-app/open-seo](https://github.com/every-app/open-seo) — MIT, needs DataForSEO. Self-hosted Semrush/Ahrefs alternative incl. backlinks + rank tracking. (Or just the [DataForSEO MCP](https://github.com/dataforseo/mcp-server-typescript).)
-5. [AminForou/mcp-gsc](https://github.com/AminForou/mcp-gsc) — MIT. Search Console data for Claude.
-6. [harlan-zw/unlighthouse](https://github.com/harlan-zw/unlighthouse) + [GoogleChrome/lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci) — wired into CI.
-7. [lycheeverse/lychee](https://github.com/lycheeverse/lychee) — wired into CI.
-8. [google/schema-dts](https://github.com/google/schema-dts) — typed JSON-LD.
-9. [elmohq/elmo](https://github.com/elmohq/elmo) — MIT, self-hosted AI-visibility tracking (ChatGPT, AI Overviews, Perplexity, Gemini, Claude…).
-10. [dgtlmoon/changedetection.io](https://github.com/dgtlmoon/changedetection.io) — Apache-2.0. Mentions / link-loss / competitor monitoring.
-
-Optional: [geo-seo-claude](https://github.com/zubair-trabzada/geo-seo-claude) (deeper GEO audit),
-[geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) (llms.txt + citation tracking),
-[advertools](https://github.com/eliasdabbas/advertools) (log-file analysis if Vercel log drains are enabled),
-[firecrawl](https://github.com/firecrawl/firecrawl) (AGPL — competitor page scraping).
-
-Avoided: repos that are fronts for a paid hosted connector (Ryze open-seo-mcp-skills),
-scrape Ahrefs against ToS (cnych/seo-mcp), or are stale (storm, seo-audits-toolkit,
-llmstxt-generator). Star counts on 2026-era SEO/GEO repos are inflated — judge by activity.
-
-### Minimum running costs
-
-- Claude Code plan (already have).
-- DataForSEO — pay-as-you-go; covers keywords, SERP, backlinks, rank tracking.
-- LLM API keys for the AI-visibility tracker (small monthly spend).
-- Free but needs setup: Google Cloud project for GSC, GA4, PageSpeed/CrUX.
-- If you already pay for Ahrefs or Semrush, their MCP connectors replace DataForSEO.
-
-## What still needs a human (be honest with clients about this)
-
-- **Link building & digital PR** — no OSS tool owns a backlink index, and
-  relationships with editors/journalists can't be automated. AI finds prospects
-  and drafts emails; a person approves and sends. Mass automated outreach burns
-  the sending domain.
-- **Strategy & prioritisation** — which markets, which pages matter to revenue.
-- **Real E-E-A-T** — first-hand experience, original data, named experts.
-  Unedited AI drafts are exactly what Google's helpful-content systems demote.
-- **Brand voice and factual / legal sign-off.**
-- **Local SEO groundwork** — Google Business Profile verification, genuine reviews.
-- **Algorithm updates, penalties, manual actions.**
-- **AI-visibility numbers are directional** — LLM answers vary per user/session.
-
-Realistic target: one person spending a few hours a week approving Claude's
-output, instead of an SEO team.
+- **Relationship link building and PR.** AI finds prospects and drafts emails;
+  a person personalises and sends them. Mass outreach burns the domain.
+- **Strategy and priorities.** Which services and markets matter to revenue.
+- **Real experience (E-E-A-T).** Client results, original examples, named
+  authors. Unedited AI drafts get demoted by Google.
+- **Google Business Profile verification and genuine reviews.**
+- **Google penalties or manual actions.** Escalate immediately.
+- **AI-visibility numbers are trends, not exact counts.**

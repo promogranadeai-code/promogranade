@@ -9,8 +9,10 @@ description: End-to-end SEO playbook for promogranade.com (and client Next.js si
 Next.js site with Claude Code + open-source tools instead of an SEO team.
 It says which tool handles each stage (research → plan → create → optimize →
 technical → publish → off-page → report), what is already automated in CI,
-the commands to run, and where a human must approve. Full research, repo links
-and costs: `seo/README.md`.
+the commands to run, and where a human must approve. Data comes from **OpenSEO**
+(see the `openseo` skill) — Promogranade has no Ahrefs/Semrush. The operator is a
+trained non-expert (`seo/TRAINING.md`); their weekly entry point is `/seo-weekly`.
+Overview, costs and options: `seo/README.md`.
 
 ---
 
@@ -50,10 +52,6 @@ Gotchas learned the hard way:
   the `unlighthouse-ci` bin (`npx -y -p unlighthouse@0.19.1 unlighthouse-ci --site URL`).
 - The cloud sandbox can't reach promogranade.com or social hosts → exclude them
   locally; CI on GitHub can reach them.
-- DataForSEO MCP env vars are `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD` (not USERNAME).
-- GSC MCP is `uvx mcp-gsc@0.1.0` with `GSC_CREDENTIALS_PATH` = service-account JSON
-  (also supports `GSC_OAUTH_CLIENT_SECRETS_FILE`).
-
 - Unlighthouse defaults to desktop throttling, so its perf scores run higher than
   Lighthouse CI's mobile runs. A full local scan of 28 routes takes ~10 min.
 
@@ -65,17 +63,22 @@ and was skipped (WebGL hero + intro animation) — the #1 technical fix. 0 broke
 
 | Stage | Do this | Tool |
 |---|---|---|
-| Research | Keyword volumes/difficulty, competitor gaps, SERP intent; GSC queries ranking 5–20 with high impressions = quick wins | DataForSEO MCP or open-seo; GSC MCP; seomachine `/research`, `/research-serp`, `/research-gaps`; claude-seo `/seo cluster` |
-| Plan | Cluster → pillar/spoke map → brief per page | marketingskills `content-strategy`, `site-architecture`, `programmatic-seo`; claude-seo `content-brief` |
-| Create | Draft into `lib/blog.ts` (or service data) with sources | seomachine `/write`; gpt-researcher for fact-heavy posts |
-| Optimize | Title ≤ 60 chars, meta ≤ 155, one H1, internal links to 2–3 service pages, JSON-LD (Article/FAQPage/BreadcrumbList), quotable answer-first paragraphs for GEO | seomachine `/optimize`; claude-seo `/seo page`, `/seo schema`, `/seo geo` |
+| Setup | Business, goals, competitors, key pages saved to OpenSEO project context | `/openseo:seo-project-setup` |
+| Research | Keyword volumes/difficulty, competitor gaps, SERP intent; GSC queries ranking 5–20 with high impressions = quick wins | `/openseo:keyword-research`, `/openseo:competitor-analysis`, `/openseo:competitive-landscape`; OpenSEO `get_search_console_performance` |
+| Plan | Cluster → pillar/spoke map → brief per page | `/openseo:keyword-clustering` |
+| Create | Draft into `lib/blog.ts` (or service data) with sources, on a branch + PR | Claude Code (web research for facts); human adds real experience |
+| Optimize | Title ≤ 60 chars, meta ≤ 155, one H1, internal links to 2–3 service pages, JSON-LD (Article/FAQPage/BreadcrumbList), quotable answer-first paragraphs for GEO | Claude Code; `/openseo:seo-audit` to verify impact |
 | Technical | Let CI gate it; for regressions open the Lighthouse artifact and fix LCP/CLS/TBT at the source | CI + Unlighthouse report |
 | Publish | Branch → PR → Vercel preview → human merges. Sitemap/llms.txt update from data; update `public/llms.txt` when services change | git + GitHub MCP |
-| Off-page | Competitor link gap → prospect list; unlinked brand mentions → reclamation emails; lost links → recovery. **Draft only; a human sends** | DataForSEO backlinks / Ahrefs connector; changedetection.io / huginn |
-| Report | Monthly: GSC clicks/impressions/CTR trends, rank movers, AI share-of-voice, CWV, actions next month | GSC MCP, SerpBear/open-seo, elmo, claude-seo PDF report |
+| Off-page | Competitor link gap → prospect list → outreach drafts. **Draft only; a human sends** | `/openseo:link-prospecting`; OpenSEO backlinks overview |
+| GEO/AEO | Questions people ask AI, who gets cited, 1–3 changes to get cited | `/openseo:ai-prompt-research`, `/openseo:ai-visibility-audit`, OpenSEO AI tracking |
+| Local | Google Business Profile, Maps rank grid (only if targeting a city) | `/openseo:local-seo` |
+| Report | Weekly actions + monthly report: GSC trends, rank movers, AI visibility, CWV | `/seo-weekly`, `/seo-weekly monthly` (saves via `/openseo:seo-report`) |
 
-Install the Claude Code side once per machine — commands in `seo/README.md` → "The stack".
-MCP template: `seo/mcp.example.json` (never commit real credentials).
+Install OpenSEO once per person: `/plugin marketplace add every-app/open-seo`,
+`/plugin install openseo@openseo`, `/mcp` to log in. Optional add-ons (claude-seo,
+marketingskills, changedetection.io…) are listed in `seo/README.md` §5 — only
+add them when a real need appears; the operator is not an SEO expert, so fewer tools is better.
 
 ## 4. Human-only (always flag, never fake)
 
