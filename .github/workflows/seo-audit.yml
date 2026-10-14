@@ -1,0 +1,91 @@
+# Automated technical-SEO checks. See seo/README.md for the full stack.
+#
+#  - lighthouse: every PR / push to main. Builds the site and runs Lighthouse
+#    on key templates. SEO score < 90 fails the build; perf/a11y/best-practices warn.
+#  - live-site: weekly + manual. Crawls every URL in the live sitemap for broken
+#    links (lychee) and runs a full-site Lighthouse scan (Unlighthouse).
+#    Reports are uploaded as workflow artifacts.
+
+name: SEO audit
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 3 * * 1" # Mondays 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SITE_URL: https://promogranade.com
+
+jobs:
+  lighthouse:
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Lighthouse CI
+        run: npx -y @lhci/cli@0.15.1 autorun --config=seo/lighthouserc.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/reports
+          if-no-files-found: ignore
+
+  live-site:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect sitemap URLs
+        id: urls
+        run: |
+          curl -fsSL "$SITE_URL/sitemap.xml" | grep -oP '(?<=<loc>)[^<]+' > urls.txt
+          echo "Found $(wc -l < urls.txt) URLs"
+          echo "list=$(tr '\n' ' ' < urls.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Broken links (lychee)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --max-concurrency 8
+            --accept '200..=299,403,429'
+            ${{ steps.urls.outputs.list }}
+          output: lychee-report.md
+          fail: true
+
+      - uses: actions/setup-node@v4
+        if: always()
+        with:
+          node-version: 22
+
+      - name: Full-site Lighthouse (Unlighthouse)
+        if: always()
+        run: npx -y -p unlighthouse@0.19.1 unlighthouse-ci --site "$SITE_URL" --reporter jsonExpanded --output-path unlighthouse-report
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-site-seo-reports
+          path: |
+            lychee-report.md
+            unlighthouse-report
+          if-no-files-found: ignore

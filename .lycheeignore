@@ -1,0 +1,11 @@
+# Social / messaging hosts block bots or need login — they return 999/403
+# to link checkers even when the link is fine.
+^https?://(www\.)?linkedin\.com/
+^https?://(www\.)?instagram\.com/
+^https?://wa\.me/
+^https?://(www\.)?(x|twitter)\.com/
+^https?://(www\.)?facebook\.com/
+# Next.js asset/image URLs and the dev server itself
+/_next/
+^mailto:
+^tel:

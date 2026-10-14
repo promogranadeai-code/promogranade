@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# SEO audit outputs / local MCP credentials
+/.lighthouseci/
+/unlighthouse-report/
+/.mcp.json
