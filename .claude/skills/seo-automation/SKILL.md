@@ -54,8 +54,12 @@ Gotchas learned the hard way:
 - GSC MCP is `uvx mcp-gsc@0.1.0` with `GSC_CREDENTIALS_PATH` = service-account JSON
   (also supports `GSC_OAUTH_CLIENT_SECRETS_FILE`).
 
-Baseline 2026-10-14: SEO 100 everywhere; home performance 36 (WebGL hero + intro),
-others 64–81; 0 broken links across 27 pages.
+- Unlighthouse defaults to desktop throttling, so its perf scores run higher than
+  Lighthouse CI's mobile runs. A full local scan of 28 routes takes ~10 min.
+
+Baseline 2026-10-14: SEO 100 on every route. Mobile perf (LHCI): home 36, others
+64–81. Desktop perf (Unlighthouse): 80–96, but `/` failed its performance audit 3×
+and was skipped (WebGL hero + intro animation) — the #1 technical fix. 0 broken links.
 
 ## 3. Stage-by-stage workflow
 

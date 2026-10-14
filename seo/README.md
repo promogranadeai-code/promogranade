@@ -20,8 +20,10 @@ allowed), `public/llms.txt`, FAQPage schema on service pages.
 
 **Baseline (local Lighthouse, 2026-10-14)** — SEO 100 on all 7 templates,
 accessibility 96–100, best-practices 100. Performance: home **36**, others 64–81.
-The home page (WebGL hero + intro animation) is the biggest technical-SEO
-opportunity. Link check: 27 pages, 81 unique URLs, 0 broken.
+Unlighthouse full scan (desktop, 28 routes): SEO 100 everywhere, performance
+80–96 — except `/`, where Lighthouse failed the performance audit 3 times and
+skipped it. The home page (WebGL hero + intro animation) is the biggest
+technical-SEO opportunity. Link check: 27 pages, 81 unique URLs, 0 broken.
 
 ---
 
