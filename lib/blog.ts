@@ -12,6 +12,8 @@ export type BlogPost = {
   categoryColor: string; // CSS gradient for card thumbnail
   date: string;
   dateISO: string;
+  /** Last substantive update (ISO date). */
+  updatedISO?: string;
   read: string;
   excerpt: string;
   metaDescription: string;
@@ -20,31 +22,41 @@ export type BlogPost = {
   content: BlogSection[];
 };
 
+
+/** Every article is written by and credited to the founder (E-E-A-T: a named, verifiable expert). */
+export const BLOG_AUTHOR = {
+  name: "Abhinandan Jain",
+  role: "Co-founder & CEO, Promogranade",
+  url: "https://promogranade.com/about",
+  sameAs: ["https://linkedin.com/in/abhinandanjain-dubai/"],
+};
+
 export const posts: BlogPost[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: "ai-agents-business-2025",
-    title: "AI Agents in 2025: How Autonomous Systems Are Replacing Entire Business Functions",
-    seoTitle: "AI Agents for Business: 2025 Guide",
+    title: "AI Agents in 2026: How Autonomous Systems Are Replacing Entire Business Functions",
+    seoTitle: "AI Agents for Business: 2026 Guide",
     category: "AI",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#7a0014 100%)",
-    date: "June 2025",
-    dateISO: "2025-06-01",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "8 min",
     featured: true,
     excerpt:
       "Autonomous AI agents are no longer a research topic — they're running pipelines, closing tickets, and drafting proposals in production today. Here's what the architecture looks like.",
     metaDescription:
-      "How AI agents are changing business operations in 2025: multi-agent orchestration, real use cases, and deploying autonomous systems that replace manual work.",
+      "How AI agents are changing business operations in 2026: multi-agent orchestration, real use cases, and deploying autonomous systems that replace manual work.",
     keywords: [
-      "AI agents 2025", "autonomous AI systems", "AI business automation",
+      "AI agents 2026", "autonomous AI systems", "AI business automation",
       "multi-agent orchestration", "LangGraph agents", "AI workflow automation",
       "business AI deployment", "agentic AI",
     ],
     content: [
       {
         heading: "The Shift From AI Tools to AI Agents",
-        body: `For the past three years, businesses adopted AI as a co-pilot — a smarter autocomplete that helped people work faster. In 2025, that model is giving way to something fundamentally different: AI agents that plan, act, observe feedback, and correct themselves without a human in the loop.\n\nThe difference matters enormously. A tool responds to a prompt. An agent receives a goal, breaks it into steps, executes those steps across multiple systems, checks whether the outcome matched the intention, and retries if it didn't. The practical implication: an agent can own an entire business function end-to-end, not just accelerate part of it.`,
+        body: `For the past three years, businesses adopted AI as a co-pilot — a smarter autocomplete that helped people work faster. In 2026, that model is giving way to something fundamentally different: AI agents that plan, act, observe feedback, and correct themselves without a human in the loop.\n\nThe difference matters enormously. A tool responds to a prompt. An agent receives a goal, breaks it into steps, executes those steps across multiple systems, checks whether the outcome matched the intention, and retries if it didn't. The practical implication: an agent can own an entire business function end-to-end, not just accelerate part of it.`,
       },
       {
         heading: "What Agents Can Do That Traditional Software Cannot",
@@ -63,6 +75,12 @@ export const posts: BlogPost[] = [
         body: `Agents introduce latency, cost, and non-determinism. For a task with a fixed input and a fixed output — parsing an invoice into structured JSON, for example — a fine-tuned model or a simple rule is faster, cheaper, and more reliable.\n\nUse an agent when: the task requires multiple steps, the path between input and output isn't fully predictable, or the task spans multiple systems that need to be coordinated. Don't use an agent when a simple API call, a regex, or a lookup table will do the job.`,
       },
       {
+        heading: "What does an AI agent look like in a real business?",
+        body: `We built an AI email-outreach system for ETRL that runs the whole first-contact loop on its own. It writes each email, checks that it was actually delivered, and carries on the conversation when a lead replies. So far it has generated more than 500 leads and saved the team more than 20 hours of work.
+
+That is the pattern to look for: a job with clear steps (write, send, verify, respond) that a person was doing by hand, where the agent can act on its own and hand over to a human when a conversation needs one.`,
+      },
+      {
         heading: "Getting Started With AI Agents for Your Business",
         body: `The highest-ROI starting point is almost always the task that your team does most repetitively and most grudgingly. Map the steps: what data does it need, what systems does it touch, what decision does it make? That map is your agent design.\n\nAt Promogranade we've built production agents for SaaS companies, e-commerce brands, and professional services firms. If you have a process you'd like to automate — or you're not sure where to start — reach out to us at hello@promogranade.com. We'll tell you within one call whether agents are the right fit.`,
       },
@@ -76,8 +94,9 @@ export const posts: BlogPost[] = [
     seoTitle: "GEO & AEO: How to Get Cited by ChatGPT",
     category: "SEO",
     categoryColor: "linear-gradient(135deg,#1a1a1a 0%,#3d0008 100%)",
-    date: "June 2025",
-    dateISO: "2025-06-05",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "6 min",
     featured: true,
     excerpt:
@@ -85,14 +104,14 @@ export const posts: BlogPost[] = [
     metaDescription:
       "Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) explained: how to get cited by ChatGPT, Perplexity and Google AI Overviews.",
     keywords: [
-      "GEO SEO 2025", "generative engine optimization", "answer engine optimization",
+      "GEO SEO 2026", "generative engine optimization", "answer engine optimization",
       "rank on ChatGPT", "Perplexity SEO", "Google AI Overview optimization",
-      "AEO strategy", "SEO 2025", "AI search ranking",
+      "AEO strategy", "SEO 2026", "AI search ranking",
     ],
     content: [
       {
         heading: "The Search Engine Is No Longer a Search Engine",
-        body: `When someone types a question into Google today, they often see an AI-generated answer before they see a single link. On ChatGPT, Perplexity, and Claude, there are no links at all — just answers, with citations. The question that defines your visibility in 2025 is not \"do I rank on page one?\" but \"does the AI cite my content when a relevant question is asked?\"\n\nThis requires a different discipline: Generative Engine Optimization (GEO) for platforms like Perplexity and Google's AI Overviews, and Answer Engine Optimization (AEO) for conversational AI like ChatGPT and Claude. Both require producing content structured the way AI models retrieve and synthesize information — not the way PageRank evaluated links.`,
+        body: `When someone types a question into Google today, they often see an AI-generated answer before they see a single link. On ChatGPT, Perplexity, and Claude, there are no links at all — just answers, with citations. The question that defines your visibility in 2026 is not \"do I rank on page one?\" but \"does the AI cite my content when a relevant question is asked?\"\n\nThis requires a different discipline: Generative Engine Optimization (GEO) for platforms like Perplexity and Google's AI Overviews, and Answer Engine Optimization (AEO) for conversational AI like ChatGPT and Claude. Both require producing content structured the way AI models retrieve and synthesize information — not the way PageRank evaluated links.`,
       },
       {
         heading: "How Generative AI Picks What to Cite",
@@ -120,8 +139,9 @@ export const posts: BlogPost[] = [
     seoTitle: "Workflow Automation for Growing Businesses",
     category: "Automation",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#111 100%)",
-    date: "May 2025",
-    dateISO: "2025-05-15",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "5 min",
     featured: true,
     excerpt:
@@ -129,7 +149,7 @@ export const posts: BlogPost[] = [
     metaDescription:
       "How workflow automation with n8n, Make.com and Zapier can save your business 20+ hours a week. A practical guide to automating repetitive processes.",
     keywords: [
-      "workflow automation 2025", "n8n automation", "business process automation",
+      "workflow automation 2026", "n8n automation", "business process automation",
       "Make.com workflows", "Zapier alternatives", "automate business processes",
       "no-code automation", "business efficiency", "scale without hiring",
     ],
@@ -139,12 +159,22 @@ export const posts: BlogPost[] = [
         body: `Every time a team member manually copies data from one system to another, chases an email thread for an approval, or reformats a report that gets generated on the same schedule every week — that's time and money leaving your business.\n\nThe average knowledge worker spends 4.5 hours per week on tasks that could be automated. Across a team of ten, that's 45 hours — more than one full-time employee — dedicated to friction rather than value. Workflow automation reclaims that time and reinvests it where humans genuinely add value: decision-making, client relationships, and creative work.`,
       },
       {
-        heading: "What Workflow Automation Actually Means in 2025",
+        heading: "What Workflow Automation Actually Means in 2026",
         body: `Workflow automation connects the tools you already use — your CRM, email, project management, invoicing, messaging — and tells them how to talk to each other without a human in the middle.\n\nn8n gives you full control with self-hosting and custom nodes. Make.com (formerly Integromat) offers a powerful visual interface for complex branching logic. Zapier handles the simple, high-volume glue between 5,000+ apps. And for workflows that involve AI decisions — routing a support ticket, scoring a lead, summarising a document — custom integrations with Claude or GPT-4 plug directly into the pipeline.`,
       },
       {
         heading: "The Workflows That Deliver the Fastest ROI",
         body: `**Lead capture to CRM**: A form submission on your website fires a webhook, enriches the lead's data, scores it against your ICP, creates a deal in your CRM, and sends a personalised email — all before your team opens their laptop in the morning.\n\n**Invoice and payment workflows**: A deal closes in your CRM → an invoice is generated in Zoho Books → the client receives it → a follow-up reminder fires at 7 and 14 days if unpaid → payment confirmation triggers project kickoff in your PM tool.\n\n**Content distribution**: Publish a blog post → it's automatically shared to LinkedIn, Instagram, and your newsletter, with channel-appropriate copy written by an AI node in the workflow.\n\n**Internal reporting**: Every Monday at 8 AM, a workflow pulls data from your ad accounts, CRM, and analytics, formats it into a Google Sheet, and sends a Slack message with the key numbers highlighted.`,
+      },
+      {
+        heading: "What does workflow automation save in practice?",
+        body: `In our projects, the savings show up as repetitive work that simply disappears: more than 20 hours of manual effort on lead outreach for one client, and no more hand-tracing invoices for another. Here is what each looked like.
+
+**Lead outreach for ETRL.** We built an AI email-outreach system for ETRL that runs the whole first-contact loop on its own. It writes each email, checks that it was actually delivered, and carries on the conversation when a lead replies. It has generated more than 500 leads and saved more than 20 hours of manual work.
+
+**Billing for a restaurant with a late-night bar.** Bar sales and restaurant sales came out of the same billing system, so checking the bar's takings for a time window meant downloading invoices and tracing them by hand. We built billing software that keeps bar billing separate from restaurant billing and lets the owner filter bills by time directly. The manual tracing is gone.
+
+Neither job was glamorous. Both were repeated every week, followed the same steps every time, and quietly ate hours. That is usually where automation pays back first.`,
       },
       {
         heading: "How to Identify What to Automate First",
@@ -160,22 +190,23 @@ export const posts: BlogPost[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: "nextjs-vs-wordpress-2025",
-    title: "Next.js vs WordPress in 2025: Which Platform Will Actually Scale Your Business?",
-    seoTitle: "Next.js vs WordPress (2025): Which Scales?",
+    title: "Next.js vs WordPress in 2026: Which Platform Will Actually Scale Your Business?",
+    seoTitle: "Next.js vs WordPress (2026): Which Scales?",
     category: "Development",
     categoryColor: "linear-gradient(135deg,#111 0%,#e0142c 80%)",
-    date: "May 2025",
-    dateISO: "2025-05-02",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "7 min",
     featured: false,
     excerpt:
       "Both platforms can power a successful business website. The decision comes down to your growth trajectory, technical team, and how much you value ownership vs convenience.",
     metaDescription:
-      "Next.js vs WordPress for business websites in 2025: performance, SEO, cost and scalability compared, so you can make the right choice for your business.",
+      "Next.js vs WordPress for business websites in 2026: performance, SEO, cost and scalability compared, so you can make the right choice for your business.",
     keywords: [
-      "Next.js vs WordPress 2025", "best website platform 2025", "WordPress alternatives",
-      "Next.js for business", "headless CMS 2025", "website platform comparison",
-      "WordPress performance 2025", "custom web development",
+      "Next.js vs WordPress 2026", "best website platform 2026", "WordPress alternatives",
+      "Next.js for business", "headless CMS 2026", "website platform comparison",
+      "WordPress performance 2026", "custom web development",
     ],
     content: [
       {
@@ -191,7 +222,7 @@ export const posts: BlogPost[] = [
         body: `Next.js shines in four scenarios:\n\n**Performance at scale**: Server-side rendering, static generation, and edge delivery mean Next.js sites consistently score 95+ on Core Web Vitals. WordPress sites, even heavily optimised ones, rarely sustain those scores under real-world conditions.\n\n**Complex integrations**: When your site needs to connect to a custom CRM, pull live product data from multiple sources, or render user-specific content, Next.js gives you the full power of Node.js and React without fighting against a CMS's constraints.\n\n**SaaS and app-like experiences**: If your \"website\" includes a customer dashboard, an onboarding flow, or a real-time feature, Next.js is the natural choice — it's an application framework, not a content management system.\n\n**Long-term cost of ownership**: A well-built Next.js codebase is cheaper to maintain than a heavily-pluginned WordPress installation that needs constant security updates, plugin conflicts resolved, and database optimisations.`,
       },
       {
-        heading: "The SEO Reality in 2025",
+        heading: "The SEO Reality in 2026",
         body: `WordPress and Next.js are equally capable of excellent SEO — but they get there differently. WordPress leans on plugins (Yoast, Rank Math) that abstract the meta-tag, sitemap, and schema work. Next.js requires you to implement these explicitly, which means higher upfront effort but more control and no dependency on plugin authors maintaining compatibility.\n\nCore Web Vitals — which Google uses as a ranking signal — tend to favour Next.js when both platforms are built thoughtfully. LCP, CLS, and FID scores are consistently better on statically-generated or server-rendered Next.js pages than on WordPress pages serving equivalent content.`,
       },
       {
@@ -208,8 +239,9 @@ export const posts: BlogPost[] = [
     seoTitle: "RAG Pipelines Explained: A Business Guide",
     category: "AI",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#4a0010 100%)",
-    date: "April 2025",
-    dateISO: "2025-04-18",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "9 min",
     featured: false,
     excerpt:
@@ -217,7 +249,7 @@ export const posts: BlogPost[] = [
     metaDescription:
       "A business guide to RAG (Retrieval-Augmented Generation) pipelines: build AI systems that answer accurately from your own data, documents and knowledge base.",
     keywords: [
-      "RAG pipeline 2025", "retrieval augmented generation", "AI knowledge base",
+      "RAG pipeline 2026", "retrieval augmented generation", "AI knowledge base",
       "custom AI system", "business AI", "vector database", "Pinecone RAG",
       "enterprise AI search", "AI document retrieval",
     ],
@@ -248,21 +280,22 @@ export const posts: BlogPost[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: "meta-ads-vs-google-ads-2025",
-    title: "Meta Ads vs Google Ads in 2025: Where Your Marketing Budget Will Work Harder",
-    seoTitle: "Meta Ads vs Google Ads in 2025",
+    title: "Meta Ads vs Google Ads in 2026: Where Your Marketing Budget Will Work Harder",
+    seoTitle: "Meta Ads vs Google Ads in 2026",
     category: "Marketing",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#8b0000 100%)",
-    date: "April 2025",
-    dateISO: "2025-04-05",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "6 min",
     featured: false,
     excerpt:
       "Both platforms have delivered exceptional results for specific business models. The mistake is treating them as interchangeable. Here's the framework for deciding where to put your budget.",
     metaDescription:
-      "Meta Ads vs Google Ads in 2025: ROAS, targeting, creative requirements and best use cases compared, so you know which platform delivers better ROI.",
+      "Meta Ads vs Google Ads in 2026: ROAS, targeting, creative requirements and best use cases compared, so you know which platform delivers better ROI.",
     keywords: [
-      "Meta Ads vs Google Ads 2025", "Facebook Ads 2025", "Google Ads ROAS",
-      "digital advertising ROI", "best ad platform 2025", "performance marketing",
+      "Meta Ads vs Google Ads 2026", "Facebook Ads 2026", "Google Ads ROAS",
+      "digital advertising ROI", "best ad platform 2026", "performance marketing",
       "social ads vs search ads", "Meta advertising strategy", "Google Ads strategy",
     ],
     content: [
@@ -272,11 +305,11 @@ export const posts: BlogPost[] = [
       },
       {
         heading: "When Google Ads Wins",
-        body: `Google Search Ads deliver the best results when: your category has active, measurable search demand; your product or service has a short consideration cycle (people search, they buy quickly); your targeting can be precise through keyword selection; and your margins support a cost-per-click model.\n\nHigh-performing Google categories in 2025: legal services, home services (plumbing, HVAC, pest control), SaaS with clear category keywords, local professional services, and high-intent e-commerce queries.\n\nGoogle's AI Max campaigns have significantly changed performance in 2025 — they use broad match with audience signals and smart bidding to find conversions that exact-match keyword campaigns miss. For most advertisers who haven't tested AI Max, it's the highest-impact change available right now.`,
+        body: `Google Search Ads deliver the best results when: your category has active, measurable search demand; your product or service has a short consideration cycle (people search, they buy quickly); your targeting can be precise through keyword selection; and your margins support a cost-per-click model.\n\nHigh-performing Google categories in 2026: legal services, home services (plumbing, HVAC, pest control), SaaS with clear category keywords, local professional services, and high-intent e-commerce queries.\n\nGoogle's AI Max campaigns have significantly changed performance in 2026 — they use broad match with audience signals and smart bidding to find conversions that exact-match keyword campaigns miss. For most advertisers who haven't tested AI Max, it's the highest-impact change available right now.`,
       },
       {
         heading: "When Meta Ads Win",
-        body: `Meta Ads outperform when: your product creates an emotional response (fashion, fitness, lifestyle, food); your target audience is defined by demographic or interest signals rather than search intent; you're launching a new product category that people don't yet know they want; or you need to reach large volumes of people at a lower cost-per-impression.\n\nMeta's Advantage+ Shopping campaigns have become the default starting point for e-commerce in 2025. Feed them creative, let the algorithm optimise audience and placement, and spend your time on what it can't automate: the creative itself.\n\nFor B2B, LinkedIn often outperforms Meta — but Meta can work well for B2B if you're willing to target by job title and industry and accept higher CPMs in exchange for intent-qualified audiences.`,
+        body: `Meta Ads outperform when: your product creates an emotional response (fashion, fitness, lifestyle, food); your target audience is defined by demographic or interest signals rather than search intent; you're launching a new product category that people don't yet know they want; or you need to reach large volumes of people at a lower cost-per-impression.\n\nMeta's Advantage+ Shopping campaigns have become the default starting point for e-commerce in 2026. Feed them creative, let the algorithm optimise audience and placement, and spend your time on what it can't automate: the creative itself.\n\nFor B2B, LinkedIn often outperforms Meta — but Meta can work well for B2B if you're willing to target by job title and industry and accept higher CPMs in exchange for intent-qualified audiences.`,
       },
       {
         heading: "The Budget Allocation Framework",
@@ -292,22 +325,23 @@ export const posts: BlogPost[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: "social-media-marketing-2025-playbook",
-    title: "Social Media Marketing in 2025: What Actually Works (And What's Just Noise)",
-    seoTitle: "Social Media Marketing in 2025: What Works",
+    title: "Social Media Marketing in 2026: What Actually Works (And What's Just Noise)",
+    seoTitle: "Social Media Marketing in 2026: What Works",
     category: "Marketing",
     categoryColor: "linear-gradient(135deg,#111 0%,#e0142c 100%)",
-    date: "March 2025",
-    dateISO: "2025-03-20",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "7 min",
     featured: false,
     excerpt:
-      "Posting consistently and hoping for the best is not a strategy. Here's how high-performing brands approach social media in 2025 — and what separates them from the noise.",
+      "Posting consistently and hoping for the best is not a strategy. Here's how high-performing brands approach social media in 2026 — and what separates them from the noise.",
     metaDescription:
-      "Social media marketing in 2025: platform-specific strategies for Instagram, LinkedIn and YouTube that drive real business results, not vanity metrics.",
+      "Social media marketing in 2026: platform-specific strategies for Instagram, LinkedIn and YouTube that drive real business results, not vanity metrics.",
     keywords: [
-      "social media marketing 2025", "Instagram marketing strategy",
-      "LinkedIn B2B marketing", "YouTube marketing 2025", "social media strategy",
-      "content marketing 2025", "social media ROI", "organic social media growth",
+      "social media marketing 2026", "Instagram marketing strategy",
+      "LinkedIn B2B marketing", "YouTube marketing 2026", "social media strategy",
+      "content marketing 2026", "social media ROI", "organic social media growth",
     ],
     content: [
       {
@@ -315,16 +349,22 @@ export const posts: BlogPost[] = [
         body: `Most brands approach social media as a broadcasting channel — they publish what they want to say, in the format they find easiest to produce, on the schedule that fits their content calendar. Then they wonder why engagement is declining and follower growth has plateaued.\n\nPlatform algorithms are not interested in your content calendar. They're optimising for the time users spend on the platform. If your content makes people stop, watch, and engage — the algorithm amplifies it. If it doesn't, it withers. The entire game is understanding what your specific audience finds worth pausing for, and producing that consistently.`,
       },
       {
-        heading: "Platform-Specific Reality in 2025",
-        body: `**Instagram**: Reels continue to dominate reach, but the bar has risen significantly. Static carousels with genuine education or strong visual storytelling still perform well in the feed. Stories drive community and retention rather than reach. The brands winning on Instagram in 2025 are doing one of two things: obsessively consistent visual identity, or fast-moving reactive content that shows personality.\n\n**LinkedIn**: The platform has undergone a significant shift toward creator content — individuals outperform company pages by a factor of ten on most metrics. If you're B2B, your best LinkedIn strategy is empowering your team (especially your founders and senior practitioners) to build personal audiences. Document-style posts and short-form video are currently the highest-performing formats.\n\n**YouTube**: YouTube is the one platform where long-form content still wins — but only if the content genuinely delivers on its title. Shorts have become a meaningful discovery channel, and many channels now use a hub-and-spoke model: Shorts drive awareness, long-form content converts viewers into subscribers.`,
+        heading: "Platform-Specific Reality in 2026",
+        body: `**Instagram**: Reels continue to dominate reach, but the bar has risen significantly. Static carousels with genuine education or strong visual storytelling still perform well in the feed. Stories drive community and retention rather than reach. The brands winning on Instagram in 2026 are doing one of two things: obsessively consistent visual identity, or fast-moving reactive content that shows personality.\n\n**LinkedIn**: The platform has undergone a significant shift toward creator content — individuals outperform company pages by a factor of ten on most metrics. If you're B2B, your best LinkedIn strategy is empowering your team (especially your founders and senior practitioners) to build personal audiences. Document-style posts and short-form video are currently the highest-performing formats.\n\n**YouTube**: YouTube is the one platform where long-form content still wins — but only if the content genuinely delivers on its title. Shorts have become a meaningful discovery channel, and many channels now use a hub-and-spoke model: Shorts drive awareness, long-form content converts viewers into subscribers.`,
       },
       {
         heading: "The Content Architecture That Actually Drives Results",
-        body: `High-performing social media programs in 2025 are built around a content architecture, not a posting schedule.\n\nAt the top is your cornerstone content: one piece of deeply researched, high-value content per month (a long YouTube video, a detailed LinkedIn document, a comprehensive Instagram carousel). This establishes credibility and attracts the algorithm's long-term trust.\n\nBelow that are distribution pieces: shorter clips, quotes, and reformatted highlights from the cornerstone content, distributed across channels throughout the month.\n\nBelow that are reactive pieces: timely content responding to industry news, trends, or audience questions. These capture short-term reach and show the algorithm that your account is active and engaged.`,
+        body: `High-performing social media programs in 2026 are built around a content architecture, not a posting schedule.\n\nAt the top is your cornerstone content: one piece of deeply researched, high-value content per month (a long YouTube video, a detailed LinkedIn document, a comprehensive Instagram carousel). This establishes credibility and attracts the algorithm's long-term trust.\n\nBelow that are distribution pieces: shorter clips, quotes, and reformatted highlights from the cornerstone content, distributed across channels throughout the month.\n\nBelow that are reactive pieces: timely content responding to industry news, trends, or audience questions. These capture short-term reach and show the algorithm that your account is active and engaged.`,
       },
       {
         heading: "Community Over Audience",
-        body: `The metric that matters most in 2025 is not followers or reach — it's the ratio of replies and shares to total impressions. These signals indicate that your content is sparking conversation and being passed between people. Platforms weight these signals heavily because they indicate genuine value delivery.\n\nBuilding community means: responding to every comment in the first hour, asking genuine questions in your posts, featuring your audience in your content, and being consistently present rather than publishing and disappearing.`,
+        body: `The metric that matters most in 2026 is not followers or reach — it's the ratio of replies and shares to total impressions. These signals indicate that your content is sparking conversation and being passed between people. Platforms weight these signals heavily because they indicate genuine value delivery.\n\nBuilding community means: responding to every comment in the first hour, asking genuine questions in your posts, featuring your audience in your content, and being consistently present rather than publishing and disappearing.`,
+      },
+      {
+        heading: "Can AI take over the content side of social media?",
+        body: `For one client, a large part of it. Their social media depended on a staff member costing $1,500 a month who came up with post ideas, wrote the captions and made the graphics. We automated that pipeline: ideas, captions and graphics now land in a Google Sheet, and the client simply approves what goes out.
+
+The role is no longer needed, which saves $1,500 every month, and the time that used to go into briefing and back-and-forth is freed up. What stays human is the judgement: what the brand should say, and the replies and conversations that build a community.`,
       },
       {
         heading: "Measurement: What to Track and What to Ignore",
@@ -340,16 +380,17 @@ export const posts: BlogPost[] = [
     seoTitle: "Shopify vs Custom E-Commerce Development",
     category: "Development",
     categoryColor: "linear-gradient(135deg,#0f0f0f 0%,#e0142c 100%)",
-    date: "June 2025",
-    dateISO: "2025-06-10",
+    date: "June 2026",
+    dateISO: "2026-06-17",
+    updatedISO: "2026-10-30",
     read: "6 min",
     featured: true,
     excerpt:
       "Shopify can take you from zero to your first million. It's what comes after that tells the real story. Here's exactly when to build custom and when Shopify still wins.",
     metaDescription:
-      "Shopify vs custom e-commerce development in 2025: an honest comparison of cost, speed, flexibility and long-term scalability to help you pick a platform.",
+      "Shopify vs custom e-commerce development in 2026: an honest comparison of cost, speed, flexibility and long-term scalability to help you pick a platform.",
     keywords: [
-      "Shopify vs custom development", "e-commerce platform 2025", "headless commerce",
+      "Shopify vs custom development", "e-commerce platform 2026", "headless commerce",
       "Shopify limitations", "custom e-commerce build", "Shopify Hydrogen", "WooCommerce alternative",
     ],
     content: [
@@ -383,18 +424,19 @@ export const posts: BlogPost[] = [
     seoTitle: "AI Content at Scale Without Losing Your Voice",
     category: "AI",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#0a0a0a 100%)",
-    date: "June 2025",
-    dateISO: "2025-06-14",
+    date: "June 2026",
+    dateISO: "2026-06-17",
+    updatedISO: "2026-10-30",
     read: "5 min",
     featured: true,
     excerpt:
-      "The brands winning at content in 2025 aren't writing more — they're building smarter pipelines. Here's how to use AI to scale content production without the output sounding like everyone else.",
+      "The brands winning at content in 2026 aren't writing more — they're building smarter pipelines. Here's how to use AI to scale content production without the output sounding like everyone else.",
     metaDescription:
-      "How to use AI tools like Claude and GPT-4 to scale content marketing in 2025 while keeping your brand voice. A practical guide to AI content pipelines.",
+      "How to use AI tools like Claude and GPT-4 to scale content marketing in 2026 while keeping your brand voice. A practical guide to AI content pipelines.",
     keywords: [
-      "AI content marketing 2025", "scale content with AI", "AI writing tools",
+      "AI content marketing 2026", "scale content with AI", "AI writing tools",
       "Claude content strategy", "brand voice AI", "content pipeline automation",
-      "AI blog writing", "content marketing strategy 2025",
+      "AI blog writing", "content marketing strategy 2026",
     ],
     content: [
       {
@@ -414,6 +456,12 @@ export const posts: BlogPost[] = [
         body: `AI content pipelines drift toward mediocrity without measurement. Track two things: editorial quality score (does every published piece pass a checklist of voice, specificity, and value standards?) and downstream performance (do AI-assisted pieces perform as well as fully human-written pieces on the metrics that matter — time on page, backlinks, leads generated?).\n\nIf AI-assisted pieces underperform on any metric, that's the signal to increase the human editorial layer on that content type. The goal is output that performs; AI is a means to that end, not the end itself.`,
       },
       {
+        heading: "What does an AI content pipeline look like in practice?",
+        body: `In one client project, the pipeline replaced a $1,500-a-month role. Post ideas, captions and graphics are generated automatically and land in a Google Sheet, where the client reviews and approves them before anything is published.
+
+The approval step is the important part. The brand still decides what goes out, and nothing is published without a person saying yes. The pipeline does the repetitive production work around that decision.`,
+      },
+      {
         heading: "Building Your Own Pipeline",
         body: `The practical starting point: take your three best-performing pieces of content and use them to train your AI voice document. Identify every stylistic choice in those pieces — sentence length patterns, how you handle data, your stance on common industry debates, your specific vocabulary. Build that into a system prompt.\n\nThen run three AI-assisted pieces through your normal editorial process and measure how long the editorial round takes. If it's taking longer than writing from scratch, the research input layer needs more work. If it's flowing fast and the quality is holding, you've found your pipeline.\n\nAt Promogranade we build content pipelines for our clients that include AI drafting, brand-voice prompts, and performance measurement built in. If you want to scale your content without scaling your headcount, let's talk.`,
       },
@@ -423,22 +471,23 @@ export const posts: BlogPost[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: "building-saas-product-2025",
-    title: "Building a SaaS Product in 2025: The Architecture, Stack, and Decisions That Matter",
+    title: "Building a SaaS Product in 2026: The Architecture, Stack, and Decisions That Matter",
     seoTitle: "Building a SaaS Product: Architecture & Stack",
     category: "Engineering",
     categoryColor: "linear-gradient(135deg,#1a1a1a 0%,#3d0008 80%)",
-    date: "March 2025",
-    dateISO: "2025-03-05",
+    date: "June 2026",
+    dateISO: "2026-06-04",
+    updatedISO: "2026-10-30",
     read: "10 min",
     featured: false,
     excerpt:
       "The decisions you make in the first sprint of a SaaS product determine whether you can move fast two years later or whether you're firefighting technical debt instead of shipping features.",
     metaDescription:
-      "A technical guide to building a SaaS product in 2025: architecture decisions, tech stack, database design, authentication, billing and scaling strategies.",
+      "A technical guide to building a SaaS product in 2026: architecture decisions, tech stack, database design, authentication, billing and scaling strategies.",
     keywords: [
-      "build SaaS product 2025", "SaaS development stack", "custom web application",
-      "SaaS architecture 2025", "Next.js SaaS", "SaaS tech stack",
-      "Supabase SaaS", "SaaS boilerplate 2025", "custom software development",
+      "build SaaS product 2026", "SaaS development stack", "custom web application",
+      "SaaS architecture 2026", "Next.js SaaS", "SaaS tech stack",
+      "Supabase SaaS", "SaaS boilerplate 2026", "custom software development",
     ],
     content: [
       {
@@ -446,8 +495,8 @@ export const posts: BlogPost[] = [
         body: `Building a SaaS product is not primarily a technical challenge — it's a decision-making challenge. The choices you make in the first few weeks about data architecture, authentication, multi-tenancy, and infrastructure will compound over the life of the product. Good decisions give you room to move. Bad decisions become the reason you're rewriting your auth system eighteen months in while your competitors are shipping new features.\n\nThis guide covers the decisions that matter most — the ones where a wrong call is expensive to reverse.`,
       },
       {
-        heading: "The 2025 Stack That Lets You Move Fast Without Breaking",
-        body: `The stack that consistently delivers the best combination of speed-to-market and long-term maintainability in 2025:\n\n**Frontend**: Next.js 15 (App Router) with TypeScript. The App Router's Server Components dramatically reduce client-side JavaScript. TypeScript catches errors that cost a week to debug at runtime.\n\n**Backend**: Next.js API Routes for simple endpoints, Hono or Express for complex API layers. For complex event-driven logic, consider Inngest or Trigger.dev rather than a roll-your-own queue.\n\n**Database**: Supabase (Postgres + Auth + Storage + Realtime in one service) for most SaaS use cases. It eliminates four separate infrastructure decisions and lets two engineers build what used to need a five-person team.\n\n**Payments**: Stripe. Not because of brand recognition but because their webhook reliability and subscription management API are genuinely best-in-class.\n\n**Deployment**: Vercel for the frontend; Railway or Render for any long-running services. Both abstract the infrastructure complexity that used to require a DevOps engineer.`,
+        heading: "The 2026 Stack That Lets You Move Fast Without Breaking",
+        body: `The stack that consistently delivers the best combination of speed-to-market and long-term maintainability in 2026:\n\n**Frontend**: Next.js 16 (App Router) with TypeScript. The App Router's Server Components dramatically reduce client-side JavaScript. TypeScript catches errors that cost a week to debug at runtime.\n\n**Backend**: Next.js API Routes for simple endpoints, Hono or Express for complex API layers. For complex event-driven logic, consider Inngest or Trigger.dev rather than a roll-your-own queue.\n\n**Database**: Supabase (Postgres + Auth + Storage + Realtime in one service) for most SaaS use cases. It eliminates four separate infrastructure decisions and lets two engineers build what used to need a five-person team.\n\n**Payments**: Stripe. Not because of brand recognition but because their webhook reliability and subscription management API are genuinely best-in-class.\n\n**Deployment**: Vercel for the frontend; Railway or Render for any long-running services. Both abstract the infrastructure complexity that used to require a DevOps engineer.`,
       },
       {
         heading: "Multi-Tenancy: The Decision That Haunts You If You Get It Wrong",

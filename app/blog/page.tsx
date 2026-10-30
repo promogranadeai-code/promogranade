@@ -13,8 +13,8 @@ export const metadata = pageMetadata({
   path: "/blog",
   socialDescription: "Field notes on AI, SEO, automation, and growth from the Promogranade team.",
   extra: { keywords: [
-    "AI blog 2025", "digital marketing blog", "web development blog",
-    "SEO tips 2025", "workflow automation guide", "Promogranade blog",
+    "AI blog 2026", "digital marketing blog", "web development blog",
+    "SEO tips 2026", "workflow automation guide", "Promogranade blog",
   ] },
 });
 

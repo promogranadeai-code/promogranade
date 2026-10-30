@@ -5,7 +5,7 @@ import { ArrowLeft, Clock, Calendar, ArrowUpRight } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
 import { BlogVisual } from "@/components/blog/BlogVisual";
 import { SectionVisual } from "@/components/blog/SectionVisual";
-import { allPosts, getPost } from "@/lib/blog";
+import { allPosts, BLOG_AUTHOR, getPost } from "@/lib/blog";
 import { pageMetadata } from "@/lib/seo";
 
 /* ─── Static params (pre-render all post pages at build time) ── */
@@ -30,9 +30,14 @@ export async function generateMetadata({
     description: post.metaDescription,
     path: `/blog/${post.slug}`,
     type: "article",
-    extra: { keywords: post.keywords, authors: [{ name: "Promogranade" }] },
+    extra: { keywords: post.keywords, authors: [{ name: BLOG_AUTHOR.name, url: BLOG_AUTHOR.url }] },
     // Social cards have room for the full headline.
-    openGraphExtra: { title: post.title, publishedTime: post.dateISO, authors: ["Promogranade"] },
+    openGraphExtra: {
+      title: post.title,
+      publishedTime: post.dateISO,
+      modifiedTime: post.updatedISO ?? post.dateISO,
+      authors: [BLOG_AUTHOR.name],
+    },
   });
 }
 
@@ -54,8 +59,16 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.metaDescription,
     datePublished: post.dateISO,
-    dateModified: post.dateISO,
-    author: { "@type": "Organization", name: "Promogranade", url: "https://promogranade.com" },
+    dateModified: post.updatedISO ?? post.dateISO,
+    mainEntityOfPage: `https://promogranade.com/blog/${post.slug}`,
+    image: "https://promogranade.com/og-image.png",
+    author: {
+      "@type": "Person",
+      name: BLOG_AUTHOR.name,
+      jobTitle: BLOG_AUTHOR.role,
+      url: BLOG_AUTHOR.url,
+      sameAs: BLOG_AUTHOR.sameAs,
+    },
     publisher: {
       "@type": "Organization",
       name: "Promogranade",
@@ -113,6 +126,13 @@ export default async function BlogPostPage({
               <Calendar className="h-3.5 w-3.5" /> {post.date}
             </span>
           </div>
+          <p className="text-sm text-white/80 mb-4">
+            By{" "}
+            <Link href="/about" rel="author" className="font-semibold text-white hover:underline">
+              {BLOG_AUTHOR.name}
+            </Link>
+            <span className="text-white/60">, {BLOG_AUTHOR.role}</span>
+          </p>
           <h1 className="font-display text-[clamp(1.8rem,4.5vw,3.5rem)] font-black leading-[1.05] tracking-[-0.03em] text-white mb-6">
             {post.title}
           </h1>
