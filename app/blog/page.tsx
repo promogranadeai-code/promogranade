@@ -4,23 +4,19 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Footer } from "@/components/layout/Footer";
 import { BlogVisual } from "@/components/blog/BlogVisual";
 import { allPosts, getCategoryColor } from "@/lib/blog";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Blog",
+export const metadata = pageMetadata({
+  title: "Blog: AI, SEO, Automation & Web Guides",
   description:
     "Field notes from Promogranade. In-depth articles on AI agents, SEO, workflow automation, web development, and digital marketing.",
-  keywords: [
+  path: "/blog",
+  socialDescription: "Field notes on AI, SEO, automation, and growth from the Promogranade team.",
+  extra: { keywords: [
     "AI blog 2025", "digital marketing blog", "web development blog",
     "SEO tips 2025", "workflow automation guide", "Promogranade blog",
-  ],
-  alternates: { canonical: "/blog" },
-  openGraph: {
-    title: "Blog — Promogranade",
-    description: "Field notes on AI, SEO, automation, and growth from the Promogranade team.",
-    type: "website",
-    url: "https://promogranade.com/blog",
-  },
-};
+  ] },
+});
 
 export default function BlogPage() {
   const [hero, ...rest] = allPosts;

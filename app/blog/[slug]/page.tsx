@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BlogVisual } from "@/components/blog/BlogVisual";
 import { SectionVisual } from "@/components/blog/SectionVisual";
 import { allPosts, getPost } from "@/lib/blog";
+import { pageMetadata } from "@/lib/seo";
 
 /* ─── Static params (pre-render all post pages at build time) ── */
 
@@ -24,26 +25,15 @@ export async function generateMetadata({
   const post = getPost(slug);
   if (!post) return { title: "Post Not Found" };
 
-  return {
-    title: post.title,
+  return pageMetadata({
+    title: post.seoTitle ?? post.title,
     description: post.metaDescription,
-    keywords: post.keywords,
-    authors: [{ name: "Promogranade" }],
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      title: post.title,
-      description: post.metaDescription,
-      type: "article",
-      url: `https://promogranade.com/blog/${post.slug}`,
-      publishedTime: post.dateISO,
-      authors: ["Promogranade"],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.metaDescription,
-    },
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    extra: { keywords: post.keywords, authors: [{ name: "Promogranade" }] },
+    // Social cards have room for the full headline.
+    openGraphExtra: { title: post.title, publishedTime: post.dateISO, authors: ["Promogranade"] },
+  });
 }
 
 /* ─── Page ─────────────────────────────────────────────────────── */

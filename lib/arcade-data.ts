@@ -8,6 +8,10 @@ export interface ArcadeCategory {
   label: string;
   blurb: string;
   pageIntro: string;
+  /** Search title (≤ 45 chars; layout appends " — Promogranade"). */
+  seoTitle: string;
+  /** Search snippet if pageIntro is over 160 chars. */
+  metaDescription?: string;
   items: ArcadeItem[];
 }
 
@@ -19,6 +23,9 @@ export const arcadeCategories: ArcadeCategory[] = [
       "The everyday kit. The editors, copilots, design boards and infra we reach for on every project.",
     pageIntro:
       "These are the tools running underneath every Promogranade project — from the first wireframe to the production deploy. No mystery stack, just what actually gets used and why.",
+    seoTitle: "Arcade Tools: The AI & Dev Stack We Use",
+    metaDescription:
+      "The tools running underneath every Promogranade project, from the first wireframe to the production deploy. No mystery stack, just what gets used and why.",
     items: [
       { name: "Cursor", description: "AI-native code editor we pair-program with for day-to-day development." },
       { name: "Claude Code", description: "Our terminal-based AI coding agent for larger refactors and multi-file changes." },
@@ -44,6 +51,7 @@ export const arcadeCategories: ArcadeCategory[] = [
       "Battle-tested prompt patterns we use to steer models — from research to code generation to copy.",
     pageIntro:
       "Prompting is an engineering discipline, not a guessing game. These are the patterns we default to when steering models toward reliable, reviewable output.",
+    seoTitle: "Arcade Prompts: Patterns for Reliable AI",
     items: [
       { name: "Chain-of-thought", description: "Asking the model to reason step-by-step before answering, for fewer logic errors on complex tasks." },
       { name: "Few-shot examples", description: "Showing 2-3 examples of the desired output so the model matches format and tone exactly." },
@@ -66,6 +74,7 @@ export const arcadeCategories: ArcadeCategory[] = [
       "How work gets stitched together — orchestration tools that turn agents and APIs into running systems.",
     pageIntro:
       "Individual tools and good prompts only go so far — these are the orchestration layers that turn them into systems which actually run unattended in production.",
+    seoTitle: "Arcade Workflows: AI Orchestration We Use",
     items: [
       { name: "n8n", description: "Self-hosted automation flows connecting client tools without per-task code." },
       { name: "Zapier", description: "Quick, no-code integrations for simpler automations and client handoffs." },

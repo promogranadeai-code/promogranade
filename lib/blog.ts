@@ -6,6 +6,8 @@ export type BlogSection = {
 export type BlogPost = {
   slug: string;
   title: string;
+  /** Search title (≤ 45 chars; the layout appends " — Promogranade"). Falls back to `title`. */
+  seoTitle?: string;
   category: string;
   categoryColor: string; // CSS gradient for card thumbnail
   date: string;
@@ -23,6 +25,7 @@ export const posts: BlogPost[] = [
   {
     slug: "ai-agents-business-2025",
     title: "AI Agents in 2025: How Autonomous Systems Are Replacing Entire Business Functions",
+    seoTitle: "AI Agents for Business: 2025 Guide",
     category: "AI",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#7a0014 100%)",
     date: "June 2025",
@@ -32,7 +35,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "Autonomous AI agents are no longer a research topic — they're running pipelines, closing tickets, and drafting proposals in production today. Here's what the architecture looks like.",
     metaDescription:
-      "Learn how AI agents are transforming business operations in 2025. Discover multi-agent orchestration, real-world use cases, and how to deploy autonomous AI systems that replace manual workflows.",
+      "How AI agents are changing business operations in 2025: multi-agent orchestration, real use cases, and deploying autonomous systems that replace manual work.",
     keywords: [
       "AI agents 2025", "autonomous AI systems", "AI business automation",
       "multi-agent orchestration", "LangGraph agents", "AI workflow automation",
@@ -70,6 +73,7 @@ export const posts: BlogPost[] = [
   {
     slug: "geo-aeo-seo-2025-guide",
     title: "SEO Is Dead. Long Live GEO and AEO: How to Get Cited by ChatGPT and Perplexity",
+    seoTitle: "GEO & AEO: How to Get Cited by ChatGPT",
     category: "SEO",
     categoryColor: "linear-gradient(135deg,#1a1a1a 0%,#3d0008 100%)",
     date: "June 2025",
@@ -79,7 +83,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "Search is no longer a list of ten blue links. It's a generated answer — and if your content isn't structured to be cited by AI, you're invisible to a growing share of the market.",
     metaDescription:
-      "Traditional SEO is being overtaken by GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization). Learn how to rank on ChatGPT, Perplexity, and Google AI Overviews in 2025.",
+      "Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) explained: how to get cited by ChatGPT, Perplexity and Google AI Overviews.",
     keywords: [
       "GEO SEO 2025", "generative engine optimization", "answer engine optimization",
       "rank on ChatGPT", "Perplexity SEO", "Google AI Overview optimization",
@@ -113,6 +117,7 @@ export const posts: BlogPost[] = [
   {
     slug: "workflow-automation-business-growth",
     title: "Why Every Growing Business Needs Workflow Automation — And How to Start",
+    seoTitle: "Workflow Automation for Growing Businesses",
     category: "Automation",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#111 100%)",
     date: "May 2025",
@@ -122,7 +127,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "Your team is spending 30% of their time on tasks a machine could do in seconds. Workflow automation isn't a luxury — it's the highest-ROI investment a growing business can make.",
     metaDescription:
-      "Learn how workflow automation with n8n, Make.com, and Zapier can save your business 20+ hours per week. A practical guide to automating repetitive business processes and scaling without headcount.",
+      "How workflow automation with n8n, Make.com and Zapier can save your business 20+ hours a week. A practical guide to automating repetitive processes.",
     keywords: [
       "workflow automation 2025", "n8n automation", "business process automation",
       "Make.com workflows", "Zapier alternatives", "automate business processes",
@@ -156,6 +161,7 @@ export const posts: BlogPost[] = [
   {
     slug: "nextjs-vs-wordpress-2025",
     title: "Next.js vs WordPress in 2025: Which Platform Will Actually Scale Your Business?",
+    seoTitle: "Next.js vs WordPress (2025): Which Scales?",
     category: "Development",
     categoryColor: "linear-gradient(135deg,#111 0%,#e0142c 80%)",
     date: "May 2025",
@@ -165,7 +171,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "Both platforms can power a successful business website. The decision comes down to your growth trajectory, technical team, and how much you value ownership vs convenience.",
     metaDescription:
-      "Comprehensive Next.js vs WordPress comparison for business websites in 2025. Understand the performance, SEO, cost, and scalability differences to make the right choice for your business.",
+      "Next.js vs WordPress for business websites in 2025: performance, SEO, cost and scalability compared, so you can make the right choice for your business.",
     keywords: [
       "Next.js vs WordPress 2025", "best website platform 2025", "WordPress alternatives",
       "Next.js for business", "headless CMS 2025", "website platform comparison",
@@ -199,6 +205,7 @@ export const posts: BlogPost[] = [
   {
     slug: "rag-pipelines-business-guide",
     title: "RAG Pipelines Explained: Give Your AI Access to Your Company's Entire Knowledge Base",
+    seoTitle: "RAG Pipelines Explained: A Business Guide",
     category: "AI",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#4a0010 100%)",
     date: "April 2025",
@@ -208,7 +215,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "A base language model knows nothing about your products, your customers, or your processes. RAG pipelines fix that — here's how they work and when to use them.",
     metaDescription:
-      "Complete guide to RAG (Retrieval-Augmented Generation) pipelines for businesses in 2025. Learn how to build AI systems that access your proprietary data, documents, and knowledge base accurately.",
+      "A business guide to RAG (Retrieval-Augmented Generation) pipelines: build AI systems that answer accurately from your own data, documents and knowledge base.",
     keywords: [
       "RAG pipeline 2025", "retrieval augmented generation", "AI knowledge base",
       "custom AI system", "business AI", "vector database", "Pinecone RAG",
@@ -242,6 +249,7 @@ export const posts: BlogPost[] = [
   {
     slug: "meta-ads-vs-google-ads-2025",
     title: "Meta Ads vs Google Ads in 2025: Where Your Marketing Budget Will Work Harder",
+    seoTitle: "Meta Ads vs Google Ads in 2025",
     category: "Marketing",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#8b0000 100%)",
     date: "April 2025",
@@ -251,7 +259,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "Both platforms have delivered exceptional results for specific business models. The mistake is treating them as interchangeable. Here's the framework for deciding where to put your budget.",
     metaDescription:
-      "Meta Ads vs Google Ads in 2025: a practical comparison of ROAS, targeting, creative requirements, and best use cases. Learn which advertising platform will deliver better ROI for your business.",
+      "Meta Ads vs Google Ads in 2025: ROAS, targeting, creative requirements and best use cases compared, so you know which platform delivers better ROI.",
     keywords: [
       "Meta Ads vs Google Ads 2025", "Facebook Ads 2025", "Google Ads ROAS",
       "digital advertising ROI", "best ad platform 2025", "performance marketing",
@@ -285,6 +293,7 @@ export const posts: BlogPost[] = [
   {
     slug: "social-media-marketing-2025-playbook",
     title: "Social Media Marketing in 2025: What Actually Works (And What's Just Noise)",
+    seoTitle: "Social Media Marketing in 2025: What Works",
     category: "Marketing",
     categoryColor: "linear-gradient(135deg,#111 0%,#e0142c 100%)",
     date: "March 2025",
@@ -294,7 +303,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "Posting consistently and hoping for the best is not a strategy. Here's how high-performing brands approach social media in 2025 — and what separates them from the noise.",
     metaDescription:
-      "Complete social media marketing guide for 2025. Learn platform-specific strategies for Instagram, LinkedIn, and YouTube that drive real business results, not just vanity metrics.",
+      "Social media marketing in 2025: platform-specific strategies for Instagram, LinkedIn and YouTube that drive real business results, not vanity metrics.",
     keywords: [
       "social media marketing 2025", "Instagram marketing strategy",
       "LinkedIn B2B marketing", "YouTube marketing 2025", "social media strategy",
@@ -328,6 +337,7 @@ export const posts: BlogPost[] = [
   {
     slug: "shopify-vs-custom-ecommerce-2025",
     title: "Shopify vs Custom Development: The E-Commerce Decision That Changes Your Ceiling",
+    seoTitle: "Shopify vs Custom E-Commerce Development",
     category: "Development",
     categoryColor: "linear-gradient(135deg,#0f0f0f 0%,#e0142c 100%)",
     date: "June 2025",
@@ -337,7 +347,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "Shopify can take you from zero to your first million. It's what comes after that tells the real story. Here's exactly when to build custom and when Shopify still wins.",
     metaDescription:
-      "Shopify vs custom e-commerce development in 2025: an honest comparison of cost, speed, flexibility, and long-term scalability to help you pick the right platform for your business.",
+      "Shopify vs custom e-commerce development in 2025: an honest comparison of cost, speed, flexibility and long-term scalability to help you pick a platform.",
     keywords: [
       "Shopify vs custom development", "e-commerce platform 2025", "headless commerce",
       "Shopify limitations", "custom e-commerce build", "Shopify Hydrogen", "WooCommerce alternative",
@@ -370,6 +380,7 @@ export const posts: BlogPost[] = [
   {
     slug: "ai-content-strategy-2025",
     title: "AI Content at Scale: How Smart Brands Are Publishing 10x More Without Losing Their Voice",
+    seoTitle: "AI Content at Scale Without Losing Your Voice",
     category: "AI",
     categoryColor: "linear-gradient(135deg,#e0142c 0%,#0a0a0a 100%)",
     date: "June 2025",
@@ -379,7 +390,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "The brands winning at content in 2025 aren't writing more — they're building smarter pipelines. Here's how to use AI to scale content production without the output sounding like everyone else.",
     metaDescription:
-      "How to use AI tools like Claude and GPT-4 to scale content marketing in 2025 while preserving brand voice. A practical guide to AI content pipelines for marketing teams.",
+      "How to use AI tools like Claude and GPT-4 to scale content marketing in 2025 while keeping your brand voice. A practical guide to AI content pipelines.",
     keywords: [
       "AI content marketing 2025", "scale content with AI", "AI writing tools",
       "Claude content strategy", "brand voice AI", "content pipeline automation",
@@ -413,6 +424,7 @@ export const posts: BlogPost[] = [
   {
     slug: "building-saas-product-2025",
     title: "Building a SaaS Product in 2025: The Architecture, Stack, and Decisions That Matter",
+    seoTitle: "Building a SaaS Product: Architecture & Stack",
     category: "Engineering",
     categoryColor: "linear-gradient(135deg,#1a1a1a 0%,#3d0008 80%)",
     date: "March 2025",
@@ -422,7 +434,7 @@ export const posts: BlogPost[] = [
     excerpt:
       "The decisions you make in the first sprint of a SaaS product determine whether you can move fast two years later or whether you're firefighting technical debt instead of shipping features.",
     metaDescription:
-      "Complete technical guide to building a SaaS product in 2025. Covers architecture decisions, recommended tech stack, database design, authentication, billing, and scaling strategies.",
+      "A technical guide to building a SaaS product in 2025: architecture decisions, tech stack, database design, authentication, billing and scaling strategies.",
     keywords: [
       "build SaaS product 2025", "SaaS development stack", "custom web application",
       "SaaS architecture 2025", "Next.js SaaS", "SaaS tech stack",

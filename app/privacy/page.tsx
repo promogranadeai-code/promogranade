@@ -1,12 +1,14 @@
 import { PageHero } from "@/components/ui/PageHero";
 import { Footer } from "@/components/layout/Footer";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Privacy Policy",
-  description: "How Promogranade collects, uses, and protects your information.",
-  alternates: { canonical: "/privacy" },
-  robots: { index: true, follow: true },
-};
+export const metadata = pageMetadata({
+  title: "Privacy Policy: How We Handle Your Data",
+  description:
+    "How Promogranade collects, uses, and protects the information you share with us through our website, contact forms, and services.",
+  path: "/privacy",
+  extra: { robots: { index: true, follow: true } },
+});
 
 const LAST_UPDATED = "17 June 2026";
 

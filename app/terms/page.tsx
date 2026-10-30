@@ -1,12 +1,14 @@
 import { PageHero } from "@/components/ui/PageHero";
 import { Footer } from "@/components/layout/Footer";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Terms of Service",
-  description: "The terms governing use of the Promogranade website and services.",
-  alternates: { canonical: "/terms" },
-  robots: { index: true, follow: true },
-};
+  description:
+    "The terms that govern your use of the Promogranade website and the web development, AI and marketing services we provide.",
+  path: "/terms",
+  extra: { robots: { index: true, follow: true } },
+});
 
 const LAST_UPDATED = "17 June 2026";
 

@@ -5,6 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { Footer } from "@/components/layout/Footer";
 import { arcadeCategories, getArcadeCategory, type ArcadeCategory } from "@/lib/arcade-data";
+import { pageMetadata } from "@/lib/seo";
 
 const ICONS: Record<ArcadeCategory["id"], typeof Wrench> = {
   tools: Wrench,
@@ -24,17 +25,11 @@ export async function generateMetadata({
   const { category: categoryId } = await params;
   const category = getArcadeCategory(categoryId);
   if (!category) return {};
-  return {
-    title: category.label,
-    description: category.pageIntro,
-    alternates: { canonical: `/arcade/${category.id}` },
-    openGraph: {
-      title: `${category.label} — Arcade — Promogranade`,
-      description: category.pageIntro,
-      type: "website",
-      url: `https://promogranade.com/arcade/${category.id}`,
-    },
-  };
+  return pageMetadata({
+    title: category.seoTitle,
+    description: category.metaDescription ?? category.pageIntro,
+    path: `/arcade/${category.id}`,
+  });
 }
 
 export default async function ArcadeCategoryPage({

@@ -2,18 +2,14 @@ import { ArcadeShowcase } from "@/components/home/ArcadeShowcase";
 import { ArcadePrinciples } from "@/components/arcade/ArcadePrinciples";
 import { PageHero } from "@/components/ui/PageHero";
 import { Footer } from "@/components/layout/Footer";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Arcade",
-  description: "The tools, prompt patterns, and orchestration layer behind every Promogranade project.",
-  alternates: { canonical: "/arcade" },
-  openGraph: {
-    title: "Arcade — Promogranade",
-    description: "The tools, prompt patterns, and orchestration layer behind every Promogranade project.",
-    type: "website",
-    url: "https://promogranade.com/arcade",
-  },
-};
+export const metadata = pageMetadata({
+  title: "Arcade: The Tools, Prompts & Workflows We Use",
+  description:
+    "The tools, prompt patterns, and orchestration layer behind every Promogranade project — the editors, AI models and automations we use daily.",
+  path: "/arcade",
+});
 
 export default function ArcadePage() {
   return (

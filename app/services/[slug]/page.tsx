@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { SERVICE_PAGES, getServiceBySlug } from "@/lib/services-data";
 import { ServicePageClient } from "@/components/services/ServicePageClient";
 import { Footer } from "@/components/layout/Footer";
+import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return SERVICE_PAGES.map((s) => ({ slug: s.slug }));
@@ -17,23 +18,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     .filter((t, i, arr) => arr.indexOf(t) === i)
     .slice(0, 12);
 
-  return {
+  return pageMetadata({
     title: service.title,
-    description: service.description,
-    keywords: [service.title, ...keywords],
-    alternates: { canonical: `/services/${service.slug}` },
-    openGraph: {
-      title: `${service.title} — Promogranade`,
-      description: service.description,
-      type: "website",
-      url: `https://promogranade.com/services/${service.slug}`,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${service.title} — Promogranade`,
-      description: service.description,
-    },
-  };
+    description: service.metaDescription,
+    path: `/services/${service.slug}`,
+    extra: { keywords: [service.title, ...keywords] },
+  });
 }
 
 export default async function ServiceSlugPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -26,6 +26,9 @@ const displayFont = Space_Grotesk({
 const SITE_URL = "https://promogranade.com";
 const SITE_NAME = "Promogranade";
 const SITE_TITLE = "Promogranade — Solutions that scale businesses";
+// Search/social snippet (≤ 160 chars). The full SITE_DESCRIPTION stays in the Organization JSON-LD.
+const SITE_SNIPPET =
+  "We build web apps, ship AI automations and run growth engines for ambitious teams: web, custom apps, AI agents, SEO/GEO/AEO, social media and paid ads.";
 const SITE_DESCRIPTION =
   "We build web applications, ship AI automations, and run growth engines for ambitious teams. One studio for the entire stack — web development, custom apps, AI agents, SEO/GEO/AEO, social media, and paid ads.";
 
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     default: SITE_TITLE,
     template: `%s — ${SITE_NAME}`,
   },
-  description: SITE_DESCRIPTION,
+  description: SITE_SNIPPET,
   metadataBase: new URL(SITE_URL),
   keywords: [
     "web development agency", "AI agent development", "custom software development",
@@ -84,7 +87,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
+    description: SITE_SNIPPET,
     images: ["/og-image.png"],
   },
 };

@@ -2,19 +2,15 @@ import { Footer } from "@/components/layout/Footer";
 import { CareerForm } from "@/components/career/CareerForm";
 import { CareerCulture } from "@/components/career/CareerCulture";
 import { PageHero } from "@/components/ui/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Careers",
+export const metadata = pageMetadata({
+  title: "Careers: Join Our Senior Web & AI Team",
   description:
     "Join Promogranade. We're a lean, senior team of developers, AI engineers, and marketing operators — no juniors, no fluff. See open roles and apply.",
-  alternates: { canonical: "/career" },
-  openGraph: {
-    title: "Careers — Promogranade",
-    description: "Join a lean, senior team building web apps, AI systems, and growth engines.",
-    type: "website",
-    url: "https://promogranade.com/career",
-  },
-};
+  path: "/career",
+  socialDescription: "Join a lean, senior team building web apps, AI systems, and growth engines.",
+});
 
 export default function CareerPage() {
   return (

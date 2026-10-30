@@ -4,19 +4,15 @@ import { AboutManifesto } from "@/components/about/AboutManifesto";
 import { AboutTeam } from "@/components/about/AboutTeam";
 import { AboutTestimonials } from "@/components/about/AboutTestimonials";
 import { Footer } from "@/components/layout/Footer";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "About",
+export const metadata = pageMetadata({
+  title: "About Us: Senior Web, AI & Growth Team",
   description:
     "Promogranade is a senior team of designers, engineers, and marketers building web applications, AI systems, and growth engines. Meet the studio behind the work.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title: "About — Promogranade",
-    description: "Obsessed with outcomes, not optics. Meet the senior team behind Promogranade.",
-    type: "website",
-    url: "https://promogranade.com/about",
-  },
-};
+  path: "/about",
+  socialDescription: "Obsessed with outcomes, not optics. Meet the senior team behind Promogranade.",
+});
 
 export default function AboutPage() {
   return (

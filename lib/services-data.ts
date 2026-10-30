@@ -20,6 +20,8 @@ export interface ServicePage {
   eyebrow: string;
   title: string;
   description: string;
+  /** Search snippet (≤ 160 chars); `description` is the longer on-page intro. */
+  metaDescription: string;
   iconKey: string;
   groups: ServiceGroup[];
   faqs: ServiceFaq[];
@@ -32,6 +34,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "Website Development",
     description:
       "We design and build conversion-focused websites that look premium, load fast, and grow with your business. Whether you need a WordPress powerhouse, a Shopify storefront, or a fully bespoke Next.js experience — every pixel is intentional and every millisecond counts.",
+    metaDescription:
+      "Conversion-focused websites that look premium and load fast: WordPress, Shopify storefronts or bespoke Next.js builds, designed and built by one senior team.",
     iconKey: "web",
     groups: [
       {
@@ -148,6 +152,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "Custom Applications",
     description:
       "Off-the-shelf software is built for the average business. You're not average. We engineer bespoke web applications, SaaS platforms, internal tools, and agentic dashboards from the ground up — scoped to your exact workflow, scaled to your exact ambition.",
+    metaDescription:
+      "Bespoke web applications, SaaS platforms, internal tools and agentic dashboards, engineered from the ground up around your exact workflow.",
     iconKey: "apps",
     groups: [
       {
@@ -245,6 +251,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "AI Agentic Development",
     description:
       "The next wave of software isn't just intelligent — it acts. We build AI agents that plan, reason, use tools, and self-correct across multi-step workflows. From a single-model assistant to a full multi-agent orchestration system, we engineer AI that does the work.",
+    metaDescription:
+      "AI agents that plan, reason, use tools and self-correct across multi-step workflows, from a single-model assistant to full multi-agent orchestration.",
     iconKey: "agents",
     groups: [
       {
@@ -343,6 +351,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "SEO / GEO / AEO",
     description:
       "Getting found used to mean ranking on Google. Now it means being cited by AI assistants, featured in generative overviews, and surfacing in zero-click answers. We optimise for all three — traditional search, generative engines, and AI answer systems — simultaneously.",
+    metaDescription:
+      "Get found on Google, cited by AI assistants and surfaced in zero-click answers. We run SEO, GEO and AEO together, across search and AI answer engines.",
     iconKey: "seo",
     groups: [
       {
@@ -449,6 +459,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "Social Media Marketing",
     description:
       "Social media is the fastest path from unknown brand to household name — when it's done with strategy, consistency, and creative quality. We handle the full stack: content strategy, production, community management, and performance reporting across every platform that matters to your audience.",
+    metaDescription:
+      "Social media marketing with strategy and consistency: content strategy, production, community management and performance reporting on the platforms that matter.",
     iconKey: "social",
     groups: [
       {
@@ -554,6 +566,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "Meta & Google Ads",
     description:
       "Paid media is the fastest lever in your growth stack — when it's managed properly. We run performance campaigns on Meta and Google that find the right people, serve the right creative, and scale spend only when the numbers justify it. No vanity metrics, no inflated dashboards.",
+    metaDescription:
+      "Performance campaigns on Meta and Google that find the right people, serve the right creative and scale spend only when the numbers justify it.",
     iconKey: "ads",
     groups: [
       {
@@ -665,6 +679,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "Workflow Automation",
     description:
       "Every repetitive task your team does manually is a tax on their creativity. We map your operations, identify the bottlenecks, and build automations that run 24/7 — connecting your tools, eliminating data entry, and letting your team focus on work that actually needs a human.",
+    metaDescription:
+      "We map your operations, find the bottlenecks and build automations that run 24/7, connecting your tools and eliminating manual data entry.",
     iconKey: "workflow",
     groups: [
       {
@@ -763,6 +779,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     title: "Custom AI Systems",
     description:
       "Production AI is harder than most companies expect. The demo works. The product doesn't. We close that gap — building full-stack AI systems with evaluation frameworks, fine-tuned models, vector retrieval pipelines, and the observability to know when things go wrong before your users do.",
+    metaDescription:
+      "Production AI that works beyond the demo: full-stack AI systems with evaluation frameworks, fine-tuned models, vector retrieval and observability.",
     iconKey: "ai",
     groups: [
       {
