@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { TextReveal, FadeUp } from "@/components/ui/TextReveal";
 import { homeFaqs as FAQS } from "@/lib/home-faqs";
@@ -33,33 +33,33 @@ export function HomeFAQ() {
             const isOpen = open === i;
             return (
               <div key={faq.question}>
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-6 py-6 text-left group"
-                  aria-expanded={isOpen}
+                <h3>
+                  <button
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="w-full flex items-center justify-between gap-6 py-6 text-left group"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-display text-lg md:text-2xl font-bold tracking-tight group-hover:text-[var(--accent)] transition-colors">
+                      {faq.question}
+                    </span>
+                    <ChevronDown
+                      className={`h-5 w-5 shrink-0 text-[color:var(--section-muted)] transition-transform duration-300 ${isOpen ? "rotate-180 text-[var(--accent)]" : ""}`}
+                    />
+                  </button>
+                </h3>
+                {/* Answer stays in the HTML (collapsed, not unmounted) so search and AI
+                    crawlers that don't click can still read it. */}
+                <motion.div
+                  initial={false}
+                  animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="overflow-hidden"
+                  aria-hidden={!isOpen}
                 >
-                  <span className="font-display text-lg md:text-2xl font-bold tracking-tight group-hover:text-[var(--accent)] transition-colors">
-                    {faq.question}
-                  </span>
-                  <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-[color:var(--section-muted)] transition-transform duration-300 ${isOpen ? "rotate-180 text-[var(--accent)]" : ""}`}
-                  />
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="pb-6 text-base md:text-lg leading-relaxed text-[color:var(--section-muted)] max-w-2xl">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  <p className="pb-6 text-base md:text-lg leading-relaxed text-[color:var(--section-muted)] max-w-2xl">
+                    {faq.answer}
+                  </p>
+                </motion.div>
               </div>
             );
           })}
