@@ -32,11 +32,14 @@ export function TextReveal({
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {words.map((word, i) => (
+      {/* A real space between word masks (not a CSS margin) so crawlers,
+          screen readers and AI engines read "Website Development", not
+          "WebsiteDevelopment". */}
+      {words.map((word, i) => [
+        i > 0 && " ",
         <span
           key={i}
           className="reveal-mask"
-          style={{ marginRight: "0.25em" }}
         >
           <motion.span
             variants={{
@@ -51,8 +54,8 @@ export function TextReveal({
           >
             {word}
           </motion.span>
-        </span>
-      ))}
+        </span>,
+      ])}
     </Tag>
   );
 }

@@ -9,7 +9,10 @@ import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 
 import { services } from "@/components/home/ServicesPreview";
 
-export function ServicesGrid() {
+/** headingAs="h1" when this section is the page's main content (/services). */
+export function ServicesGrid({ headingAs = "h2" }: { headingAs?: "h1" | "h2" } = {}) {
+  // Card titles sit one level below the section heading (keeps heading order sequential).
+  const CardHeading = headingAs === "h1" ? "h2" : "h3";
   const [highlighted, setHighlighted] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,7 +49,7 @@ export function ServicesGrid() {
         <div className="grid gap-10 lg:grid-cols-12 items-end mb-16">
           <div className="lg:col-span-7">
             <TextReveal
-              as="h2"
+              as={headingAs}
               className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-black leading-[0.92] tracking-[-0.03em]"
             >
               Everything you need to grow.
@@ -101,9 +104,9 @@ export function ServicesGrid() {
                       <ArrowUpRight className="h-4 w-4 text-[color:var(--section-muted)] opacity-0 group-hover:opacity-100 group-hover:text-[var(--accent)] transition-all duration-300" />
                     </div>
 
-                    <h3 className="font-display text-xl md:text-2xl font-bold leading-tight tracking-tight mb-3">
+                    <CardHeading className="font-display text-xl md:text-2xl font-bold leading-tight tracking-tight mb-3">
                       {s.title}
-                    </h3>
+                    </CardHeading>
                     <p className="text-sm text-[color:var(--section-muted)] leading-relaxed mb-5 flex-1">
                       {s.blurb}
                     </p>

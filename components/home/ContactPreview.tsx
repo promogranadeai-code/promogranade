@@ -40,7 +40,8 @@ const CONTACTS = [
   },
 ];
 
-export function ContactPreview() {
+/** headingAs="h1" when this section is the page's main content (/contact). */
+export function ContactPreview({ headingAs = "h2" }: { headingAs?: "h1" | "h2" } = {}) {
   return (
     <section
       id="contact"
@@ -51,7 +52,7 @@ export function ContactPreview() {
 
         {/* Heading */}
         <TextReveal
-          as="h2"
+          as={headingAs}
           className="font-display text-[clamp(2.75rem,8vw,8rem)] font-black leading-[0.9] tracking-[-0.04em] max-w-5xl"
         >
           Have a project?
