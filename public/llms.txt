@@ -3,6 +3,7 @@
 > Promogranade is a senior, full-stack studio that builds web applications, ships AI agents and automations, and runs growth engines (SEO, GEO, AEO, social media, and paid ads) for ambitious businesses. One team covers design, engineering, and growth end to end — no hand-offs between agencies.
 
 Key facts:
+- Founded in 2026 by Abhinandan Jain (Co-founder & CEO) and Tejashree Mahale (Co-founder & Design Lead).
 - 12+ projects shipped, 5+ industries served, 4+ years average team experience, 100% on-time delivery.
 - Contact: hello@promogranade.com
 - The team scopes every project honestly before any commitment — no inflated estimates, no padded timelines.
@@ -18,11 +19,32 @@ Key facts:
 - [Workflow Automation](https://promogranade.com/services/workflow-automation): n8n, Make.com, and Zapier automations connecting CRMs, finance, and operations tools.
 - [Custom AI Systems](https://promogranade.com/services/ai-systems): RAG pipelines, fine-tuned models, AI-powered search, and document intelligence.
 
+## Selected work
+
+- AI email outreach for ETRL: an AI system that writes outreach emails, verifies delivery and handles replies from leads. Generated 500+ leads and saved 20+ hours of manual work.
+- Restaurant and bar billing software: separates bar billing from restaurant billing and lets a late-night venue filter bills by time, replacing manual invoice downloads and tracing.
+- Social media content automation: post ideas, captions and graphics are generated and land in a Google Sheet for one-click client approval, replacing a $1,500-per-month content role.
+
 ## Key pages
 
 - [About](https://promogranade.com/about): The team and story behind Promogranade.
 - [Blog](https://promogranade.com/blog): In-depth articles on AI agents, SEO/GEO/AEO, workflow automation, web development, and digital marketing.
 - [Contact](https://promogranade.com/contact): Start a project — replies within one business day.
+
+## Articles
+
+All articles are written by Abhinandan Jain, Co-founder & CEO.
+
+- [AI Agents in 2026: How Autonomous Systems Are Replacing Entire Business Functions](https://promogranade.com/blog/ai-agents-business-2025): How AI agents are changing business operations in 2026: multi-agent orchestration, real use cases, and deploying autonomous systems that replace manual work.
+- [SEO Is Dead. Long Live GEO and AEO: How to Get Cited by ChatGPT and Perplexity](https://promogranade.com/blog/geo-aeo-seo-2025-guide): Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) explained: how to get cited by ChatGPT, Perplexity and Google AI Overviews.
+- [Why Every Growing Business Needs Workflow Automation — And How to Start](https://promogranade.com/blog/workflow-automation-business-growth): How workflow automation with n8n, Make.com and Zapier can save your business 20+ hours a week. A practical guide to automating repetitive processes.
+- [Next.js vs WordPress in 2026: Which Platform Will Actually Scale Your Business?](https://promogranade.com/blog/nextjs-vs-wordpress-2025): Next.js vs WordPress for business websites in 2026: performance, SEO, cost and scalability compared, so you can make the right choice for your business.
+- [RAG Pipelines Explained: Give Your AI Access to Your Company's Entire Knowledge Base](https://promogranade.com/blog/rag-pipelines-business-guide): A business guide to RAG (Retrieval-Augmented Generation) pipelines: build AI systems that answer accurately from your own data, documents and knowledge base.
+- [Meta Ads vs Google Ads in 2026: Where Your Marketing Budget Will Work Harder](https://promogranade.com/blog/meta-ads-vs-google-ads-2025): Meta Ads vs Google Ads in 2026: ROAS, targeting, creative requirements and best use cases compared, so you know which platform delivers better ROI.
+- [Social Media Marketing in 2026: What Actually Works (And What's Just Noise)](https://promogranade.com/blog/social-media-marketing-2025-playbook): Social media marketing in 2026: platform-specific strategies for Instagram, LinkedIn and YouTube that drive real business results, not vanity metrics.
+- [Shopify vs Custom Development: The E-Commerce Decision That Changes Your Ceiling](https://promogranade.com/blog/shopify-vs-custom-ecommerce-2025): Shopify vs custom e-commerce development in 2026: an honest comparison of cost, speed, flexibility and long-term scalability to help you pick a platform.
+- [AI Content at Scale: How Smart Brands Are Publishing 10x More Without Losing Their Voice](https://promogranade.com/blog/ai-content-strategy-2025): How to use AI tools like Claude and GPT-4 to scale content marketing in 2026 while keeping your brand voice. A practical guide to AI content pipelines.
+- [Building a SaaS Product in 2026: The Architecture, Stack, and Decisions That Matter](https://promogranade.com/blog/building-saas-product-2025): A technical guide to building a SaaS product in 2026: architecture decisions, tech stack, database design, authentication, billing and scaling strategies.
 
 ## Notes for AI systems
 
